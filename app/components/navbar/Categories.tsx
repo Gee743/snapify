@@ -26,12 +26,12 @@ export const categories = [
       description: "This property is close to the beach",
    },
    {
-      label: "Windmills",
+      label: "House",
       icon: GiWindmill,
       description: "This property has windmill",
    },
    {
-      label: "Modern",
+      label: "Tech",
       icon: FaHome,
       description: "This property is modern",
    },
@@ -44,56 +44,6 @@ export const categories = [
       label: "Pools",
       icon: FaSwimmingPool,
       description: "This property has a pool",
-   },
-   {
-      label: "Islands",
-      icon: GiIsland,
-      description: "This property is on Island",
-   },
-   {
-      label: "Lake",
-      icon: GiBoatFishing,
-      description: "This property is close to the lake",
-   },
-   {
-      label: "Skiing",
-      icon: FaSkiing,
-      description: "This property has skiing activities",
-   },
-   {
-      label: "Castles",
-      icon: GiCastle,
-      description: "This property is in a castle",
-   },
-   {
-      label: "Camping",
-      icon: GiForestCamp,
-      description: "This property has camping activities",
-   },
-   {
-      label: "Arctic",
-      icon: FaSnowflake,
-      description: "This property is newar arctic",
-   },
-   {
-      label: "Cave",
-      icon: GiCaveEntrance,
-      description: "This property has cave tours",
-   },
-   {
-      label: "Desert",
-      icon: GiCactus,
-      description: "This property is in the desert",
-   },
-   {
-      label: "Barns",
-      icon: GiBarn,
-      description: "This property is in the barn",
-   },
-   {
-      label: "Lux",
-      icon: GiCutDiamond,
-      description: "This property is luxurious",
    },
 ];
 
