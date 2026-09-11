@@ -19,7 +19,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
    return (
       <CldUploadWidget
          onUpload={handleUpload}
-         uploadPreset="klmzvwvp"
+         uploadPreset="ml_default"
          options={{
             maxFiles: 1,
          }}

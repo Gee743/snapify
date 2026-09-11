@@ -18,33 +18,41 @@ import { FaHome } from "@react-icons/all-files/fa/FaHome";
 import { FaSnowflake } from "@react-icons/all-files/fa/FaSnowflake";
 import CategoryBox from "../CategoryBox";
 import { usePathname, useSearchParams } from "next/navigation";
+import { HiOutlinePhoto } from "react-icons/hi2";
+import { MdOutlineVilla } from "react-icons/md";
+import { TbBeach } from "react-icons/tb";
+import { MdOutlineForest } from "react-icons/md";
+import { MdOutlineCameraIndoor } from "react-icons/md";
+
+
 
 export const categories = [
    {
-      label: "Beach",
-      icon: FaUmbrellaBeach,
+      label: "Studio",
+      icon: MdOutlineCameraIndoor,
       description: "This property is close to the beach",
    },
    {
-      label: "House",
-      icon: GiWindmill,
+      label: "Villa",
+      icon: MdOutlineVilla,
       description: "This property has windmill",
    },
    {
-      label: "Tech",
+      label: "Coastal",
+      icon: TbBeach,
+      description: "This property is modern",
+   },
+   {
+      label: "Indoor",
       icon: FaHome,
       description: "This property is modern",
    },
    {
-      label: "Countryside",
-      icon: FaMountain,
-      description: "This property is mountain",
+      label: "Outdoor",
+      icon: MdOutlineForest,
+      description: "This property is modern",
    },
-   {
-      label: "Pools",
-      icon: FaSwimmingPool,
-      description: "This property has a pool",
-   },
+   
 ];
 
 const Categories = () => {
