@@ -15,7 +15,6 @@ const Search = () => {
    const locationValue = params?.get("locationValue");
    const startDate = params?.get("startDate");
    const endDate = params?.get("endDate");
-   const guestCount = params?.get("guestCount");
 
    const locationLabel = useMemo(() => {
       if (locationValue) {
@@ -38,13 +37,6 @@ const Search = () => {
       return "Any week";
    }, [startDate, endDate]);
 
-   const guestLabe = useMemo(() => {
-      if (guestCount) {
-         return `${guestCount} guests`;
-      }
-      return "Add Guests";
-   }, [guestCount]);
-
    return (
       <div
          onClick={searchModal.onOpen}
@@ -56,7 +48,6 @@ const Search = () => {
                {durationLabel}
             </div>
             <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-               <div className="hidden sm:block">{guestLabe}</div>
                <div className="p-2 bg-green-500 rounded-full text-white">
                   <BiSearch size={18} />
                </div>

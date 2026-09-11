@@ -137,9 +137,6 @@ const ListingClient: React.FunctionComponent<ListingClientProps> = ({
                      user={listing.user}
                      category={category}
                      description={listing.description}
-                     roomCount={listing.roomCount}
-                     guestCount={listing.guestCount}
-                     bathroomCount={listing.bathroomCount}
                      locationValue={listing.locationValue}
                   />
                   <div className="order-first  mb-10 md:order-last md:col-span-3">

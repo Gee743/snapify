@@ -11,14 +11,12 @@ import useSearchModal from "@/app/hooks/useSearch";
 
 import Modal from "./Modal";
 import Calendar from "../inputs/Calendar";
-import Counter from "../inputs/Counter";
 import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
 import Heading from "../Heading";
 
 enum STEPS {
    LOCATION = 0,
    DATE = 1,
-   INFO = 2,
 }
 
 const SearchModal = () => {
@@ -29,9 +27,6 @@ const SearchModal = () => {
    const [step, setStep] = useState(STEPS.LOCATION);
 
    const [location, setLocation] = useState<CountrySelectValue>();
-   const [guestCount, setGuestCount] = useState(1);
-   const [roomCount, setRoomCount] = useState(1);
-   const [bathroomCount, setBathroomCount] = useState(1);
    const [dateRange, setDateRange] = useState<Range>({
       startDate: new Date(),
       endDate: new Date(),
@@ -55,7 +50,7 @@ const SearchModal = () => {
    }, []);
 
    const onSubmit = useCallback(async () => {
-      if (step !== STEPS.INFO) {
+      if (step !== STEPS.DATE) {
          return onNext();
       }
 
@@ -68,9 +63,6 @@ const SearchModal = () => {
       const updatedQuery: any = {
          ...currentQuery,
          locationValue: location?.value,
-         guestCount,
-         roomCount,
-         bathroomCount,
       };
 
       if (dateRange.startDate) {
@@ -97,16 +89,13 @@ const SearchModal = () => {
       searchModal,
       location,
       router,
-      guestCount,
-      roomCount,
       dateRange,
       onNext,
-      bathroomCount,
       params,
    ]);
 
    const actionLabel = useMemo(() => {
-      if (step === STEPS.INFO) {
+      if (step === STEPS.DATE) {
          return "Search";
       }
 
@@ -138,36 +127,6 @@ const SearchModal = () => {
          <div className="flex flex-col gap-8">
             <Heading title="When do you plan to go?" subtitle="Make sure everyone is free!" />
             <Calendar onChange={(value) => setDateRange(value.selection)} value={dateRange} />
-         </div>
-      );
-   }
-
-   if (step === STEPS.INFO) {
-      bodyContent = (
-         <div className="flex flex-col gap-8">
-            <Heading title="More information" subtitle="Find your perfect place!" />
-            <Counter
-               onChange={(value) => setGuestCount(value)}
-               value={guestCount}
-               title="Guests"
-               subTitle="How many guests are coming?"
-            />
-            <hr />
-            <Counter
-               onChange={(value) => setRoomCount(value)}
-               value={roomCount}
-               title="Rooms"
-               subTitle="How many rooms do you need?"
-            />
-            <hr />
-            <Counter
-               onChange={(value) => {
-                  setBathroomCount(value);
-               }}
-               value={bathroomCount}
-               title="Bathrooms"
-               subTitle="How many bahtrooms do you need?"
-            />
          </div>
       );
    }
