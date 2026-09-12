@@ -1,17 +1,9 @@
-import countries from "world-countries";
-
-const formatedCountries = countries.map((country) => ({
-   value: country.cca2,
-   label: country.name.common,
-   flag: country.flag,
-   latlng: country.latlng,
-   region: country.region,
-}));
+import sriLankaLocations from "@/app/data/sriLankaLocations";
 
 const useCountries = () => {
-   const getAll = () => formatedCountries;
+   const getAll = () => sriLankaLocations;
    const getByValue = (value: string) => {
-      return formatedCountries.find((item) => item.value === value);
+      return sriLankaLocations.find((item) => item.value === value);
    };
    return {
       getAll,
