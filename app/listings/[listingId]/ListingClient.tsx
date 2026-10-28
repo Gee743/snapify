@@ -1,28 +1,3 @@
-/**
- * React functional component that renders a listing page.
- *
- * @component
- * @example
- * const listing = {
- *   // listing data
- * };
- *
- * const currentUser = {
- *   // current user data
- * };
- *
- * const reservations = [
- *   // list of reservations
- * ];
- *
- * <ListingClient listing={listing} currentUser={currentUser} reservations={reservations} />
- *
- * @param {Object} listing - An object containing the details of the listing.
- * @param {Object} currentUser - An object representing the currently logged-in user.
- * @param {Array} reservations - An array of objects representing existing reservations for the listing.
- *
- * @returns {JSX.Element} - The rendered listing page with the listing details, date range picker, and reservation button.
- */
 "use client";
 import Container from "@/app/components/Container";
 import ListingHead from "@/app/components/listings/ListingHead";
@@ -30,19 +5,17 @@ import ListingInfo from "@/app/components/listings/ListingInfo";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 import { categories } from "@/app/components/navbar/Categories";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import {
+   getSlotRangeForHours,
+   getUpdatedHourSelection,
+   groupContiguousHours,
+   isSlotUnavailable,
+} from "@/app/libs/timeSlots";
 import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import axios from "axios";
-import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Range } from "react-date-range";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
-
-const initialDateRange = {
-   startDate: new Date(),
-   endDate: new Date(),
-   key: "selection",
-};
 
 interface ListingClientProps {
    reservations?: SafeReservation[];
@@ -60,67 +33,91 @@ const ListingClient: React.FunctionComponent<ListingClientProps> = ({
    const loginModal = useLoginModal();
    const router = useRouter();
 
-   const disabledDates = useMemo(() => {
-      let dates: Date[] = [];
-      reservations.forEach((reservation) => {
-         const range = eachDayOfInterval({
-            start: new Date(reservation.startDate),
-            end: new Date(reservation.endDate),
-         });
-
-         dates = [...dates, ...range];
-      });
-      return dates;
-   }, [reservations]);
-
    const [isLoading, setIsLoading] = useState(false);
-   const [totalPrice, setTotalPrice] = useState(listing.price);
-   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+   const [selectedDate, setSelectedDate] = useState(new Date());
+   const [selectedHours, setSelectedHours] = useState<number[]>([]);
+
+   const onChangeDate = useCallback((date: Date) => {
+      setSelectedDate(date);
+      // availability is per-day, so hours picked on one day may not be
+      // valid on another — simplest correct behavior is to clear them
+      setSelectedHours([]);
+   }, []);
+
+   const onToggleHour = useCallback(
+      (hour: number) => {
+         setSelectedHours((prev) =>
+            getUpdatedHourSelection(prev, hour, reservations, selectedDate)
+         );
+      },
+      [reservations, selectedDate]
+   );
+
+   const totalPrice = useMemo(
+      () => listing.price * selectedHours.length,
+      [listing.price, selectedHours.length]
+   );
 
    const onCreateReservation = useCallback(() => {
       if (!currentUser) {
          return loginModal.onOpen();
       }
 
+      if (selectedHours.length === 0) {
+         toast.error("Please select a time slot");
+         return;
+      }
+
+      const stillAvailable = selectedHours.every(
+         (hour) => !isSlotUnavailable(reservations, selectedDate, hour)
+      );
+
+      if (!stillAvailable) {
+         toast.error("That time is no longer available");
+         return;
+      }
+
       setIsLoading(true);
 
-      axios
-         .post("/api/reservations", {
-            totalPrice,
-            startDate: dateRange.startDate,
-            endDate: dateRange.endDate,
-            listingId: listing?.id,
+      // one reservation per contiguous run of hours
+      Promise.all(
+         groupContiguousHours(selectedHours).map((group) => {
+            const { start, end } = getSlotRangeForHours(selectedDate, group);
+            return axios.post("/api/reservations", {
+               totalPrice: listing.price * group.length,
+               startDate: start.toISOString(),
+               endDate: end.toISOString(),
+               listingId: listing?.id,
+            });
          })
+      )
          .then(() => {
-            toast.success("Listing Reseerved");
-            setDateRange(initialDateRange);
-            // Redirect to  /trips
+            toast.success("Session reserved");
+            setSelectedHours([]);
             router.push("/trips");
             router.refresh();
          })
-         .catch(() => {
-            toast.error("Something went wrong");
+         .catch((error) => {
+            toast.error(error?.response?.data?.error || "Something went wrong");
          })
          .finally(() => {
             setIsLoading(false);
          });
-   }, [totalPrice, dateRange, listing?.id, router, currentUser, loginModal]);
-
-   useEffect(() => {
-      if (dateRange.startDate && dateRange.endDate) {
-         const dayCount = differenceInCalendarDays(dateRange.endDate, dateRange.startDate);
-
-         if (dayCount && listing.price) {
-            setTotalPrice(dayCount * listing.price);
-         } else {
-            setTotalPrice(listing.price);
-         }
-      }
-   }, [dateRange, listing.price]);
+   }, [
+      listing.price,
+      listing?.id,
+      router,
+      currentUser,
+      loginModal,
+      reservations,
+      selectedDate,
+      selectedHours,
+   ]);
 
    const category = useMemo(() => {
       return categories.find((item) => item.label === listing.category);
    }, [listing.category]);
+
    return (
       <Container>
          <div className="max-w-screen-lg mx-auto">
@@ -139,15 +136,17 @@ const ListingClient: React.FunctionComponent<ListingClientProps> = ({
                      description={listing.description}
                      locationValue={listing.locationValue}
                   />
-                  <div className="order-first  mb-10 md:order-last md:col-span-3">
+                  <div className="order-first mb-10 md:order-last md:col-span-3">
                      <ListingReservation
                         price={listing.price}
                         totalPrice={totalPrice}
-                        onChangeDate={(value) => setDateRange(value)}
-                        dateRange={dateRange}
+                        selectedDate={selectedDate}
+                        selectedHours={selectedHours}
+                        onChangeDate={onChangeDate}
+                        onToggleHour={onToggleHour}
                         onSubmit={onCreateReservation}
                         disabled={isLoading}
-                        disabledDates={disabledDates}
+                        reservations={reservations}
                      />
                   </div>
                </div>

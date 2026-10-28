@@ -1,80 +1,67 @@
 "use client";
 
 import Container from "../Container";
-import { FaUmbrellaBeach } from "@react-icons/all-files/fa/FaUmbrellaBeach";
-import { FaMountain } from "@react-icons/all-files/fa/FaMountain";
-import { FaSwimmingPool } from "@react-icons/all-files/fa/FaSwimmingPool";
-import { GiBarn } from "@react-icons/all-files/gi/GiBarn";
-import { GiBoatFishing } from "@react-icons/all-files/gi/GiBoatFishing";
-import { GiCactus } from "@react-icons/all-files/gi/GiCactus";
-import { GiCastle } from "@react-icons/all-files/gi/GiCastle";
-import { GiCaveEntrance } from "@react-icons/all-files/gi/GiCaveEntrance";
-import { GiForestCamp } from "@react-icons/all-files/gi/GiForestCamp";
-import { GiIsland } from "@react-icons/all-files/gi/GiIsland";
-import { GiWindmill } from "@react-icons/all-files/gi/GiWindmill";
-import { FaSkiing } from "@react-icons/all-files/fa/FaSkiing";
-import { GiCutDiamond } from "@react-icons/all-files/gi/GiCutDiamond";
-import { FaHome } from "@react-icons/all-files/fa/FaHome";
-import { FaSnowflake } from "@react-icons/all-files/fa/FaSnowflake";
 import CategoryBox from "../CategoryBox";
-import { usePathname, useSearchParams } from "next/navigation";
-import { HiOutlinePhoto } from "react-icons/hi2";
-import { MdOutlineVilla } from "react-icons/md";
+import { useSearchParams } from "next/navigation";
+import { publicSpaceAreas } from "@/app/data/publicSpaces";
+import { IconType } from "react-icons";
+import { MdOutlineVilla, MdOutlineForest, MdOutlineCameraIndoor } from "react-icons/md";
 import { TbBeach } from "react-icons/tb";
-import { MdOutlineForest } from "react-icons/md";
-import { MdOutlineCameraIndoor } from "react-icons/md";
+import { FaHome } from "@react-icons/all-files/fa/FaHome";
+import { MdLocationOn } from "react-icons/md";
 
-
-
-export const categories = [
+export const categories: {
+   label: string;
+   icon: IconType;
+   emoji: string;
+   description: string;
+}[] = [
    {
       label: "Studio",
       icon: MdOutlineCameraIndoor,
-      description: "This property is close to the beach",
+      emoji: "🏠",
+      description: "Indoor studio spaces for controlled shoots",
    },
    {
       label: "Villa",
       icon: MdOutlineVilla,
-      description: "This property has windmill",
+      emoji: "🏘️",
+      description: "Private villas and houses",
    },
    {
       label: "Coastal",
       icon: TbBeach,
-      description: "This property is modern",
+      emoji: "🌴",
+      description: "Beaches and waterfront locations",
    },
    {
       label: "Indoor",
       icon: FaHome,
-      description: "This property is modern",
+      emoji: "🏡",
+      description: "Indoor rooms and interiors",
    },
    {
       label: "Outdoor",
       icon: MdOutlineForest,
-      description: "This property is modern",
+      emoji: "🌳",
+      description: "Gardens, estates, and open air sets",
    },
-   
 ];
 
 const Categories = () => {
    const params = useSearchParams();
-   const category = params?.get("category");
-   const pathName = usePathname();
-
-   const isMainPage = pathName === "/";
-
-   if (!isMainPage) {
-      return null;
-   }
+   const area = params?.get("area");
 
    return (
       <Container>
-         <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
-            {categories.map((item) => (
+         <div className="flex flex-row items-center gap-8 overflow-x-auto text-[#717171] pb-2">
+            {publicSpaceAreas.map((item) => (
                <CategoryBox
-                  key={item.label}
-                  label={item.label}
-                  selected={category === item.label}
-                  icon={item.icon}
+                  key={item}
+                  label={item}
+                  selected={area === item}
+                  icon={MdLocationOn}
+                  filterKey="area"
                />
             ))}
          </div>

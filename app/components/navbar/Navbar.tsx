@@ -1,7 +1,6 @@
 "use client";
 
 import Container from "../Container";
-import Categories from "./Categories";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
@@ -12,11 +11,9 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
-   console.log({ currentUser });
-
    return (
-      <div className="fixed w-full bg-white z-10 shadow-sm">
-         <div className="py-4 border-b-[1px]">
+      <div className="fixed w-full bg-white z-10">
+         <div className="py-4 border-b border-[#eee]">
             <Container>
                <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
                   <Logo />
@@ -25,7 +22,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
                </div>
             </Container>
          </div>
-         <Categories />
       </div>
    );
 };

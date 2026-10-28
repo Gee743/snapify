@@ -6,6 +6,12 @@ html,
 body,
 :root {
    height: 100%;
+   color: #222;
+}
+
+a {
+   color: #222;
+   text-decoration: none;
 }
 
 .leaflet-bottom,
@@ -22,4 +28,13 @@ body,
 .rdrCalendarWrapper {
    font-size: 16px !important;
    width: 100% !important;
+}
+
+.scrollbar-hide {
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+   display: none;
 }

@@ -1,55 +1,47 @@
 "use client";
 
-import useCountries from "@/app/hooks/useCountries";
 import useSearchModal from "@/app/hooks/useSearch";
-import { BiSearch } from "@react-icons/all-files/bi/BiSearch";
-import { differenceInDays } from "date-fns";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
 
 const Search = () => {
    const searchModal = useSearchModal();
    const params = useSearchParams();
-   const { getByValue } = useCountries();
-
-   const locationValue = params?.get("locationValue");
-   const startDate = params?.get("startDate");
-   const endDate = params?.get("endDate");
-
-   const locationLabel = useMemo(() => {
-      if (locationValue) {
-         return getByValue(locationValue as string)?.label;
-      }
-      return "Anywhere";
-   }, [getByValue, locationValue]);
-
-   const durationLabel = useMemo(() => {
-      if (startDate && endDate) {
-         const start = new Date(startDate as string);
-         const end = new Date(endDate as string);
-         let diff = differenceInDays(end, start);
-
-         if (diff === 0) {
-            diff = 1;
-         }
-         return `${diff} days`;
-      }
-      return "Any week";
-   }, [startDate, endDate]);
+   const area = params?.get("area");
 
    return (
       <div
+         role="button"
+         tabIndex={0}
          onClick={searchModal.onOpen}
-         className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+         onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+               event.preventDefault();
+               searchModal.onOpen();
+            }
+         }}
+         className="border border-[#ddd] w-full md:w-auto pl-[18px] pr-1.5 py-1.5 rounded-full shadow-[0_1px_4px_rgba(0,0,0,.08)] hover:shadow-md transition cursor-pointer"
       >
          <div className="flex flex-row items-center justify-between">
-            <div className="text-sm font-semibold px-6">{locationLabel}</div>
-            <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
-               {durationLabel}
+            <div className="pr-4">
+               <div className="text-[12px] font-semibold">Area</div>
+               <div className="text-[12px] text-[#717171]">
+                  {area || "Anywhere"}
+               </div>
             </div>
-            <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-               <div className="p-2 bg-green-500 rounded-full text-white">
-                  <BiSearch size={18} />
+            <div className="pl-3 flex flex-row items-center">
+               <div className="w-7 h-7 bg-[#2fa35d] rounded-full text-white flex items-center justify-center">
+                  <svg
+                     width="14"
+                     height="14"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="#fff"
+                     strokeWidth="2.5"
+                     aria-hidden="true"
+                  >
+                     <circle cx="11" cy="11" r="7" />
+                     <line x1="21" y1="21" x2="16.6" y2="16.6" />
+                  </svg>
                </div>
             </div>
          </div>

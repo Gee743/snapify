@@ -98,7 +98,7 @@ const LoginModal = () => {
          />
          <div className="text-neutral-500 text-center mt-4 font-light">
             <div className="flex flex-row items-center gap-2 justify-center">
-               <div>First time using Airbnb?</div>
+               <div>First time using Snapify?</div>
                <div className="text-neutral-800 cursor-pointer hover:underline" onClick={onToggle}>
                   Create an Account
                </div>

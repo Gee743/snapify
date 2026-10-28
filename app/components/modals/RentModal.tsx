@@ -204,7 +204,7 @@ const RentModal = () => {
    if (step === STEPS.PRICE) {
       bodyContent = (
          <div className="flex flex-col gap-8">
-            <Heading title="Now, set your price" subtitle="How much do you charge per night?" />
+            <Heading title="Now, set your price" subtitle="How much do you charge per hour?" />
             <Input
                id="price"
                label="Price"
@@ -223,7 +223,7 @@ const RentModal = () => {
       <Modal
          disabled={isLoading}
          isOpen={rentModal.isOpen}
-         title="Airbnb your home!"
+         title="List your space"
          actionLabel={actionLabel}
          onSubmit={handleSubmit(onSubmit)}
          secondaryActionLabel={secondaryActionLabel}

@@ -1,19 +1,28 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { IconType } from "react-icons";
 import qs from "query-string";
 
 interface CategoryBoxProps {
-   icon: IconType;
+   icon?: IconType;
    label: string;
+   emoji?: string;
    selected?: boolean;
+   filterKey?: string;
 }
 
-const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }) => {
+const CategoryBox: React.FC<CategoryBoxProps> = ({
+   icon: Icon,
+   label,
+   emoji,
+   selected,
+   filterKey = "category",
+}) => {
    const router = useRouter();
    const params = useSearchParams();
+   const pathname = usePathname();
 
    const handleClick = useCallback(() => {
       let currentQuerry = {};
@@ -24,34 +33,36 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }
 
       const updatedQuery: any = {
          ...currentQuerry,
-         category: label,
+         [filterKey]: label,
       };
 
-      if (params?.get("category") === label) {
-         delete updatedQuery.category;
+      if (params?.get(filterKey) === label) {
+         delete updatedQuery[filterKey];
       }
 
       const url = qs.stringifyUrl(
          {
-            url: "/",
+            url: pathname ?? "/",
             query: updatedQuery,
          },
          { skipNull: true }
       );
       router.push(url);
-   }, [label, params, router]);
+   }, [filterKey, label, params, pathname, router]);
 
    return (
       <div
          onClick={handleClick}
-         className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-neutral-800 transition cursor-pointer ${
-            selected
-               ? "border-b-neutral-800 text-neutral-800"
-               : "border-transparent text-neutral-500"
+         className={`flex flex-col items-center justify-center text-center text-xs hover:text-[#222] transition cursor-pointer ${
+            selected ? "text-[#222]" : "text-[#717171]"
          }`}
       >
-         <Icon size={26} />
-         <div className="font-medium text-sm">{label}</div>
+         {emoji ? (
+            <span className="text-lg leading-none">{emoji}</span>
+         ) : Icon ? (
+            <Icon size={26} />
+         ) : null}
+         <div className="mt-1 font-medium">{label}</div>
       </div>
    );
 };
