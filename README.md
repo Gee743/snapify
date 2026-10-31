@@ -33,7 +33,15 @@ GOOGLE_CLIENT_SECRET=
 GITHUB_ID=
 GITHUB_SECRET=
 NEXTAUTH_SECRET=
+ADMIN_USERNAME=
+ADMIN_PASSWORD=
+ADMIN_SESSION_SECRET=
 ```
+
+`ADMIN_USERNAME` and `ADMIN_PASSWORD` are the shared credentials for `/admin`.
+Keep them private and configure them in your deployment environment. Generate a
+separate random `ADMIN_SESSION_SECRET` with at least 32 characters (for example,
+`openssl rand -hex 32`). Do not reuse `NEXTAUTH_SECRET`.
 
 ### Setup Prisma
 
@@ -47,6 +55,11 @@ npx prisma db push
 ```shell
 npm run dev
 ```
+
+On the first successful admin dashboard load, the existing built-in public
+spaces are imported into the database once. From then on, the team can add,
+edit, and remove public spaces at `/admin`; each one appears at
+`/community/<slug>`.
 
 ## Available commands
 
