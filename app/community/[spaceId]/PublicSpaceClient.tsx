@@ -23,7 +23,13 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                   <Heading title={space.name} subtitle={space.locationLabel} />
                </div>
                <div className="w-full h-[60vh] overflow-hidden rounded-[14px] relative">
-                  <Image alt={space.name} src={space.imageSrc} fill className="object-cover" />
+                  <Image
+                     alt={space.name}
+                     src={space.imageSrc}
+                     fill
+                     unoptimized
+                     className="object-cover"
+                  />
                   <span className="absolute top-5 left-5 bg-white text-[#2fa35d] text-[10px] font-bold px-2.5 py-1 rounded-full">
                      FREE
                   </span>

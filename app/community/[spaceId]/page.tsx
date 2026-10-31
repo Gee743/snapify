@@ -1,14 +1,14 @@
 import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
-import { getPublicSpaceById } from "@/app/data/publicSpaces";
+import { getPublicSpaceBySlug } from "@/app/actions/getPublicSpaces";
 import PublicSpaceClient from "./PublicSpaceClient";
 
 interface IParams {
    spaceId?: string;
 }
 
-const PublicSpacePage = ({ params }: { params: IParams }) => {
-   const space = params.spaceId ? getPublicSpaceById(params.spaceId) : undefined;
+const PublicSpacePage = async ({ params }: { params: IParams }) => {
+   const space = params.spaceId ? await getPublicSpaceBySlug(params.spaceId) : undefined;
 
    if (!space) {
       return (

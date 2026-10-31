@@ -19,23 +19,23 @@ const Search = () => {
                searchModal.onOpen();
             }
          }}
-         className="border border-[#ddd] w-full md:w-auto pl-[18px] pr-1.5 py-1.5 rounded-full shadow-[0_1px_4px_rgba(0,0,0,.08)] hover:shadow-md transition cursor-pointer"
+         className="w-full cursor-pointer rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-[18px] pr-1.5 transition hover:border-white/20 hover:bg-white/[0.07] md:w-auto md:min-w-48"
       >
          <div className="flex flex-row items-center justify-between">
             <div className="pr-4">
-               <div className="text-[12px] font-semibold">Area</div>
-               <div className="text-[12px] text-[#717171]">
+               <div className="text-[11px] font-semibold text-[#f5f5f5]">Area</div>
+               <div className="text-[12px] text-[#929292]">
                   {area || "Anywhere"}
                </div>
             </div>
             <div className="pl-3 flex flex-row items-center">
-               <div className="w-7 h-7 bg-[#2fa35d] rounded-full text-white flex items-center justify-center">
+               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#dcff1a] text-[#0a0a0a]">
                   <svg
                      width="14"
                      height="14"
                      viewBox="0 0 24 24"
                      fill="none"
-                     stroke="#fff"
+                     stroke="#0a0a0a"
                      strokeWidth="2.5"
                      aria-hidden="true"
                   >

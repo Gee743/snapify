@@ -1,7 +1,7 @@
 "use client";
 
 import qs from "query-string";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Select from "react-select";
 
@@ -9,18 +9,45 @@ import useSearchModal from "@/app/hooks/useSearch";
 
 import Modal from "./Modal";
 import Heading from "../Heading";
-import { publicSpaceAreas } from "@/app/data/publicSpaces";
+
+interface AreaOption {
+   label: string;
+   value: string;
+}
 
 const SearchModal = () => {
    const router = useRouter();
    const searchModal = useSearchModal();
    const params = useSearchParams();
 
-   const areaOptions = useMemo(
-      () => publicSpaceAreas.map((area) => ({ label: area, value: area })),
-      []
-   );
-   const [area, setArea] = useState<(typeof areaOptions)[number] | null>(null);
+   const [areaOptions, setAreaOptions] = useState<AreaOption[]>([]);
+   const [area, setArea] = useState<AreaOption | null>(null);
+   const [areaLoadError, setAreaLoadError] = useState("");
+
+   useEffect(() => {
+      let isCurrent = true;
+      fetch("/api/public-spaces/areas")
+         .then(async (response) => {
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Could not load available areas.");
+            return result as string[];
+         })
+         .then((areas) => {
+            if (!isCurrent) return;
+            setAreaOptions(areas.map((value) => ({ label: value, value })));
+            setAreaLoadError("");
+         })
+         .catch((error: unknown) => {
+            if (!isCurrent) return;
+            setAreaLoadError(
+               error instanceof Error ? error.message : "Could not load available areas."
+            );
+         });
+
+      return () => {
+         isCurrent = false;
+      };
+   }, []);
 
    useEffect(() => {
       const selectedArea = params?.get("area");
@@ -65,6 +92,11 @@ const SearchModal = () => {
                   title="Where are you looking?"
                   subtitle="Choose an area to find free public spaces."
                />
+               {areaLoadError && (
+                  <p role="alert" className="text-sm text-rose-600">
+                     {areaLoadError}
+                  </p>
+               )}
                <Select
                   placeholder="Anywhere"
                   isClearable

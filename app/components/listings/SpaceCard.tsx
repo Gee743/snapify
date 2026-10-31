@@ -10,6 +10,7 @@ interface SpaceCardProps {
    overlay?: ReactNode;
    action?: ReactNode;
    onClick: () => void;
+   dark?: boolean;
 }
 
 const SpaceCard: React.FC<SpaceCardProps> = ({
@@ -20,6 +21,7 @@ const SpaceCard: React.FC<SpaceCardProps> = ({
    overlay,
    action,
    onClick,
+   dark = false,
 }) => {
    return (
       <div onClick={onClick} className="col-span-1 cursor-pointer group">
@@ -28,9 +30,13 @@ const SpaceCard: React.FC<SpaceCardProps> = ({
                {image}
                {overlay}
             </div>
-            <div className="font-semibold text-sm text-[#222]">{title}</div>
-            <div className="text-[13px] text-[#717171]">{subtitle}</div>
-            <div className="text-sm">{footer}</div>
+            <div className={`font-semibold text-sm ${dark ? "text-[#f5f5f5]" : "text-[#222]"}`}>
+               {title}
+            </div>
+            <div className={`text-[13px] ${dark ? "text-[#929292]" : "text-[#717171]"}`}>
+               {subtitle}
+            </div>
+            <div className={`text-sm ${dark ? "text-[#d4d4d4]" : "text-[#222]"}`}>{footer}</div>
             {action}
          </div>
       </div>

@@ -7,9 +7,10 @@ import SpaceCard from "./SpaceCard";
 
 interface PublicSpaceCardProps {
    data: PublicSpace;
+   dark?: boolean;
 }
 
-const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({ data }) => {
+const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({ data, dark = false }) => {
    const router = useRouter();
 
    return (
@@ -20,17 +21,23 @@ const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({ data }) => {
                alt={data.name}
                src={data.imageSrc}
                fill
+               unoptimized
                className="object-cover h-full w-full group-hover:scale-110 transition"
             />
          }
          overlay={
-            <span className="absolute top-3 left-3 bg-white text-[#2fa35d] text-[10px] font-bold px-2.5 py-1 rounded-full">
+            <span
+               className={`absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full ${
+                  dark ? "bg-[#dcff1a] text-[#0a0a0a]" : "bg-white text-[#2fa35d]"
+               }`}
+            >
                FREE
             </span>
          }
          title={data.name}
          subtitle={data.type}
          footer={<div className="font-bold">Free · No booking needed</div>}
+         dark={dark}
       />
    );
 };

@@ -1,7 +1,8 @@
 import ClientOnly from "../components/ClientOnly";
 import Container from "../components/Container";
 import PublicSpaceCard from "../components/listings/PublicSpaceCard";
-import publicSpaces, { getPublicSpaceArea } from "../data/publicSpaces";
+import { getPublicSpaces } from "../actions/getPublicSpaces";
+import { getPublicSpaceArea } from "../data/publicSpaces";
 
 export const dynamic = "force-dynamic";
 
@@ -11,8 +12,9 @@ interface CommunityPageProps {
    };
 }
 
-const CommunityPage = ({ searchParams }: CommunityPageProps) => {
+const CommunityPage = async ({ searchParams }: CommunityPageProps) => {
    const area = searchParams.area;
+   const publicSpaces = await getPublicSpaces();
    const spaces = area
       ? publicSpaces.filter((space) => getPublicSpaceArea(space) === area)
       : publicSpaces;

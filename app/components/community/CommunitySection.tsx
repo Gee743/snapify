@@ -1,12 +1,10 @@
-"use client";
-
-import publicSpaces from "@/app/data/publicSpaces";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { getPublicSpaces } from "@/app/actions/getPublicSpaces";
 import Container from "../Container";
 import PublicSpaceCard from "../listings/PublicSpaceCard";
 
-const CommunitySection = () => {
-   const router = useRouter();
+const CommunitySection = async () => {
+   const publicSpaces = await getPublicSpaces();
 
    return (
       <section className="bg-[#f1f8f2] mt-10 py-7">
@@ -26,12 +24,12 @@ const CommunitySection = () => {
                   <PublicSpaceCard key={space.id} data={space} />
                ))}
             </div>
-            <button
-               onClick={() => router.push("/community")}
+            <Link
+               href="/community"
                className="mt-5 text-[13px] font-semibold text-[#2fa35d] hover:underline"
             >
                See all free spaces
-            </button>
+            </Link>
          </Container>
       </section>
    );

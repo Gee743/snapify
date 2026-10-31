@@ -3,7 +3,7 @@
 import Container from "../Container";
 import CategoryBox from "../CategoryBox";
 import { useSearchParams } from "next/navigation";
-import { publicSpaceAreas } from "@/app/data/publicSpaces";
+import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { MdOutlineVilla, MdOutlineForest, MdOutlineCameraIndoor } from "react-icons/md";
 import { TbBeach } from "react-icons/tb";
@@ -51,11 +51,26 @@ export const categories: {
 const Categories = () => {
    const params = useSearchParams();
    const area = params?.get("area");
+   const [areas, setAreas] = useState<string[]>([]);
+   const [error, setError] = useState("");
+
+   useEffect(() => {
+      fetch("/api/public-spaces/areas")
+         .then(async (response) => {
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Could not load areas.");
+            return result as string[];
+         })
+         .then(setAreas)
+         .catch((loadError: unknown) => {
+            setError(loadError instanceof Error ? loadError.message : "Could not load areas.");
+         });
+   }, []);
 
    return (
       <Container>
          <div className="flex flex-row items-center gap-8 overflow-x-auto text-[#717171] pb-2">
-            {publicSpaceAreas.map((item) => (
+            {areas.map((item) => (
                <CategoryBox
                   key={item}
                   label={item}
@@ -65,6 +80,7 @@ const Categories = () => {
                />
             ))}
          </div>
+         {error && <p role="alert" className="text-xs text-rose-600">{error}</p>}
       </Container>
    );
 };

@@ -1,5 +1,4 @@
 "use client";
-import { AiOutlineMenu } from "@react-icons/all-files/ai/AiOutlineMenu";
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
@@ -8,7 +7,7 @@ import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
 import { useRouter } from "next/navigation";
 
-const ownersUrl = "http://127.0.0.1:5500/index.html";
+const ownersUrl = "host-waitlist.html";
 
 interface UserMenuProps {
    currentUser?: SafeUser | null;
@@ -30,16 +29,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
          <div className="flex flex-row items-center gap-3">
             <a
                href={ownersUrl}
-               className="hidden md:block text-[13px] font-semibold hover:text-[#555] transition cursor-pointer"
+               className="whitespace-nowrap rounded-xl bg-[#dcff1a] px-3 py-2 text-center text-[11px] font-semibold text-[#0a0a0a] transition hover:brightness-105 sm:px-4 sm:text-[13px]"
             >
                Owners, Join Us!
             </a>
-            {/* <div
-               onClick={toogleOpen}
-               className="w-9 h-9 border border-[#ddd] flex items-center justify-center rounded-full cursor-pointer hover:shadow-md transition"
-            >
-               <AiOutlineMenu />
-            </div> */}
          </div>
          {isOpen && (
             <div className="absolute rounded-xl shadow-md w-[40vw] md:w-full bg-white overflow-hidden right-0 top-14 text-sm">
