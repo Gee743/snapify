@@ -6,11 +6,10 @@ html,
 body,
 :root {
    height: 100%;
-   color: #222;
 }
 
 a {
-   color: #222;
+   color: inherit;
    text-decoration: none;
 }
 
@@ -19,15 +18,6 @@ a {
 .leaflet-pane,
 .leaflet-top {
    z-index: 0 !important;
-}
-
-.rdrMonth {
-   width: 100% !important;
-}
-
-.rdrCalendarWrapper {
-   font-size: 16px !important;
-   width: 100% !important;
 }
 
 .scrollbar-hide {

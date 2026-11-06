@@ -16,7 +16,8 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${space.latlng[0]},${space.latlng[1]}`;
 
    return (
-      <Container>
+      <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
+         <Container>
          <div className="max-w-screen-lg mx-auto">
             <div className="flex flex-col gap-6">
                <div className="flex items-center gap-2">
@@ -30,30 +31,30 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                      unoptimized
                      className="object-cover"
                   />
-                  <span className="absolute top-5 left-5 bg-white text-[#2fa35d] text-[10px] font-bold px-2.5 py-1 rounded-full">
+                  <span className="absolute top-5 left-5 bg-[#dcff1a] text-[#0a0a0a] text-[10px] font-bold px-2.5 py-1 rounded-full">
                      FREE
                   </span>
                </div>
                <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-2">
                   <div className="col-span-4 flex flex-col gap-6">
                      <div>
-                        <div className="text-[13px] text-[#717171]">{space.type}</div>
-                        <div className="text-[13px] font-bold text-[#2fa35d] mt-1">
+                        <div className="text-[13px] text-[#929292]">{space.type}</div>
+                        <div className="text-[13px] font-bold text-[#dcff1a] mt-1">
                            Free · No booking needed
                         </div>
                      </div>
-                     <p className="text-[#5c5c5c]">{space.description}</p>
+                     <p className="text-[#c4c4c4]">{space.description}</p>
                      <div>
-                        <h3 className="text-sm font-bold uppercase tracking-wide text-[#444] mb-2">
+                        <h3 className="text-sm font-bold uppercase tracking-wide text-[#dcff1a] mb-2">
                            Directions
                         </h3>
-                        <p className="text-[#5c5c5c]">{space.directions}</p>
+                        <p className="text-[#c4c4c4]">{space.directions}</p>
                      </div>
                      <div>
-                        <h3 className="text-sm font-bold uppercase tracking-wide text-[#444] mb-2">
+                        <h3 className="text-sm font-bold uppercase tracking-wide text-[#dcff1a] mb-2">
                            Tips from creators
                         </h3>
-                        <ul className="list-disc pl-5 text-[#5c5c5c] space-y-1">
+                        <ul className="list-disc pl-5 text-[#c4c4c4] space-y-1">
                            {space.tips.map((tip) => (
                               <li key={tip}>{tip}</li>
                            ))}
@@ -62,9 +63,9 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                      <Map center={space.latlng} />
                   </div>
                   <div className="order-first mb-10 md:order-last md:col-span-3">
-                     <div className="bg-[#f1f8f2] rounded-[14px] border border-[#d7eadc] overflow-hidden p-5 flex flex-col gap-4">
-                        <div className="text-2xl font-semibold text-[#2fa35d]">Free</div>
-                        <p className="text-sm text-[#5c5c5c]">
+                     <div className="bg-[#101010] rounded-[14px] border border-white/10 overflow-hidden p-5 flex flex-col gap-4">
+                        <div className="text-2xl font-semibold text-[#dcff1a]">Free</div>
+                        <p className="text-sm text-[#929292]">
                            This is a community location. Anyone can shoot here — no reservation,
                            no fee.
                         </p>
@@ -72,7 +73,7 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                            href={mapsUrl}
                            target="_blank"
                            rel="noreferrer"
-                           className="block text-center py-3 rounded-lg bg-[#2fa35d] text-white font-semibold hover:opacity-80 transition"
+                           className="block text-center py-3 rounded-lg bg-[#dcff1a] text-[#0a0a0a] font-semibold hover:brightness-105 transition"
                         >
                            Get directions
                         </a>
@@ -81,7 +82,8 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                </div>
             </div>
          </div>
-      </Container>
+         </Container>
+      </main>
    );
 };
 

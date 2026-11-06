@@ -26,11 +26,7 @@ const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({ data, dark = false })
             />
          }
          overlay={
-            <span
-               className={`absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                  dark ? "bg-[#dcff1a] text-[#0a0a0a]" : "bg-white text-[#2fa35d]"
-               }`}
-            >
+            <span className="absolute top-3 left-3 rounded-full bg-[#dcff1a] px-2.5 py-1 text-[10px] font-bold text-[#0a0a0a]">
                FREE
             </span>
          }

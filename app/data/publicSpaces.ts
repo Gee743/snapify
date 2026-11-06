@@ -124,11 +124,4 @@ const publicSpaces: PublicSpace[] = [
 export const getPublicSpaceArea = (space: PublicSpace) =>
    space.locationLabel.split(",").at(-1)?.trim() ?? space.locationLabel;
 
-export const publicSpaceAreas = Array.from(
-   new Set(publicSpaces.map(getPublicSpaceArea))
-).sort();
-
-export const getPublicSpaceById = (id: string) =>
-   publicSpaces.find((space) => space.id === id);
-
 export default publicSpaces;

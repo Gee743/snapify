@@ -51,6 +51,9 @@ export async function GET(request: Request) {
    if (!isAuthorized(request)) {
       return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
    }
+   if (!isSameOriginRequest(request)) {
+      return NextResponse.json({ error: "Request origin is not allowed." }, { status: 403 });
+   }
 
    await importInitialSpacesOnce();
    const spaces = await prisma.publicSpace.findMany({
