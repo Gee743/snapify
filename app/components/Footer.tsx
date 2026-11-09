@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Container from "./Container";
+import NewsletterForm from "./NewsletterForm";
 
 const exploreLinks = [
    { label: "All free public spaces", href: "/community" },
@@ -10,8 +11,12 @@ const exploreLinks = [
 ];
 
 const companyLinks = [
-   { label: "About Snapify", href: "/" },
-   { label: "Paid spaces", href: "/#free-spaces" },
+   { label: "About Snapify", href: "/about" },
+   { label: "Guides", href: "/guides" },
+   { label: "Submit a place", href: "/submit" },
+   { label: "List your space", href: "/list-your-space" },
+   { label: "Contact", href: "/contact" },
+   { label: "Privacy", href: "/privacy" },
 ];
 
 const currentYear = new Date().getFullYear();
@@ -44,6 +49,12 @@ const Footer = () => {
                      Discover free public spaces across Sri Lanka to shoot, explore, and create —
                      no booking and no fees.
                   </p>
+                  <div className="mt-6 max-w-sm">
+                     <h3 className="mb-2.5 text-[10px] font-semibold tracking-[0.2em] text-[#dcff1a]">
+                        NEW LOCATIONS, NOW AND THEN
+                     </h3>
+                     <NewsletterForm />
+                  </div>
                </div>
 
                <div>

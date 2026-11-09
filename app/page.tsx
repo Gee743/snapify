@@ -2,6 +2,7 @@ import Container from "./components/Container";
 import PublicSpaceCard from "./components/listings/PublicSpaceCard";
 import { getPublicSpaces } from "./actions/getPublicSpaces";
 import { getPublicSpaceCity } from "./data/publicSpaces";
+import guides from "./data/guides";
 import JsonLd from "./components/JsonLd";
 import { itemListSchema } from "./libs/structuredData";
 
@@ -78,6 +79,47 @@ const Home = async ({ searchParams }: HomeProps) => {
                         Bookable studios, homes, and unique shoot locations are coming. Until then,
                         find your next frame in one of these free public spaces.
                      </p>
+                     <a
+                        href="/list-your-space"
+                        className="mt-5 inline-flex rounded-lg border border-white/15 px-4 py-2.5 text-sm font-medium text-white transition hover:border-[#dcff1a] hover:text-[#dcff1a]"
+                     >
+                        Own a space? Join the waitlist
+                     </a>
+                  </div>
+               </section>
+
+               <section className="mb-16">
+                  <div className="mb-5 flex items-end justify-between gap-4">
+                     <div>
+                        <p className="mb-2 text-[10px] font-semibold tracking-[0.2em] text-[#dcff1a]">
+                           BEFORE YOU TRAVEL
+                        </p>
+                        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                           Permits, drones and the right season
+                        </h2>
+                     </div>
+                     <a
+                        href="/guides"
+                        className="hidden whitespace-nowrap text-sm font-semibold text-[#dcff1a] underline sm:inline"
+                     >
+                        All guides
+                     </a>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                     {guides.map((guide) => (
+                        <a
+                           key={guide.slug}
+                           href={`/guides/${guide.slug}`}
+                           className="group rounded-2xl border border-white/10 bg-[#101010] p-5 transition hover:border-[#dcff1a]"
+                        >
+                           <h3 className="text-sm font-semibold leading-snug text-[#f5f5f5] group-hover:text-[#dcff1a]">
+                              {guide.title}
+                           </h3>
+                           <p className="mt-2 text-[13px] leading-6 text-[#929292]">
+                              {guide.description.slice(0, 110)}…
+                           </p>
+                        </a>
+                     ))}
                   </div>
                </section>
 

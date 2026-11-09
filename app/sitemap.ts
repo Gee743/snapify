@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import prisma from "@/app/libs/prismadb";
 import { getPublicSpaces } from "@/app/actions/getPublicSpaces";
 import { getAllPublishedHubPaths } from "@/app/libs/hubs";
+import guides from "@/app/data/guides";
 import { SITE_URL } from "@/app/libs/site";
 
 export const revalidate = 3600;
@@ -49,6 +50,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
          changeFrequency: "weekly",
          priority: 0.9,
       },
+      // Cornerstone guides are the backlink targets and rank for informational
+      // head terms the hub pages cannot.
+      {
+         url: `${SITE_URL}/guides`,
+         lastModified: now,
+         changeFrequency: "monthly",
+         priority: 0.8,
+      },
+      ...guides.map((guide) => ({
+         url: `${SITE_URL}/guides/${guide.slug}`,
+         lastModified: new Date(guide.reviewedOn),
+         changeFrequency: "monthly" as const,
+         priority: 0.85,
+      })),
+      ...["/about", "/contact", "/submit", "/list-your-space", "/privacy"].map((path) => ({
+         url: `${SITE_URL}${path}`,
+         lastModified: now,
+         changeFrequency: "yearly" as const,
+         priority: path === "/privacy" ? 0.2 : 0.5,
+      })),
       // Hub pages rank for the "photo spots in X" queries, so they sit above
       // individual places in priority.
       ...hubs.map((hub) => ({

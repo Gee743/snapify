@@ -2,10 +2,7 @@
 
 import Link from "next/link";
 
-// TODO: point this at the real owner-waitlist form once it exists.
-// Previously "host-waitlist.html" — a relative path to a file that was never
-// added to public/, so the link 404'd and resolved differently per route.
-const ownersUrl = "mailto:hello@snapify.lk?subject=Owners%2C%20Join%20Us";
+const ownersUrl = "/list-your-space";
 
 const UserMenu = () => {
    return (
@@ -22,12 +19,12 @@ const UserMenu = () => {
          >
             All spaces
          </Link>
-         <a
+         <Link
             href={ownersUrl}
             className="whitespace-nowrap rounded-xl bg-[#dcff1a] px-3 py-2 text-center text-[11px] font-semibold text-[#0a0a0a] transition hover:brightness-105 sm:px-4 sm:text-[13px]"
          >
             Owners, Join Us!
-         </a>
+         </Link>
       </div>
    );
 };
