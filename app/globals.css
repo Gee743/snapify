@@ -12,9 +12,86 @@ body,
    min-height: 100%;
 }
 
+html {
+   scroll-behavior: smooth;
+   /* The fixed navbar is 72px tall; without this every in-page anchor lands
+      with its heading hidden underneath it. */
+   scroll-padding-top: 6rem;
+   -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+   html {
+      scroll-behavior: auto;
+   }
+   /* Honour the OS setting rather than animating anyway. Entrances become
+      instant; the layout they resolve to is identical. */
+   *,
+   *::before,
+   *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+   }
+}
+
 a {
    color: inherit;
    text-decoration: none;
+}
+
+/* ---- Browser surfaces ----------------------------------------------------
+   Selection, caret, focus ring and scrollbar ship with defaults that belong to
+   no design system -- a Chrome-blue focus ring on a lime/black site is the
+   clearest tell that a page was assembled rather than designed. */
+
+::selection {
+   background: #dcff1a;
+   color: #0a0a0a;
+}
+
+html {
+   caret-color: #dcff1a;
+   scrollbar-color: #2e2e2e #0a0a0a;
+   scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+   width: 10px;
+   height: 10px;
+}
+::-webkit-scrollbar-track {
+   background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+   background: #2e2e2e;
+   border: 2px solid #0a0a0a;
+   border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+   background: #434343;
+}
+
+/* Keyboard users get a visible, on-brand ring; pointer users never see it.
+   The offset keeps the ring clear of the element's own border. */
+:focus-visible {
+   outline: 2px solid #dcff1a;
+   outline-offset: 3px;
+   border-radius: 4px;
+}
+:focus:not(:focus-visible) {
+   outline: none;
+}
+
+/* Underlines sit clear of descenders instead of cutting through them. */
+a:hover {
+   text-underline-offset: 3px;
+}
+
+/* Times, distances and counts align in columns instead of jittering. */
+.tabular {
+   font-variant-numeric: tabular-nums;
 }
 
 .leaflet-bottom,
@@ -31,4 +108,11 @@ a {
 
 .scrollbar-hide::-webkit-scrollbar {
    display: none;
+}
+
+/* Staggered entrance for grids. Index is passed as --i from the component so
+   children resolve in sequence rather than all at once. */
+.stagger > * {
+   animation: enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+   animation-delay: calc(var(--i, 0) * 45ms);
 }

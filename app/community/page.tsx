@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Container from "../components/Container";
-import PublicSpaceCard from "../components/listings/PublicSpaceCard";
+import SpaceGrid from "../components/listings/SpaceGrid";
 import { getPublicSpaces } from "../actions/getPublicSpaces";
 import { getPublicSpaceCity } from "../data/publicSpaces";
 import JsonLd from "../components/JsonLd";
@@ -35,66 +36,82 @@ const CommunityPage = async ({ searchParams }: CommunityPageProps) => {
       : publicSpaces;
 
    return (
-      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
-            <JsonLd
-               data={[
-                  itemListSchema(
-                     spaces,
-                     area ? `Free photo spots in ${area}, Sri Lanka` : "Free photo spots in Sri Lanka"
-                  ),
-                  breadcrumbSchema([
-                     { name: "Home", path: "/" },
-                     { name: "Free public spaces", path: "/community" },
-                  ]),
-               ]}
-            />
-            <Container>
-               <div className="mb-6 border-b border-white/10 pb-5">
-                  <div className="mb-2 flex items-center gap-2.5">
-                     <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                        Free public spaces
-                     </h1>
-                     <span className="rounded-full bg-[#dcff1a] px-2.5 py-[3px] text-[10px] font-bold tracking-wide text-[#0a0a0a]">
-                        COMMUNITY
-                     </span>
-                  </div>
-                  <p className="max-w-[560px] text-sm leading-6 text-[#929292]">
-                     Open locations anyone can shoot at — parks, viewpoints, murals. No booking or
-                     fee, just directions and tips from other creators.
-                  </p>
-                  {area && (
-                     <p className="mt-3 text-sm text-[#929292]">
-                        Showing {spaces.length} {spaces.length === 1 ? "place" : "places"} in{" "}
-                        <span className="text-[#dcff1a]">{area}</span>.
-                     </p>
-                  )}
-               </div>
-               {spaces.length > 0 ? (
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                     {spaces.map((space, index) => (
-                        <PublicSpaceCard
-                           key={space.id}
-                           data={space}
-                           dark
-                           priority={index < 4}
-                        />
-                     ))}
-                  </div>
-               ) : (
-                  <div className="rounded-2xl border border-white/10 bg-[#101010] px-6 py-12 text-center">
-                     <h2 className="text-lg font-semibold">No free spaces in this area yet.</h2>
-                     <p className="mt-2 text-sm text-[#929292]">
-                        Choose another area to explore public locations.
-                     </p>
-                     <a
+      <main className="bg-ink pb-24 pt-10">
+         <JsonLd
+            data={[
+               itemListSchema(
+                  spaces,
+                  area ? `Free photo spots in ${area}, Sri Lanka` : "Free photo spots in Sri Lanka"
+               ),
+               breadcrumbSchema([
+                  { name: "Home", path: "/" },
+                  { name: "Free public spaces", path: "/community" },
+               ]),
+            ]}
+         />
+         <Container>
+            <div className="mb-9 max-w-3xl">
+               <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-cream sm:text-[2.75rem]">
+                  Free public spaces
+               </h1>
+               <p className="mt-4 max-w-[60ch] text-[16px] leading-7 text-cream-soft">
+                  Open locations anyone can shoot at — parks, viewpoints, beaches and murals. No
+                  booking or fee, just directions, access rules and tips from other creators.
+               </p>
+               {area && (
+                  <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/[0.05] py-1.5 pl-3.5 pr-2 text-[13px] text-cream-soft">
+                     Filtered to <span className="font-medium text-lime">{area}</span>
+                     <Link
                         href="/community"
-                        className="mt-5 inline-flex rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-white transition hover:border-[#dcff1a] hover:text-[#dcff1a]"
+                        aria-label={`Clear the ${area} filter`}
+                        className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-cream-muted transition-colors hover:bg-white/20 hover:text-cream"
+                     >
+                        <svg
+                           width="10"
+                           height="10"
+                           viewBox="0 0 24 24"
+                           fill="none"
+                           stroke="currentColor"
+                           strokeWidth="3"
+                           strokeLinecap="round"
+                           aria-hidden="true"
+                        >
+                           <line x1="5" y1="5" x2="19" y2="19" />
+                           <line x1="19" y1="5" x2="5" y2="19" />
+                        </svg>
+                     </Link>
+                  </p>
+               )}
+            </div>
+
+            {spaces.length > 0 ? (
+               <SpaceGrid spaces={spaces} />
+            ) : (
+               <div className="rounded-panel bg-ink-raised px-6 py-14 text-center shadow-raised">
+                  <h2 className="text-lg font-semibold text-cream">
+                     No free spaces in this area yet
+                  </h2>
+                  <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-cream-muted">
+                     Nothing is listed for that area so far. Browse every location instead, or
+                     tell us about a place you know.
+                  </p>
+                  <div className="mt-6 flex flex-wrap justify-center gap-3">
+                     <Link
+                        href="/community"
+                        className="rounded-xl bg-lime px-5 py-2.5 text-sm font-semibold text-ink transition-transform duration-200 active:scale-[0.97]"
                      >
                         Show all spaces
-                     </a>
+                     </Link>
+                     <Link
+                        href="/submit"
+                        className="rounded-xl border border-ink-lineStrong px-5 py-2.5 text-sm font-medium text-cream transition-colors duration-200 hover:border-lime hover:text-lime"
+                     >
+                        Suggest a place
+                     </Link>
                   </div>
-               )}
-            </Container>
+               </div>
+            )}
+         </Container>
       </main>
    );
 };

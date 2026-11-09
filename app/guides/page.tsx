@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const GuidesIndex = () => (
-   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+   <main className="bg-ink pb-24 pt-10">
       <JsonLd
          data={[
             breadcrumbSchema([
@@ -38,9 +38,11 @@ const GuidesIndex = () => (
          ]}
       />
       <Container>
-         <div className="mb-10 border-b border-white/10 pb-6">
-            <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">Guides</h1>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-[#c4c4c4]">
+         <div className="mb-10 max-w-3xl">
+            <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-cream sm:text-[2.75rem]">
+               Guides
+            </h1>
+            <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-cream-soft">
                The things that decide whether a shoot in Sri Lanka actually happens: what the
                drone rules require, which of the six permitting authorities applies to your
                location, and which coast is worth travelling to in a given month.
@@ -52,14 +54,20 @@ const GuidesIndex = () => (
                <Link
                   key={guide.slug}
                   href={`/guides/${guide.slug}`}
-                  className="group flex flex-col rounded-2xl border border-white/10 bg-[#101010] p-6 transition hover:border-[#dcff1a]"
+                  className="group flex flex-col rounded-card bg-ink-raised p-6 shadow-raised transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-lifted"
                >
-                  <h2 className="text-lg font-semibold leading-snug tracking-tight text-[#f5f5f5] group-hover:text-[#dcff1a]">
+                  <h2 className="text-[17px] font-semibold leading-snug tracking-[-0.015em] text-cream transition-colors duration-200 group-hover:text-lime">
                      {guide.title}
                   </h2>
-                  <p className="mt-3 grow text-sm leading-6 text-[#929292]">{guide.summary}</p>
-                  <span className="mt-5 text-[12px] font-semibold text-[#dcff1a]">
-                     Read the guide →
+                  <p className="mt-3 grow text-[14px] leading-6 text-cream-muted">{guide.summary}</p>
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-[13px] font-medium text-lime">
+                     Read the guide
+                     <span
+                        aria-hidden="true"
+                        className="transition-transform duration-300 ease-out group-hover:translate-x-1"
+                     >
+                        &rarr;
+                     </span>
                   </span>
                </Link>
             ))}

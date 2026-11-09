@@ -51,7 +51,7 @@ const GuidePage = async ({ params }: { params: Params }) => {
       .filter((space): space is NonNullable<typeof space> => Boolean(space));
 
    return (
-      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+      <main className="bg-ink pb-16 pt-4 text-cream">
          <JsonLd
             data={[
                {
@@ -77,12 +77,12 @@ const GuidePage = async ({ params }: { params: Params }) => {
          />
          <Container>
             <article className="mx-auto max-w-3xl">
-               <nav aria-label="Breadcrumb" className="mb-5 text-[12px] text-[#6f6f6f]">
-                  <Link href="/" className="transition hover:text-[#dcff1a]">
+               <nav aria-label="Breadcrumb" className="mb-5 text-[12px] text-cream-faint">
+                  <Link href="/" className="transition hover:text-lime">
                      Home
                   </Link>
                   <span className="px-1.5">/</span>
-                  <Link href="/guides" className="transition hover:text-[#dcff1a]">
+                  <Link href="/guides" className="transition hover:text-lime">
                      Guides
                   </Link>
                </nav>
@@ -90,8 +90,8 @@ const GuidePage = async ({ params }: { params: Params }) => {
                <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
                   {guide.title}
                </h1>
-               <p className="mt-4 text-base leading-7 text-[#c4c4c4]">{guide.summary}</p>
-               <p className="mt-4 border-b border-white/10 pb-6 text-[12px] text-[#6f6f6f]">
+               <p className="mt-4 text-base leading-7 text-cream-soft">{guide.summary}</p>
+               <p className="mt-4 border-b border-ink-line pb-6 text-[12px] text-cream-faint">
                   Last reviewed {formatDate(guide.reviewedOn)} · Rules and fees change, and
                   enforcement varies by site. Confirm with the authority before committing to a
                   paid shoot.
@@ -99,19 +99,19 @@ const GuidePage = async ({ params }: { params: Params }) => {
 
                {guide.sections.map((section) => (
                   <section key={section.heading} className="mt-9">
-                     <h2 className="mb-3 text-xl font-semibold tracking-tight text-[#f5f5f5]">
+                     <h2 className="mb-3 text-xl font-semibold tracking-tight text-cream">
                         {section.heading}
                      </h2>
                      <div className="space-y-3.5">
                         {section.body.map((block, index) =>
                            typeof block === "string" ? (
-                              <p key={index} className="text-sm leading-7 text-[#c4c4c4]">
+                              <p key={index} className="text-sm leading-7 text-cream-soft">
                                  {block}
                               </p>
                            ) : (
                               <ul
                                  key={index}
-                                 className="list-disc space-y-2 pl-5 text-sm leading-7 text-[#c4c4c4]"
+                                 className="list-disc space-y-2 pl-5 text-sm leading-7 text-cream-soft"
                               >
                                  {block.list.map((item) => (
                                     <li key={item}>{item}</li>
@@ -124,8 +124,8 @@ const GuidePage = async ({ params }: { params: Params }) => {
                ))}
 
                {related.length > 0 && (
-                  <section className="mt-12 border-t border-white/10 pt-7">
-                     <h2 className="mb-4 text-sm font-bold uppercase tracking-wide text-[#dcff1a]">
+                  <section className="mt-12 border-t border-ink-line pt-7">
+                     <h2 className="mb-4 text-sm font-bold uppercase tracking-wide text-lime">
                         Places this applies to
                      </h2>
                      <div className="flex flex-wrap gap-2.5">
@@ -133,7 +133,7 @@ const GuidePage = async ({ params }: { params: Params }) => {
                            <Link
                               key={space.id}
                               href={`/community/${space.id}`}
-                              className="rounded-lg border border-white/15 px-3.5 py-2 text-sm text-[#d4d4d4] transition hover:border-[#dcff1a] hover:text-[#dcff1a]"
+                              className="rounded-lg border border-ink-lineStrong px-3.5 py-2 text-sm text-cream-soft transition hover:border-lime hover:text-lime"
                            >
                               {space.name}
                            </Link>
@@ -142,18 +142,18 @@ const GuidePage = async ({ params }: { params: Params }) => {
                   </section>
                )}
 
-               <section className="mt-10 border-t border-white/10 pt-7">
-                  <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-[#dcff1a]">
+               <section className="mt-10 border-t border-ink-line pt-7">
+                  <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-lime">
                      Sources
                   </h2>
-                  <ul className="space-y-1.5 text-sm text-[#929292]">
+                  <ul className="space-y-1.5 text-sm text-cream-muted">
                      {guide.sources.map((source) => (
                         <li key={source.url}>
                            <a
                               href={source.url}
                               target="_blank"
                               rel="noreferrer nofollow"
-                              className="underline transition hover:text-[#dcff1a]"
+                              className="underline transition hover:text-lime"
                            >
                               {source.label}
                            </a>

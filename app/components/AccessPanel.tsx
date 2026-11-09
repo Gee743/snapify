@@ -1,18 +1,16 @@
 import { PublicSpace } from "@/app/data/publicSpaces";
 
 const DRONE_COPY: Record<string, { label: string; tone: string }> = {
-   ALLOWED: { label: "Drones allowed", tone: "text-[#dcff1a]" },
-   PERMIT_REQUIRED: { label: "Drone permit required", tone: "text-[#ffd166]" },
-   PROHIBITED: { label: "Drones prohibited", tone: "text-[#ff6b6b]" },
-   UNKNOWN: { label: "Drone rules unconfirmed", tone: "text-[#929292]" },
+   ALLOWED: { label: "Drones allowed", tone: "text-signal-go" },
+   PERMIT_REQUIRED: { label: "Drone permit required", tone: "text-signal-warn" },
+   PROHIBITED: { label: "Drones prohibited", tone: "text-signal-stop" },
+   UNKNOWN: { label: "Drone rules unconfirmed", tone: "text-cream-muted" },
 };
 
 const Row = ({ label, value }: { label: string; value: React.ReactNode }) => (
-   <div className="flex flex-col gap-1 border-b border-white/[0.07] py-3 last:border-b-0 sm:flex-row sm:items-baseline sm:gap-4">
-      <dt className="w-44 shrink-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#929292]">
-         {label}
-      </dt>
-      <dd className="text-sm text-[#e4e4e4]">{value}</dd>
+   <div className="flex flex-col gap-1 border-b border-ink-line py-3.5 last:border-b-0 sm:flex-row sm:items-baseline sm:gap-5">
+      <dt className="w-40 shrink-0 text-[13px] text-cream-muted">{label}</dt>
+      <dd className="text-[14.5px] leading-6 text-cream">{value}</dd>
    </div>
 );
 
@@ -34,11 +32,11 @@ const AccessPanel = ({ space }: { space: PublicSpace }) => {
    if (!hasAnything) return null;
 
    return (
-      <section className="rounded-[14px] border border-white/10 bg-[#101010] p-5">
-         <h2 className="mb-1 text-sm font-bold uppercase tracking-wide text-[#dcff1a]">
-            Access, fees &amp; permits
+      <section className="rounded-panel bg-ink-raised p-6 shadow-raised">
+         <h2 className="text-[19px] font-semibold tracking-[-0.02em] text-cream">
+            Access, fees and permits
          </h2>
-         <p className="mb-3 text-xs text-[#6f6f6f]">
+         <p className="mb-2 mt-1.5 text-[13px] leading-5 text-cream-muted">
             Rules change and enforcement varies. Confirm with the site before a paid shoot.
          </p>
          <dl>
@@ -51,16 +49,18 @@ const AccessPanel = ({ space }: { space: PublicSpace }) => {
                      <>
                         <span
                            className={
-                              space.permitRequired ? "text-[#ffd166]" : "text-[#dcff1a]"
+                              space.permitRequired ? "text-signal-warn" : "text-signal-go"
                            }
                         >
                            {space.permitRequired ? "Required" : "Not required"}
                         </span>
                         {space.permitAuthority && (
-                           <span className="text-[#929292]"> · {space.permitAuthority}</span>
+                           <span className="text-cream-muted"> · {space.permitAuthority}</span>
                         )}
                         {space.permitNotes && (
-                           <span className="mt-1 block text-[#c4c4c4]">{space.permitNotes}</span>
+                           <span className="mt-1.5 block text-cream-soft">
+                              {space.permitNotes}
+                           </span>
                         )}
                      </>
                   }
@@ -73,7 +73,9 @@ const AccessPanel = ({ space }: { space: PublicSpace }) => {
                      <>
                         <span className={drone.tone}>{drone.label}</span>
                         {space.droneNotes && (
-                           <span className="mt-1 block text-[#c4c4c4]">{space.droneNotes}</span>
+                           <span className="mt-1.5 block text-cream-soft">
+                              {space.droneNotes}
+                           </span>
                         )}
                      </>
                   }

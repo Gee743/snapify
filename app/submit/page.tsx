@@ -20,7 +20,7 @@ const wanted = [
 ];
 
 const Submit = () => (
-   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+   <main className="bg-ink pb-16 pt-4 text-cream">
       <JsonLd
          data={breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -29,11 +29,11 @@ const Submit = () => (
       />
       <Container>
          <div className="mx-auto max-w-4xl">
-            <div className="mb-9 border-b border-white/10 pb-7">
+            <div className="mb-9 border-b border-ink-line pb-7">
                <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">
                   Submit a place
                </h1>
-               <p className="mt-4 max-w-2xl text-sm leading-6 text-[#c4c4c4]">
+               <p className="mt-4 max-w-2xl text-sm leading-6 text-cream-soft">
                   Snapify grows from the people who shoot here. If you know a public place that
                   belongs on the list, send it over. Every submission is reviewed before it goes
                   live, and we will credit you if you want the credit.
@@ -45,13 +45,13 @@ const Submit = () => (
                   <OwnerLeadForm />
                </div>
                <div className="lg:col-span-2">
-                  <h2 className="text-sm font-semibold text-[#dcff1a]">What helps most</h2>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-[#929292]">
+                  <h2 className="text-sm font-semibold text-lime">What helps most</h2>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-cream-muted">
                      {wanted.map((item) => (
                         <li key={item}>{item}</li>
                      ))}
                   </ul>
-                  <p className="mt-5 text-[11px] leading-5 text-[#6f6f6f]">
+                  <p className="mt-5 text-[11px] leading-5 text-cream-faint">
                      Please do not send photographs you do not own the rights to. If you have
                      your own shots of the place and are happy for us to use them, say so and we
                      will follow up about licensing and credit.

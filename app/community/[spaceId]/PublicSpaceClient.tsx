@@ -1,11 +1,12 @@
+import Link from "next/link";
 import Container from "@/app/components/Container";
-import Heading from "@/app/components/Heading";
 import MapSection from "@/app/components/MapSection";
 import AccessPanel from "@/app/components/AccessPanel";
 import ShootTiming from "@/app/components/ShootTiming";
 import NearbyPlaces from "@/app/components/NearbyPlaces";
-import { PublicSpace } from "@/app/data/publicSpaces";
+import { PublicSpace, getPublicSpaceCity, slugifyPlace } from "@/app/data/publicSpaces";
 import PlaceImage from "@/app/components/PlaceImage";
+import { accessSignals } from "@/app/libs/accessSignal";
 
 interface PublicSpaceClientProps {
    space: PublicSpace;
@@ -14,16 +15,69 @@ interface PublicSpaceClientProps {
 
 const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [] }) => {
    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${space.latlng[0]},${space.latlng[1]}`;
+   const city = getPublicSpaceCity(space);
+   const signals = accessSignals(space);
+   // Reuses the card's fee verdict so the sidebar headline and the chip on the
+   // listing can never disagree about the same place.
+   const feeLabel = signals.find((signal) =>
+      ["Free entry", "Free in part", "Entry fee"].includes(signal.label)
+   )?.label;
+   const feeHeadline =
+      feeLabel === "Entry fee" ? "Ticketed" : feeLabel === "Free in part" ? "Partly free" : "Free";
 
    return (
-      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+      <main className="bg-ink pb-24 pt-8">
          <Container>
-         <div className="max-w-screen-lg mx-auto">
-            <div className="flex flex-col gap-6">
-               <div className="flex items-center gap-2">
-                  <Heading title={space.name} subtitle={space.locationLabel} />
-               </div>
-               <div className="w-full h-[60vh] overflow-hidden rounded-[14px] relative">
+            <div className="mx-auto max-w-screen-lg">
+               <nav aria-label="Breadcrumb" className="mb-6">
+                  <ol className="flex flex-wrap items-center gap-x-1.5 text-[12.5px] text-cream-faint">
+                     <li>
+                        <Link href="/" className="inline-flex min-h-[32px] items-center transition-colors duration-200 hover:text-lime">
+                           Home
+                        </Link>
+                     </li>
+                     <li aria-hidden="true" className="text-cream-faint/60">/</li>
+                     <li>
+                        <Link
+                           href={`/photo-spots/${slugifyPlace(city)}`}
+                           className="inline-flex min-h-[32px] items-center transition-colors duration-200 hover:text-lime"
+                        >
+                           {city}
+                        </Link>
+                     </li>
+                     <li aria-hidden="true" className="text-cream-faint/60">/</li>
+                     <li aria-current="page" className="text-cream-muted">
+                        {space.name}
+                     </li>
+                  </ol>
+               </nav>
+
+               <header className="mb-7">
+                  <h1 className="text-[2rem] font-semibold leading-[1.1] tracking-[-0.03em] text-cream sm:text-[2.75rem]">
+                     {space.name}
+                  </h1>
+                  <p className="mt-3 text-[15px] text-cream-muted">
+                     {space.type} · {space.locationLabel}
+                  </p>
+                  {/* The access facts sit above the fold, next to the name:
+                      they decide whether the rest of the page is worth reading. */}
+                  {signals.length > 0 && (
+                     <div className="mt-5 flex flex-wrap gap-2">
+                        {signals.map((signal) => (
+                           <span
+                              key={signal.label}
+                              title={signal.title}
+                              className={`inline-flex items-center gap-1.5 rounded-full bg-white/[0.05] px-3 py-1.5 text-[13px] font-medium ${signal.tone}`}
+                           >
+                              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current" />
+                              {signal.label}
+                           </span>
+                        ))}
+                     </div>
+                  )}
+               </header>
+
+               <div className="relative h-[clamp(260px,46vh,520px)] w-full overflow-hidden rounded-panel bg-ink-raised">
                   <PlaceImage
                      alt={space.name}
                      src={space.imageSrc}
@@ -32,62 +86,100 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [
                      priority
                      className="object-cover"
                   />
-                  <span className="absolute top-5 left-5 bg-[#dcff1a] text-[#0a0a0a] text-[10px] font-bold px-2.5 py-1 rounded-full">
-                     FREE
-                  </span>
                </div>
-               <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-2">
-                  <div className="col-span-4 flex flex-col gap-6">
-                     <div>
-                        <div className="text-[13px] text-[#929292]">{space.type}</div>
-                        <div className="text-[13px] font-bold text-[#dcff1a] mt-1">
-                           Free · No booking needed
-                        </div>
-                     </div>
-                     <p className="text-[#c4c4c4]">{space.description}</p>
-                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-wide text-[#dcff1a] mb-2">
-                           Directions
-                        </h3>
-                        <p className="text-[#c4c4c4]">{space.directions}</p>
-                     </div>
-                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-wide text-[#dcff1a] mb-2">
+
+               <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-7">
+                  <div className="flex flex-col gap-9 md:col-span-4">
+                     <p className="max-w-[68ch] text-[16px] leading-[1.75] text-cream-soft">
+                        {space.description}
+                     </p>
+
+                     <section>
+                        <h2 className="mb-2.5 text-[19px] font-semibold tracking-[-0.02em] text-cream">
+                           Getting there
+                        </h2>
+                        <p className="max-w-[68ch] text-[15px] leading-7 text-cream-soft">
+                           {space.directions}
+                        </p>
+                     </section>
+
+                     <section>
+                        <h2 className="mb-3 text-[19px] font-semibold tracking-[-0.02em] text-cream">
                            Tips from creators
-                        </h3>
-                        <ul className="list-disc pl-5 text-[#c4c4c4] space-y-1">
+                        </h2>
+                        <ul className="flex flex-col gap-3">
                            {space.tips.map((tip) => (
-                              <li key={tip}>{tip}</li>
+                              <li
+                                 key={tip}
+                                 className="flex max-w-[66ch] gap-3 text-[15px] leading-7 text-cream-soft"
+                              >
+                                 <span
+                                    aria-hidden="true"
+                                    className="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-lime"
+                                 />
+                                 {tip}
+                              </li>
                            ))}
                         </ul>
-                     </div>
+                     </section>
+
                      <ShootTiming space={space} />
                      <AccessPanel space={space} />
-                     <MapSection center={space.latlng} />
+
+                     <section>
+                        <h2 className="mb-3 text-[19px] font-semibold tracking-[-0.02em] text-cream">
+                           On the map
+                        </h2>
+                        <MapSection center={space.latlng} />
+                     </section>
                   </div>
-                  <div className="order-first mb-10 md:order-last md:col-span-3">
-                     <div className="bg-[#101010] rounded-[14px] border border-white/10 overflow-hidden p-5 flex flex-col gap-4">
-                        <div className="text-2xl font-semibold text-[#dcff1a]">Free</div>
-                        <p className="text-sm text-[#929292]">
-                           This is a community location. Anyone can shoot here — no reservation,
-                           no fee.
+
+                  <aside className="order-first md:order-last md:col-span-3">
+                     {/* Sticky on desktop: the directions action stays reachable
+                         through a long page instead of scrolling away at the top
+                         and leaving the column empty. */}
+                     <div className="rounded-panel bg-ink-raised p-6 shadow-raised md:sticky md:top-[88px]">
+                        <p className="text-[13px] text-cream-muted">Cost to shoot</p>
+                        {/* The headline is the derived verdict; entryFee itself
+                            is a sentence and belongs in the body below. */}
+                        <p className="mt-1 text-[28px] font-semibold tracking-[-0.02em] text-lime">
+                           {feeHeadline}
+                        </p>
+                        <p className="mt-3 text-[14px] leading-6 text-cream-soft">
+                           {space.entryFee?.trim() ||
+                              "A public location. Anyone can shoot here — no reservation and no fee."}
                         </p>
                         <a
                            href={mapsUrl}
                            target="_blank"
                            rel="noreferrer"
-                           className="block text-center py-3 rounded-lg bg-[#dcff1a] text-[#0a0a0a] font-semibold hover:brightness-105 transition"
+                           className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-lime px-5 py-3.5 text-[15px] font-semibold text-ink transition-all duration-300 ease-out hover:shadow-glow hover:brightness-105 active:scale-[0.98]"
                         >
                            Get directions
+                           <svg
+                              className="h-4 w-4"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              aria-hidden="true"
+                           >
+                              <path d="M7 17 17 7M9 7h8v8" />
+                           </svg>
                         </a>
+                        <p className="mt-3 text-center text-[12px] text-cream-faint">
+                           Opens in Google Maps
+                        </p>
                      </div>
-                  </div>
+                  </aside>
                </div>
-               <div className="mt-12">
+
+               <div className="mt-20">
                   <NearbyPlaces places={nearby} />
                </div>
             </div>
-         </div>
          </Container>
       </main>
    );

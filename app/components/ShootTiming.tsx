@@ -13,42 +13,66 @@ const ShootTiming = ({ space }: { space: PublicSpace }) => {
 
    if (!sun) return null;
 
+   // Ordered through the day so the column reads as a timeline. The two golden
+   // hours are marked because they are what most visitors came for.
    const slots = [
-      { label: "Blue hour", value: `${formatSriLankaTime(sun.blueHourMorningStart)}–${formatSriLankaTime(sun.sunrise)}` },
+      {
+         label: "Blue hour",
+         value: `${formatSriLankaTime(sun.blueHourMorningStart)}–${formatSriLankaTime(sun.sunrise)}`,
+      },
       { label: "Sunrise", value: formatSriLankaTime(sun.sunrise) },
-      { label: "Morning golden hour", value: `${formatSriLankaTime(sun.sunrise)}–${formatSriLankaTime(sun.goldenHourMorningEnd)}` },
-      { label: "Evening golden hour", value: `${formatSriLankaTime(sun.goldenHourEveningStart)}–${formatSriLankaTime(sun.sunset)}` },
+      {
+         label: "Golden hour",
+         value: `${formatSriLankaTime(sun.sunrise)}–${formatSriLankaTime(sun.goldenHourMorningEnd)}`,
+         key: true,
+      },
+      {
+         label: "Golden hour",
+         value: `${formatSriLankaTime(sun.goldenHourEveningStart)}–${formatSriLankaTime(sun.sunset)}`,
+         key: true,
+      },
       { label: "Sunset", value: formatSriLankaTime(sun.sunset) },
-      { label: "Blue hour (pm)", value: `${formatSriLankaTime(sun.sunset)}–${formatSriLankaTime(sun.blueHourEveningEnd)}` },
+      {
+         label: "Blue hour",
+         value: `${formatSriLankaTime(sun.sunset)}–${formatSriLankaTime(sun.blueHourEveningEnd)}`,
+      },
    ];
 
    return (
-      <section className="rounded-[14px] border border-white/10 bg-[#101010] p-5">
-         <h2 className="mb-1 text-sm font-bold uppercase tracking-wide text-[#dcff1a]">
+      <section className="rounded-panel bg-ink-raised p-6 shadow-raised">
+         <h2 className="text-[19px] font-semibold tracking-[-0.02em] text-cream">
             Best time to shoot
          </h2>
-         <p className="mb-4 text-xs text-[#6f6f6f]">
+         <p className="mb-5 mt-1.5 text-[13px] leading-5 text-cream-muted">
             Light times for today at this location, in Sri Lanka time.
          </p>
-         <div className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3">
-            {slots.map((slot) => (
-               <div key={slot.label}>
-                  <div className="text-[11px] uppercase tracking-[0.1em] text-[#929292]">
-                     {slot.label}
+         <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
+            {slots.map((slot, index) => (
+               <div key={`${slot.label}-${index}`}>
+                  <div className="text-[12px] text-cream-muted">{slot.label}</div>
+                  <div
+                     className={`tabular mt-0.5 text-[15px] font-semibold ${
+                        slot.key ? "text-lime" : "text-cream"
+                     }`}
+                  >
+                     {slot.value}
                   </div>
-                  <div className="text-sm font-semibold text-[#f5f5f5]">{slot.value}</div>
                </div>
             ))}
          </div>
-         <div className="mt-4 border-t border-white/[0.07] pt-3 text-sm">
-            <span className="text-[#929292]">Best months: </span>
-            <span className="font-semibold text-[#dcff1a]">{season.bestLabel}</span>
-            <span className="mt-1 block text-xs text-[#929292]">
+         <div className="mt-6 border-t border-ink-line pt-4">
+            <p className="text-[14.5px] text-cream">
+               <span className="text-cream-muted">Best months: </span>
+               <span className="font-semibold text-lime">{season.bestLabel}</span>
+            </p>
+            <p className="mt-1 text-[13px] text-cream-muted">
                Usually avoid {season.avoidLabel}.
-            </span>
+            </p>
          </div>
          {space.shootingNotes && (
-            <p className="mt-3 text-sm text-[#c4c4c4]">{space.shootingNotes}</p>
+            <p className="mt-4 max-w-[62ch] text-[14.5px] leading-6 text-cream-soft">
+               {space.shootingNotes}
+            </p>
          )}
       </section>
    );

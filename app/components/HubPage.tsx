@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Container from "./Container";
-import PublicSpaceCard from "./listings/PublicSpaceCard";
+import SpaceGrid from "./listings/SpaceGrid";
 import JsonLd from "./JsonLd";
 import { breadcrumbSchema, itemListSchema } from "@/app/libs/structuredData";
 import { PublicSpace } from "@/app/data/publicSpaces";
@@ -32,7 +32,7 @@ const HubPage = ({
    const spaces: PublicSpace[] = hub.spaces;
 
    return (
-      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+      <main className="bg-ink pb-24 pt-8">
          <JsonLd
             data={[
                itemListSchema(spaces, `${heading}, Sri Lanka`),
@@ -40,42 +40,52 @@ const HubPage = ({
             ]}
          />
          <Container>
-            <nav aria-label="Breadcrumb" className="mb-5 text-[12px] text-[#6f6f6f]">
-               {breadcrumbs.map((crumb, index) => (
-                  <span key={crumb.path}>
-                     {index > 0 && <span className="px-1.5">/</span>}
-                     {index === breadcrumbs.length - 1 ? (
-                        <span className="text-[#929292]">{crumb.name}</span>
-                     ) : (
-                        <Link href={crumb.path} className="transition hover:text-[#dcff1a]">
-                           {crumb.name}
-                        </Link>
-                     )}
-                  </span>
-               ))}
+            <nav aria-label="Breadcrumb" className="mb-6">
+               <ol className="flex flex-wrap items-center gap-x-1.5 text-[12.5px] text-cream-faint">
+                  {breadcrumbs.map((crumb, index) => (
+                     <li key={crumb.path} className="flex items-center gap-1.5">
+                        {index > 0 && (
+                           <span aria-hidden="true" className="text-cream-faint/60">
+                              /
+                           </span>
+                        )}
+                        {index === breadcrumbs.length - 1 ? (
+                           <span aria-current="page" className="text-cream-muted">
+                              {crumb.name}
+                           </span>
+                        ) : (
+                           <Link
+                              href={crumb.path}
+                              className="inline-flex min-h-[32px] items-center transition-colors duration-200 hover:text-lime"
+                           >
+                              {crumb.name}
+                           </Link>
+                        )}
+                     </li>
+                  ))}
+               </ol>
             </nav>
 
-            <div className="mb-6 border-b border-white/10 pb-6">
-               <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">{heading}</h1>
-               <div className="mt-4 max-w-2xl space-y-3 text-sm leading-6 text-[#c4c4c4]">
+            <div className="mb-9 max-w-3xl">
+               <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-cream sm:text-[2.75rem]">
+                  {heading}
+               </h1>
+               <div className="mt-4 max-w-[62ch] space-y-3 text-[15.5px] leading-7 text-cream-soft">
                   {intro}
                </div>
-               <p className="mt-4 text-sm text-[#929292]">
-                  {spaces.length} {spaces.length === 1 ? "place" : "places"} listed
+               <p className="mt-5 text-[13px] text-cream-muted">
+                  <span className="tabular font-medium text-cream">{spaces.length}</span>{" "}
+                  {spaces.length === 1 ? "place" : "places"} listed
                </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-               {spaces.map((space, index) => (
-                  <PublicSpaceCard key={space.id} data={space} dark priority={index < 4} />
-               ))}
-            </div>
+            <SpaceGrid spaces={spaces} />
 
             {children}
 
             {related.length > 0 && (
-               <section className="mt-14 border-t border-white/10 pt-7">
-                  <h2 className="mb-4 text-sm font-bold uppercase tracking-wide text-[#dcff1a]">
+               <section className="mt-20 border-t border-ink-line pt-9">
+                  <h2 className="mb-5 text-[19px] font-semibold tracking-[-0.02em] text-cream">
                      {relatedLabel}
                   </h2>
                   <div className="flex flex-wrap gap-2.5">
@@ -83,10 +93,12 @@ const HubPage = ({
                         <Link
                            key={item.path}
                            href={item.path}
-                           className="rounded-lg border border-white/15 px-3.5 py-2 text-sm text-[#d4d4d4] transition hover:border-[#dcff1a] hover:text-[#dcff1a]"
+                           className="group inline-flex items-center gap-2 rounded-xl bg-white/[0.05] px-4 py-2.5 text-sm text-cream-soft transition-all duration-200 ease-out hover:bg-white/[0.09] hover:text-cream active:scale-[0.98]"
                         >
                            {item.name}
-                           <span className="ml-1.5 text-[#6f6f6f]">{item.count}</span>
+                           <span className="tabular text-[12px] text-cream-faint">
+                              {item.count}
+                           </span>
                         </Link>
                      ))}
                   </div>

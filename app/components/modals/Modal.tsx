@@ -1,9 +1,6 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { IoMdClose } from "@react-icons/all-files/io/IoMdClose";
-import { IoMdSend } from "@react-icons/all-files/io/IoMdSend";
-
-import { MdCancel } from "@react-icons/all-files/md/MdCancel";
 import Button from "../Button";
 
 interface ModalProps {
@@ -19,6 +16,14 @@ interface ModalProps {
    secondaryActionLabel?: string;
 }
 
+/**
+ * Dialog shell.
+ *
+ * Was a white panel with light-grey borders opening over a black site -- a full
+ * theme inversion mid-interaction. It also had no Escape key, no scroll lock
+ * and no focus management, and animated from `translate-y-full` (the whole
+ * sheet flying up from below the fold) on every open.
+ */
 const Modal: React.FC<ModalProps> = ({
    isOpen,
    onClose,
@@ -31,89 +36,83 @@ const Modal: React.FC<ModalProps> = ({
    secondaryAction,
    secondaryActionLabel,
 }) => {
-   const [showModal, setShowModal] = useState(isOpen);
-
-   useEffect(() => {
-      setShowModal(isOpen);
-
-      return () => {};
-   }, [isOpen]);
+   const panelRef = useRef<HTMLDivElement>(null);
 
    const handleClose = useCallback(() => {
-      if (disabled) {
-         return;
-      }
-
-      setShowModal(false);
-      setTimeout(() => {
-         onClose();
-      }, 300);
+      if (disabled) return;
+      onClose();
    }, [disabled, onClose]);
 
-   const handleSubmit = useCallback(() => {
-      if (disabled) {
-         return;
-      }
+   useEffect(() => {
+      if (!isOpen) return;
+      const onKey = (event: KeyboardEvent) => {
+         if (event.key === "Escape") handleClose();
+      };
+      document.addEventListener("keydown", onKey);
+      document.body.style.overflow = "hidden";
+      // Move focus into the dialog so the keyboard does not stay behind it.
+      panelRef.current?.focus();
+      return () => {
+         document.removeEventListener("keydown", onKey);
+         document.body.style.overflow = "";
+      };
+   }, [isOpen, handleClose]);
 
-      onSubmit();
-   }, [disabled, onSubmit]);
-
-   const handleSecondayAction = useCallback(() => {
-      if (disabled || !secondaryAction) {
-         return;
-      }
-
-      secondaryAction();
-   }, [disabled, secondaryAction]);
-
-   if (!isOpen) {
-      return null;
-   }
+   if (!isOpen) return null;
 
    return (
-      <>
-         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
-            <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
-               {/* CONTENT */}
-               <div
-                  className={`translate duration-300 h-full 
-                  ${showModal ? "translate-y-0" : "translate-y-full"}
-                  ${showModal ? "opacity-100" : "opacity-0"}`}
+      <div
+         className="fixed inset-0 z-[70] flex items-end justify-center bg-black/70 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+         onMouseDown={(event) => {
+            // Backdrop click closes; a drag that starts inside the panel does not.
+            if (event.target === event.currentTarget) handleClose();
+         }}
+      >
+         <div
+            ref={panelRef}
+            tabIndex={-1}
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+            className="animate-sheet flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-panel bg-ink-raised shadow-lifted outline-none sm:max-w-lg sm:rounded-panel"
+         >
+            <div className="flex items-center justify-between gap-4 border-b border-ink-line px-6 py-5">
+               <h2 className="text-[17px] font-semibold tracking-[-0.015em] text-cream">
+                  {title}
+               </h2>
+               <button
+                  type="button"
+                  onClick={handleClose}
+                  aria-label="Close"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-cream-muted transition-colors duration-200 hover:bg-white/[0.07] hover:text-cream"
                >
-                  <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg realtive flex flex-col w-full bg-white outline-none focus:outline-none">
-                     {/* HEADER */}
-                     <div className="flex items-center  p-6 rounded-t justify-center relative border-b-[1px]">
-                        <button
-                           onClick={handleClose}
-                           className="p-1 border-0 hover:opacity-70 transition absolute right-9"
-                        >
-                           <IoMdClose size={18} />
-                        </button>
-                        <div className="text-lg font font-semibold">{title}</div>
-                     </div>
-                     {/* BODY */}
-                     <div className="relative p-6 flex-auto">{body}</div>
-                     {/* FOOTER */}
-                     <div className="flex flex-col gap-2 p-6">
-                        <div className="flex flex-row items-center gap-4 w-full">
-                           {secondaryAction && secondaryActionLabel && (
-                              <Button
-                                 outline
-                                 disabled={disabled}
-                                 label={secondaryActionLabel}
-                                 onClick={handleSecondayAction}
-                              />
-                           )}
+                  <IoMdClose size={18} />
+               </button>
+            </div>
 
-                           <Button disabled={disabled} label={actionLabel} onClick={handleSubmit} />
-                        </div>
-                        {footer}
-                     </div>
-                  </div>
+            <div className="flex-auto overflow-y-auto px-6 py-6">{body}</div>
+
+            <div className="flex flex-col gap-3 border-t border-ink-line px-6 py-5">
+               <div className="flex w-full flex-row items-center gap-3">
+                  {secondaryAction && secondaryActionLabel && (
+                     <Button
+                        outline
+                        disabled={disabled}
+                        label={secondaryActionLabel}
+                        onClick={secondaryAction}
+                     />
+                  )}
+                  <Button
+                     disabled={disabled}
+                     loading={disabled}
+                     label={actionLabel}
+                     onClick={onSubmit}
+                  />
                </div>
+               {footer}
             </div>
          </div>
-      </>
+      </div>
    );
 };
 export default Modal;

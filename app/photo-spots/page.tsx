@@ -28,21 +28,25 @@ const HubGroup = ({
    if (hubs.length === 0) return null;
 
    return (
-      <section className="mb-12">
-         <h2 className="text-lg font-semibold tracking-tight sm:text-xl">{title}</h2>
-         <p className="mb-4 mt-1 text-sm text-[#929292]">{description}</p>
+      <section className="mb-14">
+         <h2 className="text-[21px] font-semibold tracking-[-0.02em] text-cream">{title}</h2>
+         <p className="mb-5 mt-1.5 max-w-[60ch] text-[14px] leading-6 text-cream-muted">
+            {description}
+         </p>
          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {hubs.map((hub) => (
                <Link
                   key={hub.path}
                   href={hub.path}
-                  className="flex items-baseline justify-between rounded-xl border border-white/10 bg-[#101010] px-4 py-3 transition hover:border-[#dcff1a]"
+                  className="group flex items-center justify-between gap-3 rounded-xl bg-ink-raised px-4 py-3.5 shadow-raised transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lifted"
                >
-                  <span className="text-sm font-medium text-[#f5f5f5]">
+                  <span className="text-[14.5px] font-medium text-cream transition-colors duration-200 group-hover:text-lime">
                      {hub.name}
                      {suffix}
                   </span>
-                  <span className="text-[12px] text-[#6f6f6f]">{hub.spaces.length}</span>
+                  <span className="tabular shrink-0 text-[12.5px] text-cream-faint">
+                     {hub.spaces.length}
+                  </span>
                </Link>
             ))}
          </div>
@@ -59,7 +63,7 @@ const PhotoSpotsIndex = async () => {
    ]);
 
    return (
-      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+      <main className="bg-ink pb-24 pt-10">
          <JsonLd
             data={breadcrumbSchema([
                { name: "Home", path: "/" },
@@ -67,11 +71,11 @@ const PhotoSpotsIndex = async () => {
             ])}
          />
          <Container>
-            <div className="mb-10 border-b border-white/10 pb-6">
-               <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">
+            <div className="mb-12 max-w-3xl">
+               <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-cream sm:text-[2.75rem]">
                   Photo Spots in Sri Lanka
                </h1>
-               <p className="mt-4 max-w-2xl text-sm leading-6 text-[#c4c4c4]">
+               <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-cream-soft">
                   Every location on Snapify, grouped by where it is and what kind of place it is.
                   Each listing carries directions, entry fees, permit requirements and the drone
                   rules that actually apply — the details that decide whether a shoot is possible

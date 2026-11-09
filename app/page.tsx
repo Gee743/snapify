@@ -1,5 +1,6 @@
+import Link from "next/link";
 import Container from "./components/Container";
-import PublicSpaceCard from "./components/listings/PublicSpaceCard";
+import SpaceGrid from "./components/listings/SpaceGrid";
 import { getPublicSpaces } from "./actions/getPublicSpaces";
 import { getPublicSpaceCity } from "./data/publicSpaces";
 import guides from "./data/guides";
@@ -20,150 +21,199 @@ const Home = async ({ searchParams }: HomeProps) => {
       ? publicSpaces.filter((space) => getPublicSpaceCity(space) === searchParams.area)
       : publicSpaces;
 
+   const cities = Array.from(new Set(publicSpaces.map(getPublicSpaceCity))).sort();
+   const droneFriendly = publicSpaces.filter((space) => space.droneRule === "ALLOWED").length;
+
    return (
-      <main className="relative isolate -mt-6 overflow-hidden bg-[#0a0a0a] pb-16 text-[#f5f5f5]">
-            <JsonLd data={itemListSchema(spaces, "Free photo spots in Sri Lanka")} />
-            <div
-               className="pointer-events-none absolute inset-0 -z-10"
-               style={{
-                  background:
-                     "radial-gradient(520px 420px at 0% 26%, rgba(220,255,26,.14), transparent 70%)",
-               }}
-            />
-            <svg
-               className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
-               viewBox="0 0 1200 1000"
-               preserveAspectRatio="xMidYMin slice"
-               aria-hidden="true"
-            >
-               <path
-                  d="M-60 640C220 560 420 720 700 580S1100 430 1280 300M-60 700C240 620 440 780 720 640S1120 490 1280 370M300 -40C420 140 640 120 780 260S1000 420 1280 380M520 -40C640 120 820 100 940 220S1120 330 1280 300"
-                  fill="none"
-                  stroke="rgba(255,255,255,.055)"
-                  strokeWidth="1"
-               />
-            </svg>
-            <Container>
-               <section className="mx-auto flex max-w-4xl flex-col items-center py-16 text-center sm:py-24">
-                  <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-[#d4d4d4]">
-                     <span className="h-2 w-2 rounded-full bg-[#dcff1a] shadow-[0_0_10px_#dcff1a]" />
-                     Free places to create across Sri Lanka
-                  </div>
-                  <h1 className="max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] sm:text-6xl">
+      <main className="relative isolate overflow-hidden bg-ink pb-24">
+         <JsonLd data={itemListSchema(spaces, "Free photo spots in Sri Lanka")} />
+
+         {/* A single warm pool behind the hero, fading before the grid starts.
+             Gives the first screen depth without putting a texture under the
+             whole page. */}
+         <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[680px]"
+            style={{
+               background:
+                  "radial-gradient(900px 480px at 15% 0%, rgba(220,255,26,.10), transparent 68%), radial-gradient(700px 400px at 85% 10%, rgba(220,255,26,.05), transparent 70%)",
+            }}
+         />
+
+         <Container>
+            <section className="animate-enter py-16 sm:py-24">
+               <div className="max-w-3xl">
+                  <h1 className="text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.035em] text-cream sm:text-6xl lg:text-[4.25rem]">
                      Your next great shot starts{" "}
-                     <span className="text-[#dcff1a]">somewhere.</span>
+                     <span className="text-lime">somewhere.</span>
                   </h1>
-                  <p className="mt-5 max-w-xl text-base leading-7 text-[#929292] sm:text-lg">
-                     Find inspiring public places to shoot, explore, and create — no booking and
-                     no fees.
+                  {/* Measure held near 60ch so the line does not run the full
+                      1280px container. */}
+                  <p className="mt-6 max-w-[52ch] text-[17px] leading-[1.65] text-cream-soft sm:text-lg">
+                     {publicSpaces.length} free public places across Sri Lanka to shoot, explore
+                     and create — each with directions, entry fees, permit rules and the drone
+                     law that actually applies.
                   </p>
-                  <a
-                     href="#free-spaces"
-                     className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#dcff1a] px-6 py-3.5 text-sm font-semibold text-[#0a0a0a] shadow-[0_0_28px_rgba(220,255,26,.14)] transition hover:brightness-105"
-                  >
-                     Explore free spaces
-                     <span aria-hidden="true">↓</span>
-                  </a>
-               </section>
 
-               <section className="relative mb-16 overflow-hidden rounded-2xl border border-white/10 bg-[#101010] px-7 py-8 sm:px-10 sm:py-10">
-                  <div className="absolute -right-10 -top-12 h-48 w-48 rounded-full border-[24px] border-[#dcff1a]/[0.07]" />
-                  <div className="relative max-w-2xl">
-                     <span className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold tracking-[0.16em] text-[#dcff1a]">
-                        COMING SOON
-                     </span>
-                     <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
-                        Paid spaces are on the way
-                     </h2>
-                     <p className="mt-2 max-w-xl text-sm leading-6 text-[#929292]">
-                        Bookable studios, homes, and unique shoot locations are coming. Until then,
-                        find your next frame in one of these free public spaces.
-                     </p>
+                  <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                      <a
-                        href="/list-your-space"
-                        className="mt-5 inline-flex rounded-lg border border-white/15 px-4 py-2.5 text-sm font-medium text-white transition hover:border-[#dcff1a] hover:text-[#dcff1a]"
+                        href="#free-spaces"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-lime px-6 py-3.5 text-[15px] font-semibold text-ink transition-all duration-300 ease-out hover:shadow-glow hover:brightness-105 active:scale-[0.98]"
                      >
-                        Own a space? Join the waitlist
-                     </a>
-                  </div>
-               </section>
-
-               <section className="mb-16">
-                  <div className="mb-5 flex items-end justify-between gap-4">
-                     <div>
-                        <p className="mb-2 text-[10px] font-semibold tracking-[0.2em] text-[#dcff1a]">
-                           BEFORE YOU TRAVEL
-                        </p>
-                        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                           Permits, drones and the right season
-                        </h2>
-                     </div>
-                     <a
-                        href="/guides"
-                        className="hidden whitespace-nowrap text-sm font-semibold text-[#dcff1a] underline sm:inline"
-                     >
-                        All guides
-                     </a>
-                  </div>
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                     {guides.map((guide) => (
-                        <a
-                           key={guide.slug}
-                           href={`/guides/${guide.slug}`}
-                           className="group rounded-2xl border border-white/10 bg-[#101010] p-5 transition hover:border-[#dcff1a]"
+                        Explore free spaces
+                        <svg
+                           className="h-4 w-4"
+                           viewBox="0 0 24 24"
+                           fill="none"
+                           stroke="currentColor"
+                           strokeWidth="2.2"
+                           strokeLinecap="round"
+                           strokeLinejoin="round"
+                           aria-hidden="true"
                         >
-                           <h3 className="text-sm font-semibold leading-snug text-[#f5f5f5] group-hover:text-[#dcff1a]">
-                              {guide.title}
-                           </h3>
-                           <p className="mt-2 text-[13px] leading-6 text-[#929292]">
-                              {guide.description.slice(0, 110)}…
-                           </p>
-                        </a>
-                     ))}
+                           <path d="M12 5v14M6 13l6 6 6-6" />
+                        </svg>
+                     </a>
+                     <Link
+                        href="/photo-spots"
+                        className="inline-flex items-center justify-center rounded-xl border border-ink-lineStrong px-6 py-3.5 text-[15px] font-medium text-cream transition-colors duration-300 hover:border-lime hover:text-lime"
+                     >
+                        Browse by area
+                     </Link>
                   </div>
-               </section>
 
-               <section id="free-spaces" className="scroll-mt-8">
-                  <div className="mb-6 flex flex-col gap-2 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-                     <div>
-                        <p className="mb-2 text-[10px] font-semibold tracking-[0.2em] text-[#dcff1a]">
-                           MADE FOR YOUR NEXT FRAME
-                        </p>
-                        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                           Free public spaces
-                        </h2>
-                     </div>
-                     <p className="text-sm text-[#929292]">
-                        {spaces.length} {spaces.length === 1 ? "place" : "places"} to explore
+                  {/* Three facts that answer "is this worth my time", in text
+                      rather than as a row of stat cards. */}
+                  <dl className="mt-12 flex flex-wrap gap-x-10 gap-y-5 border-t border-ink-line pt-7">
+                     {[
+                        { value: publicSpaces.length, label: "Free locations" },
+                        { value: cities.length, label: "Cities and towns" },
+                        { value: droneFriendly, label: "Drone friendly" },
+                     ].map((stat) => (
+                        <div key={stat.label}>
+                           <dt className="sr-only">{stat.label}</dt>
+                           <dd>
+                              <span className="tabular block text-[26px] font-semibold leading-none tracking-[-0.02em] text-cream">
+                                 {stat.value}
+                              </span>
+                              <span className="mt-1.5 block text-[13px] text-cream-muted">
+                                 {stat.label}
+                              </span>
+                           </dd>
+                        </div>
+                     ))}
+                  </dl>
+               </div>
+            </section>
+
+            <section id="free-spaces" className="scroll-mt-32 pt-4">
+               <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                     <h2 className="text-[27px] font-semibold tracking-[-0.025em] text-cream sm:text-[32px]">
+                        Free public spaces
+                     </h2>
+                     <p className="mt-2 max-w-[56ch] text-[15px] leading-6 text-cream-muted">
+                        Open locations anyone can shoot at. No booking, no fee — filter by what
+                        the rules let you do.
                      </p>
                   </div>
-                  {spaces.length === 0 ? (
-                     <div className="rounded-2xl border border-white/10 bg-[#101010] px-6 py-12 text-center">
-                        <h3 className="text-lg font-semibold">No free spaces in this area yet.</h3>
-                        <p className="mt-2 text-sm text-[#929292]">
-                           Choose another area to explore public locations.
-                        </p>
-                        <a
+                  <Link
+                     href="/community"
+                     className="shrink-0 text-sm font-medium text-lime transition-opacity duration-200 hover:opacity-75"
+                  >
+                     View all {publicSpaces.length} &rarr;
+                  </Link>
+               </div>
+
+               {spaces.length === 0 ? (
+                  <div className="rounded-panel bg-ink-raised px-6 py-14 text-center shadow-raised">
+                     <h3 className="text-lg font-semibold text-cream">
+                        No free spaces in this area yet
+                     </h3>
+                     <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-cream-muted">
+                        Nothing is listed for that area so far. Browse every location instead, or
+                        tell us about a place you know.
+                     </p>
+                     <div className="mt-6 flex flex-wrap justify-center gap-3">
+                        <Link
                            href="/"
-                           className="mt-5 inline-flex rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-white transition hover:border-[#dcff1a] hover:text-[#dcff1a]"
+                           className="rounded-xl bg-lime px-5 py-2.5 text-sm font-semibold text-ink transition-transform duration-200 active:scale-[0.97]"
                         >
                            Show all spaces
-                        </a>
+                        </Link>
+                        <Link
+                           href="/submit"
+                           className="rounded-xl border border-ink-lineStrong px-5 py-2.5 text-sm font-medium text-cream transition-colors duration-200 hover:border-lime hover:text-lime"
+                        >
+                           Suggest a place
+                        </Link>
                      </div>
-                  ) : (
-                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {spaces.map((space, index) => (
-                           <PublicSpaceCard
-                              key={space.id}
-                              data={space}
-                              dark
-                              priority={index < 4}
-                           />
-                        ))}
-                     </div>
-                  )}
-               </section>
-            </Container>
+                  </div>
+               ) : (
+                  <SpaceGrid spaces={spaces} />
+               )}
+            </section>
+
+            <section className="mt-24">
+               <div className="mb-7">
+                  <h2 className="text-[27px] font-semibold tracking-[-0.025em] text-cream sm:text-[32px]">
+                     Permits, drones and the right season
+                  </h2>
+                  <p className="mt-2 max-w-[56ch] text-[15px] leading-6 text-cream-muted">
+                     The things that decide whether a shoot happens at all — worth reading before
+                     you book the travel.
+                  </p>
+               </div>
+               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  {guides.map((guide) => (
+                     <Link
+                        key={guide.slug}
+                        href={`/guides/${guide.slug}`}
+                        className="group flex flex-col rounded-card bg-ink-raised p-6 shadow-raised transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-lifted"
+                     >
+                        <h3 className="text-[16px] font-semibold leading-snug text-cream transition-colors duration-200 group-hover:text-lime">
+                           {guide.title}
+                        </h3>
+                        <p className="mt-2.5 grow text-[13.5px] leading-6 text-cream-muted">
+                           {guide.summary}
+                        </p>
+                        <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-lime">
+                           Read the guide
+                           <span
+                              aria-hidden="true"
+                              className="transition-transform duration-300 ease-out group-hover:translate-x-1"
+                           >
+                              &rarr;
+                           </span>
+                        </span>
+                     </Link>
+                  ))}
+               </div>
+            </section>
+
+            <section className="relative mt-24 overflow-hidden rounded-panel bg-ink-raised px-7 py-10 shadow-raised sm:px-12 sm:py-14">
+               <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-lime/[0.06] blur-2xl"
+               />
+               <div className="relative max-w-2xl">
+                  <h2 className="text-[25px] font-semibold tracking-[-0.025em] text-cream sm:text-[30px]">
+                     Paid spaces are on the way
+                  </h2>
+                  <p className="mt-3 max-w-[54ch] text-[15px] leading-7 text-cream-muted">
+                     Bookable studios, homes and unique shoot locations are coming to Snapify. If
+                     you own a space worth shooting in, join the waitlist and we will come to you
+                     first.
+                  </p>
+                  <Link
+                     href="/list-your-space"
+                     className="mt-7 inline-flex rounded-xl bg-lime px-5 py-3 text-[14px] font-semibold text-ink transition-all duration-300 ease-out hover:shadow-glow hover:brightness-105 active:scale-[0.98]"
+                  >
+                     Join the owner waitlist
+                  </Link>
+               </div>
+            </section>
+         </Container>
       </main>
    );
 };

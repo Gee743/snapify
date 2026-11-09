@@ -30,7 +30,7 @@ const routes = [
 ];
 
 const Contact = () => (
-   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+   <main className="bg-ink pb-16 pt-4 text-cream">
       <JsonLd
          data={breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -40,9 +40,9 @@ const Contact = () => (
       <Container>
          <div className="mx-auto max-w-3xl">
             <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">Contact</h1>
-            <p className="mt-4 text-sm leading-7 text-[#c4c4c4]">
+            <p className="mt-4 text-sm leading-7 text-cream-soft">
                Email us at{" "}
-               <a href="mailto:hello@snapify.lk" className="text-[#dcff1a] underline">
+               <a href="mailto:hello@snapify.lk" className="text-lime underline">
                   hello@snapify.lk
                </a>
                . We read everything, and corrections to permit or access information get
@@ -53,14 +53,14 @@ const Contact = () => (
                {routes.map((route) => (
                   <div
                      key={route.title}
-                     className="flex flex-col rounded-2xl border border-white/10 bg-[#101010] p-5"
+                     className="flex flex-col rounded-2xl border border-ink-line bg-ink-raised p-5"
                   >
-                     <h2 className="text-sm font-semibold text-[#dcff1a]">{route.title}</h2>
-                     <p className="mt-2 grow text-sm leading-6 text-[#929292]">{route.body}</p>
+                     <h2 className="text-sm font-semibold text-lime">{route.title}</h2>
+                     <p className="mt-2 grow text-sm leading-6 text-cream-muted">{route.body}</p>
                      {route.action && (
                         <Link
                            href={route.action.href}
-                           className="mt-4 text-[12px] font-semibold text-[#f5f5f5] underline transition hover:text-[#dcff1a]"
+                           className="mt-4 text-[12px] font-semibold text-cream underline transition hover:text-lime"
                         >
                            {route.action.label}
                         </Link>

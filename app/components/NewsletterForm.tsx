@@ -34,7 +34,7 @@ const NewsletterForm = () => {
 
    if (done) {
       return (
-         <p className="text-[13px] leading-6 text-[#dcff1a]">
+         <p className="text-[13px] leading-6 text-lime">
             You are on the list. We will send new locations and permit updates, nothing else.
          </p>
       );
@@ -52,12 +52,12 @@ const NewsletterForm = () => {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="you@example.com"
-            className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0a0a0a] px-3.5 py-2.5 text-sm text-[#f5f5f5] outline-none transition placeholder:text-[#6f6f6f] focus:border-[#dcff1a]"
+            className="min-w-0 flex-1 rounded-lg border border-ink-lineStrong bg-ink px-3.5 py-2.5 text-sm text-cream outline-none transition placeholder:text-cream-faint focus:border-lime"
          />
          <button
             type="submit"
             disabled={submitting}
-            className="whitespace-nowrap rounded-lg bg-[#dcff1a] px-4 py-2.5 text-sm font-semibold text-[#0a0a0a] transition hover:brightness-105 disabled:opacity-60"
+            className="whitespace-nowrap rounded-lg bg-lime px-4 py-2.5 text-sm font-semibold text-ink transition hover:brightness-105 disabled:opacity-60"
          >
             {submitting ? "…" : "Subscribe"}
          </button>

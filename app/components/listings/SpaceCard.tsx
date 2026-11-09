@@ -5,38 +5,55 @@ interface SpaceCardProps {
    image: ReactNode;
    title: string;
    subtitle: string;
-   footer: ReactNode;
+   /** Access chips: fee, permit, drone rule. */
+   signals?: ReactNode;
    overlay?: ReactNode;
-   action?: ReactNode;
    href: string;
-   dark?: boolean;
+   /** Stagger position for the grid entrance. */
+   index?: number;
 }
 
 const SpaceCard: React.FC<SpaceCardProps> = ({
    image,
    title,
    subtitle,
-   footer,
+   signals,
    overlay,
-   action,
    href,
-   dark = false,
+   index = 0,
 }) => {
    return (
-      <Link href={href} className="col-span-1 group">
-         <div className="flex flex-col gap-2 w-full">
-            <div className="aspect-square w-full relative overflow-hidden rounded-[14px]">
-               {image}
-               {overlay}
-            </div>
-            <div className={`font-semibold text-sm ${dark ? "text-[#f5f5f5]" : "text-[#222]"}`}>
+      <Link
+         href={href}
+         style={{ ["--i" as string]: index }}
+         // The lift is on the whole card, so the shadow reads as the card
+         // rising off the page rather than the image growing inside a frame.
+         className="group relative flex flex-col overflow-hidden rounded-card bg-ink-raised shadow-raised transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-lifted focus-visible:-translate-y-1"
+      >
+         <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink-overlay">
+            {image}
+            {/* Scrim: card titles sit on photographs of every exposure, and
+                without it a bright sky leaves the FREE chip unreadable. */}
+            <div
+               aria-hidden="true"
+               className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/20"
+            />
+            {overlay}
+         </div>
+         <div className="flex grow flex-col gap-1 p-3.5">
+            {/* Two lines reserved for the name so a one-word place and a
+                three-word one put their chips on the same baseline. */}
+            <h3 className="line-clamp-2 min-h-[2.6em] text-[15px] font-semibold leading-[1.3] tracking-[-0.01em] text-cream transition-colors duration-200 group-hover:text-lime">
                {title}
-            </div>
-            <div className={`text-[13px] ${dark ? "text-[#929292]" : "text-[#717171]"}`}>
-               {subtitle}
-            </div>
-            <div className={`text-sm ${dark ? "text-[#d4d4d4]" : "text-[#222]"}`}>{footer}</div>
-            {action}
+            </h3>
+            <p className="text-[12.5px] leading-5 text-cream-muted">{subtitle}</p>
+            {signals && (
+               // Chips sit on one row and scroll rather than stacking, so a
+               // place with three rules does not grow taller than its neighbours.
+               <div className="scrollbar-hide mt-auto flex gap-x-2.5 overflow-x-auto pt-2.5">
+                  {signals}
+               </div>
+            )}
          </div>
       </Link>
    );

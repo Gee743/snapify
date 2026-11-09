@@ -27,7 +27,7 @@ const points = [
 ];
 
 const ListYourSpace = () => (
-   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+   <main className="bg-ink pb-16 pt-4 text-cream">
       <JsonLd
          data={breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -36,14 +36,14 @@ const ListYourSpace = () => (
       />
       <Container>
          <div className="mx-auto max-w-4xl">
-            <div className="mb-9 border-b border-white/10 pb-7">
-               <span className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold tracking-[0.16em] text-[#dcff1a]">
+            <div className="mb-9 border-b border-ink-line pb-7">
+               <span className="inline-flex rounded-full border border-ink-line bg-white/[0.03] px-3 py-1 text-[10px] font-semibold tracking-[0.16em] text-lime">
                   OWNER WAITLIST
                </span>
                <h1 className="mt-4 text-2xl font-semibold tracking-tight sm:text-4xl">
                   List your space for shoots
                </h1>
-               <p className="mt-4 max-w-2xl text-sm leading-6 text-[#c4c4c4]">
+               <p className="mt-4 max-w-2xl text-sm leading-6 text-cream-soft">
                   Snapify lists free public places to shoot across Sri Lanka. Paid, bookable
                   locations are next: studios, villas, rooftops, warehouses and anywhere else a
                   crew would pay to work. If you own one, tell us about it and we will come to you
@@ -58,8 +58,8 @@ const ListYourSpace = () => (
                <div className="space-y-6 lg:col-span-2">
                   {points.map((point) => (
                      <div key={point.title}>
-                        <h2 className="text-sm font-semibold text-[#dcff1a]">{point.title}</h2>
-                        <p className="mt-1.5 text-sm leading-6 text-[#929292]">{point.body}</p>
+                        <h2 className="text-sm font-semibold text-lime">{point.title}</h2>
+                        <p className="mt-1.5 text-sm leading-6 text-cream-muted">{point.body}</p>
                      </div>
                   ))}
                </div>

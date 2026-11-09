@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const About = () => (
-   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+   <main className="bg-ink pb-16 pt-4 text-cream">
       <JsonLd
          data={breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -23,7 +23,7 @@ const About = () => (
          <article className="mx-auto max-w-3xl">
             <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">About Snapify</h1>
 
-            <div className="mt-6 space-y-4 text-sm leading-7 text-[#c4c4c4]">
+            <div className="mt-6 space-y-4 text-sm leading-7 text-cream-soft">
                <p>
                   Snapify is a directory of places to shoot in Sri Lanka, made for the people who
                   actually shoot here: photographers, videographers, students, and the crews who
@@ -46,7 +46,7 @@ const About = () => (
             </div>
 
             <h2 className="mt-10 text-xl font-semibold tracking-tight">Where the data comes from</h2>
-            <div className="mt-4 space-y-4 text-sm leading-7 text-[#c4c4c4]">
+            <div className="mt-4 space-y-4 text-sm leading-7 text-cream-soft">
                <p>
                   Descriptions, directions and shooting notes are written by us. Permit and drone
                   information is taken from the relevant authorities -- the Civil Aviation
@@ -63,7 +63,7 @@ const About = () => (
                <p>
                   Rules change and enforcement varies. If you find something out of date, or you
                   know a place worth adding, please{" "}
-                  <Link href="/contact" className="text-[#dcff1a] underline">
+                  <Link href="/contact" className="text-lime underline">
                      tell us
                   </Link>
                   .
@@ -71,11 +71,11 @@ const About = () => (
             </div>
 
             <h2 className="mt-10 text-xl font-semibold tracking-tight">What is coming</h2>
-            <div className="mt-4 space-y-4 text-sm leading-7 text-[#c4c4c4]">
+            <div className="mt-4 space-y-4 text-sm leading-7 text-cream-soft">
                <p>
                   Free public places are live now. Paid, bookable locations -- studios, villas,
                   rooftops -- are next. If you own a space crews would pay to work in,{" "}
-                  <Link href="/list-your-space" className="text-[#dcff1a] underline">
+                  <Link href="/list-your-space" className="text-lime underline">
                      join the owner waitlist
                   </Link>
                   .

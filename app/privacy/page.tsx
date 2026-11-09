@@ -47,11 +47,11 @@ const sections = [
 ];
 
 const Privacy = () => (
-   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
+   <main className="bg-ink pb-16 pt-4 text-cream">
       <Container>
          <article className="mx-auto max-w-3xl">
             <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">Privacy</h1>
-            <p className="mt-4 text-sm leading-7 text-[#c4c4c4]">
+            <p className="mt-4 text-sm leading-7 text-cream-soft">
                Snapify is a location directory. We collect as little as the site can function
                with, and we would rather explain it in plain language than in four pages of
                boilerplate.
@@ -61,7 +61,7 @@ const Privacy = () => (
                   <h2 className="mb-2.5 text-lg font-semibold tracking-tight">{section.heading}</h2>
                   <div className="space-y-3">
                      {section.body.map((paragraph) => (
-                        <p key={paragraph} className="text-sm leading-7 text-[#c4c4c4]">
+                        <p key={paragraph} className="text-sm leading-7 text-cream-soft">
                            {paragraph}
                         </p>
                      ))}
