@@ -88,6 +88,19 @@ const CITY_TO_DISTRICT: Record<string, string> = {
    anuradhapura: "Anuradhapura",
    kalpitiya: "Puttalam",
    ratnapura: "Ratnapura",
+   dambulla: "Matale",
+   sigiriya: "Matale",
+   koggala: "Galle",
+   ahangama: "Galle",
+   weligama: "Matara",
+   polonnaruwa: "Polonnaruwa",
+   matara: "Matara",
+   nuwaraeliya: "Nuwara Eliya",
+   "nuwara eliya": "Nuwara Eliya",
+   tangalle: "Hambantota",
+   bentota: "Galle",
+   kalutara: "Kalutara",
+   dikwella: "Matara",
 };
 
 export const districtForCity = (city: string): string =>
