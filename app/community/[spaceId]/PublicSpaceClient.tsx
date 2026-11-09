@@ -1,14 +1,18 @@
 import Container from "@/app/components/Container";
 import Heading from "@/app/components/Heading";
 import MapSection from "@/app/components/MapSection";
+import AccessPanel from "@/app/components/AccessPanel";
+import ShootTiming from "@/app/components/ShootTiming";
+import NearbyPlaces from "@/app/components/NearbyPlaces";
 import { PublicSpace } from "@/app/data/publicSpaces";
 import Image from "next/image";
 
 interface PublicSpaceClientProps {
    space: PublicSpace;
+   nearby?: { space: PublicSpace; km: number }[];
 }
 
-const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
+const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [] }) => {
    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${space.latlng[0]},${space.latlng[1]}`;
 
    return (
@@ -57,6 +61,8 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                            ))}
                         </ul>
                      </div>
+                     <ShootTiming space={space} />
+                     <AccessPanel space={space} />
                      <MapSection center={space.latlng} />
                   </div>
                   <div className="order-first mb-10 md:order-last md:col-span-3">
@@ -76,6 +82,9 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                         </a>
                      </div>
                   </div>
+               </div>
+               <div className="mt-12">
+                  <NearbyPlaces places={nearby} />
                </div>
             </div>
          </div>

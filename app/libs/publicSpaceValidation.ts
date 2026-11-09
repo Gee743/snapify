@@ -8,7 +8,35 @@ export interface PublicSpaceInput {
    directions: string;
    tips: string[];
    imageSrc: string;
+   // Access intelligence (Plan 3.2). All optional: existing admin clients that
+   // do not send them keep working, and the fields stay undefined rather than
+   // overwriting stored values with blanks.
+   entryFee?: string;
+   isFree?: boolean;
+   permitRequired?: boolean;
+   permitAuthority?: string;
+   permitNotes?: string;
+   droneRule?: DroneRuleValue;
+   droneNotes?: string;
+   openingHours?: string;
+   tripodAllowed?: boolean;
+   shootingNotes?: string;
+   bestTimeOfDay?: string[];
+   bestMonths?: number[];
 }
+
+export const DRONE_RULES = ["ALLOWED", "PERMIT_REQUIRED", "PROHIBITED", "UNKNOWN"] as const;
+export type DroneRuleValue = (typeof DRONE_RULES)[number];
+
+export const BEST_TIMES = [
+   "sunrise",
+   "golden-hour-am",
+   "midday",
+   "golden-hour-pm",
+   "sunset",
+   "blue-hour",
+   "night",
+] as const;
 
 const isNonEmptyString = (value: unknown): value is string =>
    typeof value === "string" && value.trim().length > 0;
@@ -57,6 +85,92 @@ export const parsePublicSpaceInput = (body: unknown): PublicSpaceInput | null =>
    }
    if (imageUrl.protocol !== "https:") return null;
 
+   // Optional fields: absent stays undefined so a partial payload never clears
+   // stored data, and an invalid value rejects the whole request rather than
+   // being silently coerced. INVALID is a sentinel so the happy path can stay
+   // typed as `string | undefined`.
+   const INVALID = Symbol("invalid");
+
+   const optionalText = (raw: unknown, maxLength: number) => {
+      if (raw === undefined) return undefined;
+      return isValidText(raw, maxLength) ? raw.trim() : INVALID;
+   };
+
+   const optionalBool = (raw: unknown) => {
+      if (raw === undefined) return undefined;
+      return typeof raw === "boolean" ? raw : INVALID;
+   };
+
+   const entryFeeRaw = optionalText(value.entryFee, 200);
+   const permitAuthorityRaw = optionalText(value.permitAuthority, 200);
+   const permitNotesRaw = optionalText(value.permitNotes, 2000);
+   const droneNotesRaw = optionalText(value.droneNotes, 2000);
+   const openingHoursRaw = optionalText(value.openingHours, 300);
+   const shootingNotesRaw = optionalText(value.shootingNotes, 2000);
+   const isFreeRaw = optionalBool(value.isFree);
+   const permitRequiredRaw = optionalBool(value.permitRequired);
+   const tripodAllowedRaw = optionalBool(value.tripodAllowed);
+
+   if (
+      entryFeeRaw === INVALID ||
+      permitAuthorityRaw === INVALID ||
+      permitNotesRaw === INVALID ||
+      droneNotesRaw === INVALID ||
+      openingHoursRaw === INVALID ||
+      shootingNotesRaw === INVALID ||
+      isFreeRaw === INVALID ||
+      permitRequiredRaw === INVALID ||
+      tripodAllowedRaw === INVALID
+   ) {
+      return null;
+   }
+
+   const entryFee = entryFeeRaw;
+   const permitAuthority = permitAuthorityRaw;
+   const permitNotes = permitNotesRaw;
+   const droneNotes = droneNotesRaw;
+   const openingHours = openingHoursRaw;
+   const shootingNotes = shootingNotesRaw;
+   const isFree = isFreeRaw;
+   const permitRequired = permitRequiredRaw;
+   const tripodAllowed = tripodAllowedRaw;
+
+   let droneRule: DroneRuleValue | undefined;
+   if (value.droneRule !== undefined) {
+      if (typeof value.droneRule !== "string" || !DRONE_RULES.includes(value.droneRule as DroneRuleValue)) {
+         return null;
+      }
+      droneRule = value.droneRule as DroneRuleValue;
+   }
+
+   let bestTimeOfDay: string[] | undefined;
+   if (value.bestTimeOfDay !== undefined) {
+      if (
+         !Array.isArray(value.bestTimeOfDay) ||
+         value.bestTimeOfDay.length > 7 ||
+         !value.bestTimeOfDay.every(
+            (entry) => typeof entry === "string" && (BEST_TIMES as readonly string[]).includes(entry)
+         )
+      ) {
+         return null;
+      }
+      bestTimeOfDay = value.bestTimeOfDay as string[];
+   }
+
+   let bestMonths: number[] | undefined;
+   if (value.bestMonths !== undefined) {
+      if (
+         !Array.isArray(value.bestMonths) ||
+         value.bestMonths.length > 12 ||
+         !value.bestMonths.every(
+            (month) => typeof month === "number" && Number.isInteger(month) && month >= 1 && month <= 12
+         )
+      ) {
+         return null;
+      }
+      bestMonths = value.bestMonths as number[];
+   }
+
    return {
       slug: value.slug,
       name: value.name.trim(),
@@ -67,5 +181,17 @@ export const parsePublicSpaceInput = (body: unknown): PublicSpaceInput | null =>
       directions: value.directions.trim(),
       tips: value.tips.map((tip) => tip.trim()).filter(Boolean),
       imageSrc: imageUrl.toString(),
+      ...(entryFee !== undefined && { entryFee }),
+      ...(isFree !== undefined && { isFree }),
+      ...(permitRequired !== undefined && { permitRequired }),
+      ...(permitAuthority !== undefined && { permitAuthority }),
+      ...(permitNotes !== undefined && { permitNotes }),
+      ...(droneRule !== undefined && { droneRule }),
+      ...(droneNotes !== undefined && { droneNotes }),
+      ...(openingHours !== undefined && { openingHours }),
+      ...(tripodAllowed !== undefined && { tripodAllowed }),
+      ...(shootingNotes !== undefined && { shootingNotes }),
+      ...(bestTimeOfDay !== undefined && { bestTimeOfDay }),
+      ...(bestMonths !== undefined && { bestMonths }),
    };
 };

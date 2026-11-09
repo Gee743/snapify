@@ -8,6 +8,8 @@ import {
 import { toPublicSpaceRecord } from "@/app/actions/getPublicSpaces";
 import publicSpaces from "@/app/data/publicSpaces";
 import { parsePublicSpaceInput } from "@/app/libs/publicSpaceValidation";
+import { deriveSpaceFields } from "@/app/libs/deriveSpaceFields";
+import { revalidatePath } from "next/cache";
 
 const isAuthorized = (request: Request) =>
    isValidAdminSession(getAdminSessionTokenFromRequest(request));
@@ -34,6 +36,7 @@ async function importInitialSpacesOnce() {
                directions: space.directions,
                tips: space.tips,
                imageSrc: space.imageSrc,
+               ...deriveSpaceFields(space),
             },
             update: {},
          });
@@ -83,7 +86,12 @@ export async function POST(request: Request) {
    }
 
    try {
-      const space = await prisma.publicSpace.create({ data: input });
+      const space = await prisma.publicSpace.create({
+         data: { ...input, ...deriveSpaceFields(input) },
+      });
+      // Surface the new place immediately instead of waiting out the ISR window.
+      revalidatePath("/");
+      revalidatePath("/community");
       return NextResponse.json(toPublicSpaceRecord(space), { status: 201 });
    } catch (error) {
       if (

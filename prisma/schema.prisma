@@ -42,6 +42,28 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+enum SpaceCategory {
+  BEACH
+  WATERFALL
+  VIEWPOINT
+  TEMPLE_LANDMARK
+  NATURE_TRAIL
+  URBAN
+}
+
+enum DroneRule {
+  ALLOWED
+  PERMIT_REQUIRED
+  PROHIBITED
+  UNKNOWN
+}
+
+enum SpaceStatus {
+  PUBLISHED
+  PENDING
+  REJECTED
+}
+
 model PublicSpace {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   slug          String   @unique
@@ -55,6 +77,95 @@ model PublicSpace {
   imageSrc      String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  // Structured location. locationLabel stays for display and back-compat, but
+  // these are what the hub URLs, JSON-LD address and breadcrumbs read from.
+  // String parsing is fragile: an admin entering "Ella" with no comma would
+  // make city and province identical.
+  city         String?
+  citySlug     String?
+  district     String?
+  districtSlug String?
+  province     String?
+  provinceSlug String?
+
+  // Controlled taxonomy for the category hubs. The freeform `type` field stays
+  // as the human-readable descriptor, e.g. "Clifftop Temple".
+  category SpaceCategory?
+
+  // Gallery. imageSrc remains the canonical hero so OG/JSON-LD stay unambiguous.
+  images String[]
+
+  // Shoot timing. bestMonths is 1-12 and matters a lot here: the west/south
+  // coast is effectively unshootable May-Sept, the east Nov-Feb.
+  bestTimeOfDay String[]
+  bestMonths    Int[]
+  shootingNotes String?
+
+  // Access intelligence -- the differentiator. Sri Lanka's shoot-permission
+  // landscape is split across the NFC, Dept. of Archaeology, Central Cultural
+  // Fund, CAASL/TRCSL and the Galle Heritage Foundation.
+  entryFee        String?
+  isFree          Boolean   @default(true)
+  permitRequired  Boolean   @default(false)
+  permitAuthority String?
+  permitNotes     String?
+  droneRule       DroneRule @default(UNKNOWN)
+  droneNotes      String?
+  openingHours    String?
+  tripodAllowed   Boolean?
+
+  // Per-place SEO overrides.
+  metaTitle       String?
+  metaDescription String?
+
+  // Submission pipeline.
+  status           SpaceStatus @default(PUBLISHED)
+  submittedByName  String?
+  submittedByEmail String?
+
+  // Provenance for imported places (OSM/ODbL and Wikimedia attribution).
+  sourceAttribution String?
+
+  @@index([citySlug])
+  @@index([districtSlug])
+  @@index([provinceSlug])
+  @@index([category])
+  @@index([status])
+}
+
+model SpaceOwnerLead {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String
+  phone        String?
+  spaceName    String?
+  locationText String?
+  spaceType    String?
+  message      String?
+  createdAt    DateTime @default(now())
+
+  @@index([email])
+}
+
+model SpaceInquiry {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  spaceSlug String
+  name      String
+  email     String
+  phone     String?
+  shootDate DateTime?
+  message   String?
+  createdAt DateTime  @default(now())
+
+  @@index([spaceSlug])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  source    String?
+  createdAt DateTime @default(now())
 }
 
 model PublicSpaceBootstrap {

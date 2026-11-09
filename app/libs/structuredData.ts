@@ -39,8 +39,33 @@ export const touristAttractionSchema = (space: PublicSpace) => {
       image: [space.imageSrc],
       // The core of the "free, no booking" positioning -- and the single fact an
       // AI answer engine is most likely to quote.
-      isAccessibleForFree: true,
+      isAccessibleForFree: space.isFree ?? true,
       publicAccess: true,
+      ...(space.openingHours && { openingHours: space.openingHours }),
+      // Permit and drone status as explicit statements, so an answer engine can
+      // lift them verbatim for "do I need a permit to shoot at X".
+      ...(space.permitRequired !== undefined && {
+         additionalProperty: [
+            {
+               "@type": "PropertyValue",
+               name: "Permit required",
+               value: space.permitRequired ? "Yes" : "No",
+               ...(space.permitAuthority && { description: space.permitAuthority }),
+            },
+            ...(space.droneRule && space.droneRule !== "UNKNOWN"
+               ? [
+                    {
+                       "@type": "PropertyValue",
+                       name: "Drone policy",
+                       value: space.droneRule
+                          .toLowerCase()
+                          .split("_")
+                          .join(" "),
+                    },
+                 ]
+               : []),
+         ],
+      }),
       touristType: ["Photographers", "Filmmakers", "Content creators"],
       geo: {
          "@type": "GeoCoordinates",

@@ -8,6 +8,28 @@ export type PublicSpace = {
    directions: string;
    tips: string[];
    imageSrc: string;
+   // Structured + access fields (Plan 3.1). Optional so the built-in seed array
+   // and any not-yet-backfilled rows still satisfy the type.
+   city?: string | null;
+   citySlug?: string | null;
+   district?: string | null;
+   districtSlug?: string | null;
+   province?: string | null;
+   provinceSlug?: string | null;
+   category?: string | null;
+   images?: string[];
+   bestTimeOfDay?: string[];
+   bestMonths?: number[];
+   shootingNotes?: string | null;
+   entryFee?: string | null;
+   isFree?: boolean;
+   permitRequired?: boolean;
+   permitAuthority?: string | null;
+   permitNotes?: string | null;
+   droneRule?: string | null;
+   droneNotes?: string | null;
+   openingHours?: string | null;
+   tripodAllowed?: boolean | null;
 };
 
 const publicSpaces: PublicSpace[] = [
@@ -433,10 +455,13 @@ const publicSpaces: PublicSpace[] = [
 // "area" and "Province" in the UI, which made the two impossible to tell apart.
 // Every pSEO URL, JSON-LD address and breadcrumb depends on the distinction.
 export const getPublicSpaceCity = (space: PublicSpace) =>
-   space.locationLabel.split(",").at(-1)?.trim() ?? space.locationLabel;
+   space.city?.trim() || space.locationLabel.split(",").at(-1)?.trim() || space.locationLabel;
 
 export const getPublicSpaceProvince = (space: PublicSpace) =>
-   space.locationLabel.split(",")[0]?.trim() ?? space.locationLabel;
+   space.province?.trim() || space.locationLabel.split(",")[0]?.trim() || space.locationLabel;
+
+export const getPublicSpaceDistrict = (space: PublicSpace) =>
+   space.district?.trim() || getPublicSpaceCity(space);
 
 /** @deprecated Ambiguous name - returns the city. Use getPublicSpaceCity. */
 export const getPublicSpaceArea = getPublicSpaceCity;

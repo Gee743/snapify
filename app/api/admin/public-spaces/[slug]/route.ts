@@ -7,6 +7,15 @@ import {
 } from "@/app/libs/adminAuth";
 import { toPublicSpaceRecord } from "@/app/actions/getPublicSpaces";
 import { parsePublicSpaceInput } from "@/app/libs/publicSpaceValidation";
+import { deriveSpaceFields } from "@/app/libs/deriveSpaceFields";
+import { revalidatePath } from "next/cache";
+
+/** Refresh the pages a space appears on so admin edits are visible at once. */
+const revalidateSpace = (slug: string) => {
+   revalidatePath("/");
+   revalidatePath("/community");
+   revalidatePath(`/community/${slug}`);
+};
 
 interface RouteContext {
    params: { slug: string };
@@ -37,8 +46,12 @@ export async function PUT(request: Request, { params }: RouteContext) {
    try {
       const space = await prisma.publicSpace.update({
          where: { slug: params.slug },
-         data: input,
+         // Re-derive on update: locationLabel or type may have changed, which
+         // moves the place between hubs.
+         data: { ...input, ...deriveSpaceFields(input) },
       });
+      revalidateSpace(params.slug);
+      if (space.slug !== params.slug) revalidateSpace(space.slug);
       return NextResponse.json(toPublicSpaceRecord(space));
    } catch (error) {
       if (
@@ -71,6 +84,7 @@ export async function DELETE(request: Request, { params }: RouteContext) {
 
    try {
       await prisma.publicSpace.delete({ where: { slug: params.slug } });
+      revalidateSpace(params.slug);
       return NextResponse.json({ deleted: true });
    } catch (error) {
       if (

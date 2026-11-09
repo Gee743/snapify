@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPublicSpaceBySlug, getPublicSpaces } from "@/app/actions/getPublicSpaces";
 import { getPublicSpaceCity } from "@/app/data/publicSpaces";
+import { findNearby } from "@/app/libs/nearby";
 import JsonLd from "@/app/components/JsonLd";
 import { breadcrumbSchema, touristAttractionSchema } from "@/app/libs/structuredData";
 import PublicSpaceClient from "./PublicSpaceClient";
@@ -81,6 +82,7 @@ const PublicSpacePage = async ({ params }: { params: IParams }) => {
    }
 
    const city = getPublicSpaceCity(space);
+   const nearby = findNearby(space, await getPublicSpaces());
 
    return (
       <>
@@ -95,7 +97,7 @@ const PublicSpacePage = async ({ params }: { params: IParams }) => {
                ]),
             ]}
          />
-         <PublicSpaceClient space={space} />
+         <PublicSpaceClient space={space} nearby={nearby} />
       </>
    );
 };

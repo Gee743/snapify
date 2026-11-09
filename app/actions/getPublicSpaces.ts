@@ -5,7 +5,7 @@ import publicSpaces, {
    getPublicSpaceProvince,
 } from "@/app/data/publicSpaces";
 
-const toPublicSpace = (space: {
+type PublicSpaceRow = {
    slug: string;
    name: string;
    type: string;
@@ -15,7 +15,29 @@ const toPublicSpace = (space: {
    directions: string;
    tips: string[];
    imageSrc: string;
-}): PublicSpace => ({
+   city?: string | null;
+   citySlug?: string | null;
+   district?: string | null;
+   districtSlug?: string | null;
+   province?: string | null;
+   provinceSlug?: string | null;
+   category?: string | null;
+   images?: string[];
+   bestTimeOfDay?: string[];
+   bestMonths?: number[];
+   shootingNotes?: string | null;
+   entryFee?: string | null;
+   isFree?: boolean;
+   permitRequired?: boolean;
+   permitAuthority?: string | null;
+   permitNotes?: string | null;
+   droneRule?: string | null;
+   droneNotes?: string | null;
+   openingHours?: string | null;
+   tripodAllowed?: boolean | null;
+};
+
+const toPublicSpace = (space: PublicSpaceRow): PublicSpace => ({
    id: space.slug,
    name: space.name,
    type: space.type,
@@ -25,6 +47,26 @@ const toPublicSpace = (space: {
    directions: space.directions,
    tips: space.tips,
    imageSrc: space.imageSrc,
+   city: space.city,
+   citySlug: space.citySlug,
+   district: space.district,
+   districtSlug: space.districtSlug,
+   province: space.province,
+   provinceSlug: space.provinceSlug,
+   category: space.category,
+   images: space.images ?? [],
+   bestTimeOfDay: space.bestTimeOfDay ?? [],
+   bestMonths: space.bestMonths ?? [],
+   shootingNotes: space.shootingNotes,
+   entryFee: space.entryFee,
+   isFree: space.isFree ?? true,
+   permitRequired: space.permitRequired ?? false,
+   permitAuthority: space.permitAuthority,
+   permitNotes: space.permitNotes,
+   droneRule: space.droneRule,
+   droneNotes: space.droneNotes,
+   openingHours: space.openingHours,
+   tripodAllowed: space.tripodAllowed,
 });
 
 export const getPublicSpaces = async () => {
