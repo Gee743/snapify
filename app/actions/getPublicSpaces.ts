@@ -1,5 +1,9 @@
 import prisma from "@/app/libs/prismadb";
-import publicSpaces, { PublicSpace } from "@/app/data/publicSpaces";
+import publicSpaces, {
+   PublicSpace,
+   getPublicSpaceCity,
+   getPublicSpaceProvince,
+} from "@/app/data/publicSpaces";
 
 const toPublicSpace = (space: {
    slug: string;
@@ -49,14 +53,14 @@ export const getPublicSpaceBySlug = async (slug: string) => {
       : publicSpaces.find((legacySpace) => legacySpace.id === slug);
 };
 
+/** Distinct cities, for the area filter. Reuses the shared helper rather than
+ *  re-implementing the locationLabel parse. */
 export const getPublicSpaceAreas = async () =>
-   Array.from(
-      new Set(
-         (await getPublicSpaces()).map(
-            (space) => space.locationLabel.split(",").at(-1)?.trim() ?? space.locationLabel
-         )
-      )
-   ).sort();
+   Array.from(new Set((await getPublicSpaces()).map(getPublicSpaceCity))).sort();
+
+/** Distinct provinces, for the province hubs in Plan 2.1. */
+export const getPublicSpaceProvinces = async () =>
+   Array.from(new Set((await getPublicSpaces()).map(getPublicSpaceProvince))).sort();
 
 export const toPublicSpaceRecord = (space: {
    id: string;

@@ -1,9 +1,25 @@
+import type { Metadata } from "next";
 import Container from "../components/Container";
 import PublicSpaceCard from "../components/listings/PublicSpaceCard";
 import { getPublicSpaces } from "../actions/getPublicSpaces";
-import { getPublicSpaceArea } from "../data/publicSpaces";
+import { getPublicSpaceCity } from "../data/publicSpaces";
+import JsonLd from "../components/JsonLd";
+import { breadcrumbSchema, itemListSchema } from "../libs/structuredData";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+   title: "Free Public Photo & Film Locations in Sri Lanka",
+   description:
+      "Browse free public places to shoot across Sri Lanka - parks, beaches, viewpoints and landmarks. No booking, no fee: just directions, access notes and tips from local creators.",
+   alternates: { canonical: "/community" },
+   openGraph: {
+      title: "Free Public Photo & Film Locations in Sri Lanka",
+      description:
+         "Browse free public places to shoot across Sri Lanka. No booking, no fee: just directions, access notes and tips from local creators.",
+      url: "/community",
+   },
+};
 
 interface CommunityPageProps {
    searchParams: {
@@ -15,11 +31,23 @@ const CommunityPage = async ({ searchParams }: CommunityPageProps) => {
    const area = searchParams.area;
    const publicSpaces = await getPublicSpaces();
    const spaces = area
-      ? publicSpaces.filter((space) => getPublicSpaceArea(space) === area)
+      ? publicSpaces.filter((space) => getPublicSpaceCity(space) === area)
       : publicSpaces;
 
    return (
       <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
+            <JsonLd
+               data={[
+                  itemListSchema(
+                     spaces,
+                     area ? `Free photo spots in ${area}, Sri Lanka` : "Free photo spots in Sri Lanka"
+                  ),
+                  breadcrumbSchema([
+                     { name: "Home", path: "/" },
+                     { name: "Free public spaces", path: "/community" },
+                  ]),
+               ]}
+            />
             <Container>
                <div className="mb-6 border-b border-white/10 pb-5">
                   <div className="mb-2 flex items-center gap-2.5">

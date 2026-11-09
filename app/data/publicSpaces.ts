@@ -427,7 +427,28 @@ const publicSpaces: PublicSpace[] = [
    },
 ];
 
-export const getPublicSpaceArea = (space: PublicSpace) =>
+// locationLabel is stored as "Province, City" (e.g. "Western Province, Colombo"),
+// so the last comma-separated part is the CITY and the first is the PROVINCE.
+// The old getPublicSpaceArea() returned the city while being named/labelled
+// "area" and "Province" in the UI, which made the two impossible to tell apart.
+// Every pSEO URL, JSON-LD address and breadcrumb depends on the distinction.
+export const getPublicSpaceCity = (space: PublicSpace) =>
    space.locationLabel.split(",").at(-1)?.trim() ?? space.locationLabel;
+
+export const getPublicSpaceProvince = (space: PublicSpace) =>
+   space.locationLabel.split(",")[0]?.trim() ?? space.locationLabel;
+
+/** @deprecated Ambiguous name - returns the city. Use getPublicSpaceCity. */
+export const getPublicSpaceArea = getPublicSpaceCity;
+
+/** URL-safe slug: "Arugam Bay" -> "arugam-bay", "Uva Province" -> "uva-province". */
+export const slugifyPlace = (value: string) =>
+   value
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
 
 export default publicSpaces;
