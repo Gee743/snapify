@@ -1,27 +1,28 @@
-"use client";
-
 import { PublicSpace } from "@/app/data/publicSpaces";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import SpaceCard from "./SpaceCard";
 
 interface PublicSpaceCardProps {
    data: PublicSpace;
    dark?: boolean;
+   priority?: boolean;
 }
 
-const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({ data, dark = false }) => {
-   const router = useRouter();
-
+const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({
+   data,
+   dark = false,
+   priority = false,
+}) => {
    return (
       <SpaceCard
-         onClick={() => router.push(`/community/${data.id}`)}
+         href={`/community/${data.id}`}
          image={
             <Image
                alt={data.name}
                src={data.imageSrc}
                fill
-               unoptimized
+               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
+               priority={priority}
                className="object-cover h-full w-full group-hover:scale-110 transition"
             />
          }

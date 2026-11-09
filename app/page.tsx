@@ -1,9 +1,9 @@
-export const dynamic = "force-dynamic";
-import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import PublicSpaceCard from "./components/listings/PublicSpaceCard";
 import { getPublicSpaces } from "./actions/getPublicSpaces";
 import { getPublicSpaceArea } from "./data/publicSpaces";
+
+export const revalidate = 3600;
 
 interface HomeProps {
    searchParams: {
@@ -18,8 +18,7 @@ const Home = async ({ searchParams }: HomeProps) => {
       : publicSpaces;
 
    return (
-      <ClientOnly>
-         <main className="relative isolate -mt-6 min-h-screen overflow-hidden bg-[#0a0a0a] pb-16 text-[#f5f5f5]">
+      <main className="relative isolate -mt-6 min-h-screen overflow-hidden bg-[#0a0a0a] pb-16 text-[#f5f5f5]">
             <div
                className="pointer-events-none absolute inset-0 -z-10"
                style={{
@@ -108,15 +107,19 @@ const Home = async ({ searchParams }: HomeProps) => {
                      </div>
                   ) : (
                      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {spaces.map((space) => (
-                           <PublicSpaceCard key={space.id} data={space} dark />
+                        {spaces.map((space, index) => (
+                           <PublicSpaceCard
+                              key={space.id}
+                              data={space}
+                              dark
+                              priority={index < 4}
+                           />
                         ))}
                      </div>
                   )}
                </section>
             </Container>
-         </main>
-      </ClientOnly>
+      </main>
    );
 };
 

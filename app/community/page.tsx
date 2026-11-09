@@ -1,10 +1,9 @@
-import ClientOnly from "../components/ClientOnly";
 import Container from "../components/Container";
 import PublicSpaceCard from "../components/listings/PublicSpaceCard";
 import { getPublicSpaces } from "../actions/getPublicSpaces";
 import { getPublicSpaceArea } from "../data/publicSpaces";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 interface CommunityPageProps {
    searchParams: {
@@ -20,8 +19,7 @@ const CommunityPage = async ({ searchParams }: CommunityPageProps) => {
       : publicSpaces;
 
    return (
-      <ClientOnly>
-         <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
+      <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
             <Container>
                <div className="mb-6 border-b border-white/10 pb-5">
                   <div className="mb-2 flex items-center gap-2.5">
@@ -45,8 +43,13 @@ const CommunityPage = async ({ searchParams }: CommunityPageProps) => {
                </div>
                {spaces.length > 0 ? (
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                     {spaces.map((space) => (
-                        <PublicSpaceCard key={space.id} data={space} dark />
+                     {spaces.map((space, index) => (
+                        <PublicSpaceCard
+                           key={space.id}
+                           data={space}
+                           dark
+                           priority={index < 4}
+                        />
                      ))}
                   </div>
                ) : (
@@ -64,8 +67,7 @@ const CommunityPage = async ({ searchParams }: CommunityPageProps) => {
                   </div>
                )}
             </Container>
-         </main>
-      </ClientOnly>
+      </main>
    );
 };
 

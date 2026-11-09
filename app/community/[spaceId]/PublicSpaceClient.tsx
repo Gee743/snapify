@@ -1,12 +1,8 @@
-"use client";
-
 import Container from "@/app/components/Container";
 import Heading from "@/app/components/Heading";
+import MapSection from "@/app/components/MapSection";
 import { PublicSpace } from "@/app/data/publicSpaces";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-
-const Map = dynamic(() => import("@/app/components/Map"), { ssr: false });
 
 interface PublicSpaceClientProps {
    space: PublicSpace;
@@ -28,7 +24,8 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                      alt={space.name}
                      src={space.imageSrc}
                      fill
-                     unoptimized
+                     sizes="(max-width: 1024px) 100vw, 1024px"
+                     priority
                      className="object-cover"
                   />
                   <span className="absolute top-5 left-5 bg-[#dcff1a] text-[#0a0a0a] text-[10px] font-bold px-2.5 py-1 rounded-full">
@@ -60,7 +57,7 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space }) => {
                            ))}
                         </ul>
                      </div>
-                     <Map center={space.latlng} />
+                     <MapSection center={space.latlng} />
                   </div>
                   <div className="order-first mb-10 md:order-last md:col-span-3">
                      <div className="bg-[#101010] rounded-[14px] border border-white/10 overflow-hidden p-5 flex flex-col gap-4">

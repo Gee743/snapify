@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 import { ReactNode } from "react";
 
 interface SpaceCardProps {
@@ -9,7 +8,7 @@ interface SpaceCardProps {
    footer: ReactNode;
    overlay?: ReactNode;
    action?: ReactNode;
-   onClick: () => void;
+   href: string;
    dark?: boolean;
 }
 
@@ -20,11 +19,11 @@ const SpaceCard: React.FC<SpaceCardProps> = ({
    footer,
    overlay,
    action,
-   onClick,
+   href,
    dark = false,
 }) => {
    return (
-      <div onClick={onClick} className="col-span-1 cursor-pointer group">
+      <Link href={href} className="col-span-1 group">
          <div className="flex flex-col gap-2 w-full">
             <div className="aspect-square w-full relative overflow-hidden rounded-[14px]">
                {image}
@@ -39,7 +38,7 @@ const SpaceCard: React.FC<SpaceCardProps> = ({
             <div className={`text-sm ${dark ? "text-[#d4d4d4]" : "text-[#222]"}`}>{footer}</div>
             {action}
          </div>
-      </div>
+      </Link>
    );
 };
 

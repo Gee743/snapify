@@ -1,8 +1,8 @@
 import "./globals.css";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
-import ClientOnly from "./components/ClientOnly";
 import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
@@ -22,13 +22,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
    return (
       <html lang="en">
          <body className={`${inter.className} flex min-h-full flex-col bg-[#0a0a0a] text-[#222]`}>
-            <ClientOnly>
-               <ToasterProvider />
+            <ToasterProvider />
+            <Suspense fallback={null}>
                <SearchModal />
-               <LoginModal />
-               <RegisterModal />
-               <Navbar />
-            </ClientOnly>
+            </Suspense>
+            <LoginModal />
+            <RegisterModal />
+            <Navbar />
             <div className="grow pt-24">{children}</div>
             <Footer />
          </body>
