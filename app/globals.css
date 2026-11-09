@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* min-height, not height: `height: 100%` pins body to the viewport, so any page
+   taller than one screen overflows its own container while short pages cannot
+   shrink. min-height lets body grow with content and still fills the screen,
+   which is what the flex-col + grow layout in app/layout.tsx expects. */
 html,
 body,
 :root {
-   height: 100%;
+   min-height: 100%;
 }
 
 a {

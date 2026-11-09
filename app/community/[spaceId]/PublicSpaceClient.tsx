@@ -16,7 +16,7 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [
    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${space.latlng[0]},${space.latlng[1]}`;
 
    return (
-      <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
+      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
          <Container>
          <div className="max-w-screen-lg mx-auto">
             <div className="flex flex-col gap-6">

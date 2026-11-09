@@ -21,7 +21,7 @@ const Home = async ({ searchParams }: HomeProps) => {
       : publicSpaces;
 
    return (
-      <main className="relative isolate -mt-6 min-h-screen overflow-hidden bg-[#0a0a0a] pb-16 text-[#f5f5f5]">
+      <main className="relative isolate -mt-6 overflow-hidden bg-[#0a0a0a] pb-16 text-[#f5f5f5]">
             <JsonLd data={itemListSchema(spaces, "Free photo spots in Sri Lanka")} />
             <div
                className="pointer-events-none absolute inset-0 -z-10"

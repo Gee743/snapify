@@ -51,7 +51,7 @@ const GuidePage = async ({ params }: { params: Params }) => {
       .filter((space): space is NonNullable<typeof space> => Boolean(space));
 
    return (
-      <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
+      <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
          <JsonLd
             data={[
                {

@@ -47,7 +47,7 @@ const sections = [
 ];
 
 const Privacy = () => (
-   <main className="-mt-6 min-h-screen bg-[#0a0a0a] pb-16 pt-10 text-[#f5f5f5]">
+   <main className="bg-[#0a0a0a] pb-16 pt-4 text-[#f5f5f5]">
       <Container>
          <article className="mx-auto max-w-3xl">
             <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">Privacy</h1>
