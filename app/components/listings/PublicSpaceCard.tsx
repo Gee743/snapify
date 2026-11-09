@@ -1,5 +1,5 @@
 import { PublicSpace } from "@/app/data/publicSpaces";
-import Image from "next/image";
+import PlaceImage from "@/app/components/PlaceImage";
 import SpaceCard from "./SpaceCard";
 
 interface PublicSpaceCardProps {
@@ -17,7 +17,7 @@ const PublicSpaceCard: React.FC<PublicSpaceCardProps> = ({
       <SpaceCard
          href={`/community/${data.id}`}
          image={
-            <Image
+            <PlaceImage
                alt={data.name}
                src={data.imageSrc}
                fill

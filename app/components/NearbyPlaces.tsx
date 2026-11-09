@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import PlaceImage from "@/app/components/PlaceImage";
 import { PublicSpace } from "@/app/data/publicSpaces";
 
 interface NearbyPlacesProps {
@@ -18,7 +18,7 @@ const NearbyPlaces = ({ places }: NearbyPlacesProps) => {
             {places.map(({ space, km }) => (
                <Link key={space.id} href={`/community/${space.id}`} className="group">
                   <div className="relative aspect-square w-full overflow-hidden rounded-[12px]">
-                     <Image
+                     <PlaceImage
                         alt={space.name}
                         src={space.imageSrc}
                         fill

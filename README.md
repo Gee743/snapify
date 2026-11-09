@@ -212,6 +212,12 @@ appear without waiting out the ISR window.
   rendering on Node 26 in both `next dev` and `next start`, with and without an
   explicit font and with no remote image. Detail pages fall back to the location
   photograph as the social card.
+- **Location photos are hotlinked from Wikimedia.** Mitigated rather than
+  solved: stored URLs point at the `/thumb/` CDN, the optimiser generates a
+  narrow set of widths and caches for 30 days, `sharp` does the encoding, and
+  `PlaceImage` shows a placeholder if an image still fails. Self-hosting the
+  images (Cloudinary or similar) remains the real fix and is needed anyway for
+  galleries.
 - **Rate limiting is in-memory.** `app/libs/rateLimit.ts` is a single-instance
   guard against casual spam; it resets on deploy and does not coordinate across
   serverless instances.

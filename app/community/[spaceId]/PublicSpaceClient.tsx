@@ -5,7 +5,7 @@ import AccessPanel from "@/app/components/AccessPanel";
 import ShootTiming from "@/app/components/ShootTiming";
 import NearbyPlaces from "@/app/components/NearbyPlaces";
 import { PublicSpace } from "@/app/data/publicSpaces";
-import Image from "next/image";
+import PlaceImage from "@/app/components/PlaceImage";
 
 interface PublicSpaceClientProps {
    space: PublicSpace;
@@ -24,7 +24,7 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [
                   <Heading title={space.name} subtitle={space.locationLabel} />
                </div>
                <div className="w-full h-[60vh] overflow-hidden rounded-[14px] relative">
-                  <Image
+                  <PlaceImage
                      alt={space.name}
                      src={space.imageSrc}
                      fill
