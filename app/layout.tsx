@@ -7,6 +7,7 @@ import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
 import SearchModal from "./components/modals/SearchModal";
+import Footer from "./components/Footer";
 
 const inter = Inter({
    subsets: ["latin"],
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
    return (
       <html lang="en">
-         <body className={`${inter.className} text-[#222]`}>
+         <body className={`${inter.className} flex min-h-full flex-col bg-[#0a0a0a] text-[#222]`}>
             <ClientOnly>
                <ToasterProvider />
                <SearchModal />
@@ -28,7 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                <RegisterModal />
                <Navbar />
             </ClientOnly>
-            <div className="pb-20 pt-24">{children}</div>
+            <div className="grow pt-24">{children}</div>
+            <Footer />
          </body>
       </html>
    );

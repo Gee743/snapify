@@ -1,0 +1,12 @@
+{
+   // This project runs Prisma 5.2.0, but the Prisma VS Code extension (v31+)
+   // defaults to the Prisma 7 language server. Prisma 7 moved the datasource
+   // connection URL out of schema.prisma and into prisma.config.ts, so the v7
+   // server flags our valid `url = env("DATABASE_URL")` line as an error.
+   //
+   // Pinning to the legacy (Prisma 6) language server restores correct
+   // diagnostics for this schema. Remove both settings if the project is
+   // ever upgraded to Prisma 7.
+   "prisma.pinToPrisma6": true,
+   "prisma.hidePrisma6Prompts": true
+}
