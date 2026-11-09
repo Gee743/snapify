@@ -2,8 +2,11 @@ import Link from "next/link";
 import Container from "./Container";
 
 const exploreLinks = [
-   { label: "Free public spaces", href: "/#free-spaces" },
-   { label: "Community spaces", href: "/community" },
+   { label: "All free public spaces", href: "/community" },
+   { label: "Browse by area", href: "/photo-spots" },
+   { label: "Beaches", href: "/photo-spots/category/beaches" },
+   { label: "Viewpoints", href: "/photo-spots/category/viewpoints" },
+   { label: "Photo spots in Colombo", href: "/photo-spots/colombo" },
 ];
 
 const companyLinks = [

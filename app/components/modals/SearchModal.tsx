@@ -3,6 +3,7 @@
 import qs from "query-string";
 import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { slugifyPlace } from "@/app/data/publicSpaces";
 import Select from "react-select";
 
 import useSearchModal from "@/app/hooks/useSearch";
@@ -55,29 +56,12 @@ const SearchModal = () => {
    }, [areaOptions, params, searchModal.isOpen]);
 
    const onSubmit = useCallback(async () => {
-      const updatedQuery = qs.parse(params?.toString() ?? "");
-      delete updatedQuery.locationValue;
-      delete updatedQuery.startDate;
-      delete updatedQuery.endDate;
-      delete updatedQuery.category;
-
-      if (area) {
-         updatedQuery.area = area.value;
-      } else {
-         delete updatedQuery.area;
-      }
-
-      const url = qs.stringifyUrl(
-         {
-            url: "/",
-            query: updatedQuery,
-         },
-         { skipNull: true }
-      );
-
+      // Push the canonical hub URL rather than ?area=. The old query form now
+      // 301s, so navigating to it would cost every user a redirect hop. Also
+      // fixes always pushing to "/" regardless of the current page.
       searchModal.onClose();
-      router.push(url);
-   }, [area, params, router, searchModal]);
+      router.push(area ? `/photo-spots/${slugifyPlace(area.value)}` : "/community");
+   }, [area, router, searchModal]);
 
    return (
       <Modal

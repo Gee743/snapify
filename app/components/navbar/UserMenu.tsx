@@ -11,10 +11,16 @@ const UserMenu = () => {
    return (
       <div className="flex flex-row items-center gap-3">
          <Link
-            href="/community"
+            href="/photo-spots"
             className="whitespace-nowrap text-[11px] font-semibold text-[#f5f5f5]/80 transition hover:text-[#dcff1a] sm:text-[13px]"
          >
-            Community spaces
+            Browse by area
+         </Link>
+         <Link
+            href="/community"
+            className="hidden whitespace-nowrap text-[11px] font-semibold text-[#f5f5f5]/80 transition hover:text-[#dcff1a] sm:inline sm:text-[13px]"
+         >
+            All spaces
          </Link>
          <a
             href={ownersUrl}
