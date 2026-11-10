@@ -16,13 +16,23 @@ Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Prisma and MongoDB
 
 ## Features
 
-- **34 public locations** at `/community/<slug>`, each with directions, shooting
+- **84 public locations** at `/community/<slug>`, each with directions, shooting
   tips, permit and drone rules, computed sunrise/sunset/golden hour, and the four
   nearest other places.
+- **Faceted browsing** at `/community` — search by name, type or town, and
+  filter by province, district, category and access (no entry fee, no permit,
+  drone friendly, tripod OK). Filter state lives in the query string, so a
+  filtered view is shareable and the back button works. Facet counts
+  cross-filter: choosing a district narrows the province and category options
+  to what exists inside it, so the controls cannot build an empty result.
+  Filtered views are `noindex` — the facets multiply into thousands of
+  near-identical URLs, and the curated hubs below are the indexable surface.
 - **Browse by area** at `/photo-spots` — hub pages by city, district, province
   and category. A hub is only published once it has at least
   `MIN_PLACES_FOR_HUB` (3) places; anything thinner returns 404 rather than
-  shipping a near-empty page.
+  shipping a near-empty page. Most cities sit below that line, so links to a
+  city resolve through `getCityFallbackPath` to the nearest published tier
+  instead of pointing at a 404.
 - **Three cornerstone guides** at `/guides` covering drone law, the permit
   landscape, and which coast is shootable in which month. Each carries a visible
   last-reviewed date and its sources.
@@ -93,14 +103,22 @@ new image domain there.
 
 ```shell
 npx prisma db push
-npx tsx scripts/seedLandmarks.ts    # 11 iconic landmarks
-npx tsx scripts/seedAccessData.ts   # permit/fee/drone data
-npx tsx scripts/backfillPlaces.ts   # derive city/district/province/category
+node --env-file=.env scripts/seed-places.mjs
 ```
 
-The seed scripts are idempotent — `seedLandmarks` skips places that already
-exist, and `backfillPlaces` only writes fields that are still empty unless you
-pass `--force`. All three accept `--dry` to preview.
+`seed-places.mjs` upserts the batched JSON in `scripts/places-batch-*.json` by
+slug, so it is idempotent and safe to re-run. It is the one seeding step a
+fresh clone needs — the batches carry the structured location, category and
+access fields already derived.
+
+You can skip it entirely if you prefer: with an empty database the app serves
+the built-in array in `app/data/publicSpaces.ts`, and the first authenticated
+`/admin` load imports that array once (see **Seeding and the fixture** below).
+
+The older `scripts/*.ts` seeders (`seedLandmarks`, `seedAccessData`,
+`backfillPlaces`, `normalizeImages`) are kept for reference but are **not**
+part of first-run setup: their places are already in the fixture, and they need
+a TypeScript runner (`tsx`) that is not a dependency of this project.
 
 ### Run
 
@@ -119,14 +137,19 @@ The app starts at http://localhost:3000.
 | `start` | Serves the production build |
 | `lint`  | Runs ESLint via `next lint` |
 
-Useful scripts:
+Useful scripts. These are plain `.mjs` and run on Node with no extra tooling —
+pass `--env-file=.env` so they can reach the database:
 
 | script | purpose |
 | :----- | :------ |
-| `scripts/backfillPlaces.ts` | Derive structured location + category for existing rows |
-| `scripts/seedLandmarks.ts` | Add the iconic landmark locations |
-| `scripts/seedAccessData.ts` | Populate permit / fee / drone fields |
-| `scripts/checkHubGate.ts` | Report drift between the published-hub list in `middleware.ts` and the database |
+| `scripts/seed-places.mjs` | Upsert `places-batch-*.json` into the database (idempotent) |
+| `scripts/generate-fixture.mjs` | Regenerate `app/data/publicSpaces.ts` from the database |
+| `scripts/sync-hub-gate.mjs` | Rewrite the published-hub mirror in `middleware.ts`; `--check` verifies without writing and exits non-zero on drift |
+
+Legacy TypeScript seeders (`backfillPlaces.ts`, `seedLandmarks.ts`,
+`seedAccessData.ts`, `normalizeImages.ts`) predate the batch seeder and need a
+`tsx`-style runner that is not installed. Keep them for reference; do not use
+them to set up a new database.
 
 ## Project structure
 
@@ -137,14 +160,20 @@ app/
   api/            Route handlers (admin CRUD, leads, newsletter, register)
   community/      Location directory and detail pages
   components/     UI — navbar, modals, cards, hub page, access/timing panels
-  data/           Seed locations and guide content
+  data/           Fallback location array (generated) and guide content
   guides/         Cornerstone guides
-  libs/           Prisma client, admin auth, validation, hubs, sun times, taxonomy
+  libs/           Prisma client, admin auth, validation, hubs, filters, sun times, taxonomy
   photo-spots/    pSEO hub pages (city, district, province, category)
-middleware.ts     Canonicalises legacy ?area= URLs
+middleware.ts     Canonicalises legacy ?area= URLs; holds the generated hub mirror
 prisma/           Prisma schema (MongoDB)
-scripts/          One-off seed, backfill and consistency scripts
+scripts/          Seed batches, generators and consistency scripts
 ```
+
+Two files under `app/libs/` carry the browsing logic: `spaceFilters.ts` (facet
+matching, counting and query-string parsing, shared by the server render and
+the client filter bar so the two cannot disagree) and `spaceSpecs.ts` (derives
+the short values for the detail-page spec rows, since `entryFee` and
+`openingHours` are stored as full sentences).
 
 ## Data model
 
@@ -162,6 +191,29 @@ scripts/          One-off seed, backfill and consistency scripts
 are easy to transpose, and every hub URL, breadcrumb and JSON-LD address depends
 on telling them apart.
 
+### Seeding and the fixture
+
+`app/data/publicSpaces.ts` is not dead demo data. It plays two roles:
+
+1. `getPublicSpaces()` serves it whenever the database returns zero rows.
+2. `importInitialSpacesOnce()` seeds a fresh database from it on the first
+   authenticated `/admin` load, then sets a `PublicSpaceBootstrap` marker.
+
+So the fixture is what a cold start or an unreachable database falls back to.
+Once rows exist, the database wins and the fixture is ignored — which means
+editing the fixture alone changes nothing on a populated instance, and letting
+it fall behind means a cold start quietly serves an older, smaller catalogue.
+
+Keep them in step: seed or edit the database, then run
+
+```shell
+node --env-file=.env scripts/generate-fixture.mjs
+```
+
+which rewrites the array from the live rows and leaves the exported type and
+helper functions untouched. Run it *after* seeding — it treats the database as
+the source of truth and overwrites the file.
+
 ## Routes
 
 ### Pages
@@ -169,7 +221,7 @@ on telling them apart.
 | Route | Access | Description |
 | :---- | :----- | :---------- |
 | `/` | Public | Landing page, guides strip and location grid |
-| `/community` | Public | Full location directory |
+| `/community` | Public | Full location directory with faceted search and filters |
 | `/community/[spaceId]` | Public | Location detail — access, timing, map, nearby |
 | `/photo-spots` | Public | Browse index for all hub tiers |
 | `/photo-spots/[city]` | Public | City hub (published tiers only) |
@@ -190,9 +242,11 @@ on telling them apart.
 | `POST /api/register` | Create an account |
 | `/api/auth/[...nextauth]` | NextAuth sign-in, sign-out, session |
 | `GET /api/public-spaces`, `/api/public-spaces/areas` | Read locations and areas |
+| `GET /api/public-spaces/search` | Trimmed index (id, name, type, city, category) for the navbar typeahead, cached for an hour |
 | `GET`/`POST`/`DELETE /api/admin/session` | Admin session |
 | `GET`/`POST /api/admin/public-spaces` | List and create locations |
 | `PUT`/`DELETE /api/admin/public-spaces/[slug]` | Update and delete a location |
+| `GET /api/admin/leads` | Read captured owner leads (admin session) |
 
 Admin write endpoints require a valid signed session cookie **and** a
 same-origin request, and validate every field through
@@ -243,6 +297,18 @@ Deploys as a standard Next.js application. Set every variable from
 runs `prisma generate` first. Make sure the deployment's IP range can reach your
 MongoDB cluster, and that `NEXT_PUBLIC_SITE_URL` is the real public origin.
 
-After the first deploy: submit the sitemap in Google Search Console, and if the
-place count changes enough to cross a hub threshold, run
-`npx tsx scripts/checkHubGate.ts` and update the list in `middleware.ts`.
+After the first deploy, submit the sitemap in Google Search Console.
+
+Whenever the place count changes, re-sync the two generated mirrors of the
+database — both fail silently rather than loudly if they go stale:
+
+```shell
+node --env-file=.env scripts/sync-hub-gate.mjs    # published-hub list in middleware.ts
+node --env-file=.env scripts/generate-fixture.mjs # fallback array in app/data/publicSpaces.ts
+```
+
+`sync-hub-gate.mjs --check` is the CI-friendly form: it writes nothing and
+exits non-zero on drift. Middleware runs on the edge and cannot query Prisma,
+which is why the hub list has to be mirrored there at all — and it has already
+gone stale once, redirecting `?area=Jaffna` to the generic index while a
+working Jaffna hub sat one URL away.
