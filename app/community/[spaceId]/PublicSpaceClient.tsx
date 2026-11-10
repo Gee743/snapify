@@ -12,9 +12,15 @@ import { accessSignals } from "@/app/libs/accessSignal";
 interface PublicSpaceClientProps {
    space: PublicSpace;
    nearby?: { space: PublicSpace; km: number }[];
+   /** Resolved on the server: the nearest published hub for this city. */
+   cityPath: string;
 }
 
-const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [] }) => {
+const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({
+   space,
+   nearby = [],
+   cityPath,
+}) => {
    const city = getPublicSpaceCity(space);
    const signals = accessSignals(space);
 
@@ -29,15 +35,21 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [
                            Home
                         </Link>
                      </li>
-                     <li aria-hidden="true" className="text-cream-faint/60">/</li>
-                     <li>
-                        <Link
-                           href={`/photo-spots/${slugifyPlace(city)}`}
-                           className="inline-flex min-h-[32px] items-center transition-colors duration-200 hover:text-lime"
-                        >
-                           {city}
-                        </Link>
-                     </li>
+                     {/* A one-place city reads "Home / Arugam Bay / Arugam Bay".
+                         Drop the crumb when it only repeats the page title. */}
+                     {city !== space.name && (
+                        <>
+                           <li aria-hidden="true" className="text-cream-faint/60">/</li>
+                           <li>
+                              <Link
+                                 href={cityPath}
+                                 className="inline-flex min-h-[32px] items-center transition-colors duration-200 hover:text-lime"
+                              >
+                                 {city}
+                              </Link>
+                           </li>
+                        </>
+                     )}
                      <li aria-hidden="true" className="text-cream-faint/60">/</li>
                      <li aria-current="page" className="text-cream-muted">
                         {space.name}

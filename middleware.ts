@@ -12,10 +12,25 @@ import type { NextRequest } from "next/server";
  */
 /**
  * Cities with a published hub. Middleware runs on the edge and cannot query the
- * database, so this mirrors the MIN_PLACES_FOR_HUB gate. Keep it in step when
- * the place count changes -- `npx tsx scripts/checkHubGate.ts` reports drift.
+ * database, so this mirrors the MIN_PLACES_FOR_HUB gate.
+ *
+ * GENERATED -- do not edit by hand. Run `node scripts/sync-hub-gate.mjs` after
+ * adding places; it rewrites this list and exits non-zero if it changed, so a
+ * stale mirror fails rather than silently redirecting real hubs to the index.
+ * (It went stale once already: the list kept 3 cities after the catalogue grew
+ * to 7, sending ?area=Jaffna to /photo-spots instead of the Jaffna hub.)
  */
-const PUBLISHED_CITY_HUBS = new Set(["colombo", "kandy", "ella"]);
+// hub-gate:start
+const PUBLISHED_CITY_HUBS = new Set([
+   "anuradhapura",
+   "colombo",
+   "ella",
+   "jaffna",
+   "kandy",
+   "nuwara-eliya",
+   "trincomalee",
+]);
+// hub-gate:end
 
 export function middleware(request: NextRequest) {
    const area = request.nextUrl.searchParams.get("area");

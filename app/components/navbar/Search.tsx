@@ -98,6 +98,10 @@ const Search = () => {
             href: `/community/${row.id}`,
          }));
 
+      // Most cities hold too few places to earn a /photo-spots hub, and this
+      // list is built in the browser where the published set is not known. The
+      // filtered listing exists for every city, so it is the one destination
+      // that cannot 404.
       const areas = Array.from(new Set(rows.map((row) => row.city)))
          .filter((city) => normalise(city).includes(term))
          .slice(0, 3)
@@ -105,7 +109,7 @@ const Search = () => {
             kind: "area",
             label: city,
             detail: `All photo spots in ${city}`,
-            href: `/photo-spots/${slugifyPlace(city)}`,
+            href: `/community?city=${slugifyPlace(city)}`,
          }));
 
       return [...places, ...areas];

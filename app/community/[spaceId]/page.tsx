@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPublicSpaceBySlug, getPublicSpaces } from "@/app/actions/getPublicSpaces";
-import { getPublicSpaceCity } from "@/app/data/publicSpaces";
+import { getPublicSpaceCity, slugifyPlace } from "@/app/data/publicSpaces";
+import { getCityFallbackPath } from "@/app/libs/hubs";
 import { findNearby } from "@/app/libs/nearby";
 import JsonLd from "@/app/components/JsonLd";
 import { breadcrumbSchema, touristAttractionSchema } from "@/app/libs/structuredData";
@@ -82,6 +83,11 @@ const PublicSpacePage = async ({ params }: { params: IParams }) => {
    }
 
    const city = getPublicSpaceCity(space);
+   // Most cities hold too few places to earn a hub, so /photo-spots/<city>
+   // 404s for them. Resolve the nearest published tier here (district, then
+   // province, then the directory) rather than linking a breadcrumb into a
+   // dead end. Server-side because the lookup is async.
+   const cityPath = await getCityFallbackPath(slugifyPlace(city));
    const nearby = findNearby(space, await getPublicSpaces());
 
    return (
@@ -92,12 +98,12 @@ const PublicSpacePage = async ({ params }: { params: IParams }) => {
                breadcrumbSchema([
                   { name: "Home", path: "/" },
                   { name: "Free public spaces", path: "/community" },
-                  { name: city, path: `/community?area=${encodeURIComponent(city)}` },
+                  { name: city, path: cityPath },
                   { name: space.name, path: `/community/${space.id}` },
                ]),
             ]}
          />
-         <PublicSpaceClient space={space} nearby={nearby} />
+         <PublicSpaceClient space={space} nearby={nearby} cityPath={cityPath} />
       </>
    );
 };
