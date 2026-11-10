@@ -34,7 +34,7 @@ const AdminLogin = () => {
    };
 
    return (
-      <main className="relative isolate flex min-h-[calc(100vh-6rem)] items-center justify-center overflow-hidden bg-[#0a0a0a] px-4 py-12 text-[#f5f5f5]">
+      <main className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-[#0a0a0a] px-4 py-12 text-[#f5f5f5]">
          <div
             className="pointer-events-none absolute inset-0 -z-10"
             style={{

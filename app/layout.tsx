@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
@@ -7,6 +6,7 @@ import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
 import Footer from "./components/Footer";
+import { SiteFooter, SiteHeader, SiteMain } from "./components/SiteChrome";
 import JsonLd from "./components/JsonLd";
 import { organizationSchema } from "./libs/structuredData";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./libs/site";
@@ -60,20 +60,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <LoginModal />
             <RegisterModal />
             {/* Keyboard and screen-reader users can jump the nav instead of
-                tabbing the whole header on every page. */}
-            <a
-               href="#main"
-               className="sr-only left-4 top-4 z-[60] rounded-lg bg-lime px-4 py-2.5 text-sm font-semibold text-ink focus:not-sr-only focus:fixed"
-            >
-               Skip to content
-            </a>
-            <Navbar />
-            {/* The header is 72px on desktop and ~125px on mobile, where search
-                occupies a second row. */}
-            <div id="main" className="grow pt-[125px] md:pt-[72px]">
-               {children}
-            </div>
-            <Footer />
+                tabbing the whole header on every page. Hidden alongside the
+                header on admin, where there is no nav to skip. */}
+            <SiteHeader>
+               <a
+                  href="#main"
+                  className="sr-only left-4 top-4 z-[60] rounded-lg bg-lime px-4 py-2.5 text-sm font-semibold text-ink focus:not-sr-only focus:fixed"
+               >
+                  Skip to content
+               </a>
+               <Navbar />
+            </SiteHeader>
+            <SiteMain>{children}</SiteMain>
+            <SiteFooter>
+               <Footer />
+            </SiteFooter>
          </body>
       </html>
    );

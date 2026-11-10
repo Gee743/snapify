@@ -104,21 +104,27 @@ export const getPublicSpaceAreas = async () =>
 export const getPublicSpaceProvinces = async () =>
    Array.from(new Set((await getPublicSpaces()).map(getPublicSpaceProvince))).sort();
 
-export const toPublicSpaceRecord = (space: {
+/** Shape the admin dashboard reads. Unlike `toPublicSpace` this keeps the
+ *  timestamps and the editable access-intelligence columns, so /admin can
+ *  round-trip every field the validator accepts. */
+export const toPublicSpaceRecord = (space: PublicSpaceRow & {
    id: string;
-   slug: string;
-   name: string;
-   type: string;
-   locationLabel: string;
-   latlng: number[];
-   description: string;
-   directions: string;
-   tips: string[];
-   imageSrc: string;
    createdAt: Date;
    updatedAt: Date;
+   status?: string | null;
+   submittedByName?: string | null;
+   submittedByEmail?: string | null;
+   metaTitle?: string | null;
+   metaDescription?: string | null;
 }) => ({
    ...space,
    createdAt: space.createdAt.toISOString(),
    updatedAt: space.updatedAt.toISOString(),
+   images: space.images ?? [],
+   bestTimeOfDay: space.bestTimeOfDay ?? [],
+   bestMonths: space.bestMonths ?? [],
+   isFree: space.isFree ?? true,
+   permitRequired: space.permitRequired ?? false,
+   droneRule: space.droneRule ?? "UNKNOWN",
+   status: space.status ?? "PUBLISHED",
 });

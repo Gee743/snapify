@@ -8,5 +8,12 @@
    // diagnostics for this schema. Remove both settings if the project is
    // ever upgraded to Prisma 7.
    "prisma.pinToPrisma6": true,
-   "prisma.hidePrisma6Prompts": true
+   "prisma.hidePrisma6Prompts": true,
+
+   // Use the TypeScript pinned in package.json (5.1.6) instead of the version
+   // bundled with VS Code. Without this the editor type-checks with a much
+   // newer compiler than `npm run build` does, so it reports errors from rules
+   // that do not exist in the project's TypeScript -- e.g. ts(2882) on the
+   // `import "./globals.css"` side-effect import.
+   "typescript.tsdk": "node_modules/typescript/lib"
 }
