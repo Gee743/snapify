@@ -1,0 +1,554 @@
+[
+  {
+    "slug": "gangaramaya-temple",
+    "name": "Gangaramaya Temple",
+    "type": "Urban Temple",
+    "city": "Colombo",
+    "district": "Colombo",
+    "province": "Western Province",
+    "latlng": [
+      6.9168,
+      79.8564
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A working Colombo temple that doubles as a museum of donated curiosities — vintage cars, carved ivory and crowded relic cabinets sit alongside the shrine hall. The sheer density of objects makes it unlike any other temple interior in the city.",
+    "directions": "On Sri Jinaratana Road beside Beira Lake, a short walk from Seema Malaka. The lane entrance is narrow and easy to miss coming from Hunupitiya Road.",
+    "tips": [
+      "Interiors are cluttered and dim — a fast lens beats a flash you are not permitted to use.",
+      "Shoulders and knees covered, shoes off at the shrine entrance.",
+      "The Navam Perahera in February fills the whole precinct with elephants and dancers."
+    ],
+    "openingHours": "Roughly 05:30–22:00 daily.",
+    "entryFee": "Nominal donation requested at the museum section.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Dense urban airspace beside an active religious site; do not fly here.",
+    "tripodAllowed": false,
+    "shootingNotes": "Cramped interiors mixing tungsten and daylight — expect heavy white-balance correction.",
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Colombo_Temple_bouddhiste_de_Gangaramaya_%282%29.JPG/1280px-Colombo_Temple_bouddhiste_de_Gangaramaya_%282%29.JPG"
+  },
+  {
+    "slug": "wellawatte-beach",
+    "name": "Wellawatte Beach",
+    "type": "Public Beach",
+    "city": "Colombo",
+    "district": "Colombo",
+    "province": "Western Province",
+    "latlng": [
+      6.8731,
+      79.8578
+    ],
+    "category": "BEACH",
+    "description": "A working city beach rather than a resort one — fishing boats hauled up on the sand, cricket games, and a steady flow of residents walking after work. The coastal railway runs directly behind it.",
+    "directions": "Reached by level crossings off Galle Road in Wellawatte (Colombo 06). Wellawatte station sits on the beach side of the line.",
+    "tips": [
+      "Trains passing between the sand and the road make a strong foreground element.",
+      "Evening is when the beach fills with locals — better for candid work than empty sand.",
+      "Litter varies day to day; scout the frame before committing to a wide shot."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Inside Colombo's controlled airspace — CAASL registration and TRCSL clearance required.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "evening"
+    ],
+    "bestMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Wellawatte_Beach_Sunset.jpg/1280px-Wellawatte_Beach_Sunset.jpg"
+  },
+  {
+    "slug": "viharamahadevi-park",
+    "name": "Viharamahadevi Park",
+    "type": "Public Park",
+    "city": "Colombo",
+    "district": "Colombo",
+    "province": "Western Province",
+    "latlng": [
+      6.9147,
+      79.8607
+    ],
+    "category": "URBAN",
+    "description": "The city's oldest and largest park, laid out under British rule as Victoria Park and later renamed for the mother of King Dutugemunu. Mature rain trees, a golden Buddha statue, and the Town Hall dome rising behind the lawns.",
+    "directions": "Opposite Colombo Town Hall, bounded by Ananda Coomaraswamy Mawatha in Colombo 07. Gates on several sides; the Town Hall side is the usual approach.",
+    "tips": [
+      "Rain-tree canopies hold usable open shade right through the middle of the day.",
+      "The Town Hall dome lines up cleanly as a background from the northern lawns.",
+      "A nominal admission applies at the gate — carry small change in rupees."
+    ],
+    "openingHours": "Roughly 06:00–20:00 daily.",
+    "entryFee": "Nominal gate fee, around LKR 20 for adults.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Adjacent to government buildings in central Colombo; flying is not permitted.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/SL_Colombo_asv2020-01_img11_Viharamahadevi_Park.jpg/1280px-SL_Colombo_asv2020-01_img11_Viharamahadevi_Park.jpg"
+  },
+  {
+    "slug": "colombo-port-city",
+    "name": "Port City Colombo",
+    "type": "Waterfront Promenade",
+    "city": "Colombo",
+    "district": "Colombo",
+    "province": "Western Province",
+    "latlng": [
+      6.9344,
+      79.8386
+    ],
+    "category": "URBAN",
+    "description": "Reclaimed land north of Galle Face being built out as a new financial district. Wide empty boulevards and a hard geometric seafront give it a character entirely unlike the rest of Colombo.",
+    "directions": "North of Galle Face Green, entered from the Marine Drive side. Open areas and access points shift as construction phases complete.",
+    "tips": [
+      "Empty new infrastructure suits clean minimal composition and longer lenses.",
+      "Security patrols the active zones — ask before setting up near construction.",
+      "Almost no shade anywhere; treat it as an early-morning or late-afternoon location."
+    ],
+    "openingHours": "Public promenade areas generally open during daylight.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Port-adjacent restricted airspace with an active security presence.",
+    "tripodAllowed": null,
+    "bestTimeOfDay": [
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Colombo_Port_City_seem_from_galle_road..jpg/1280px-Colombo_Port_City_seem_from_galle_road..jpg"
+  },
+  {
+    "slug": "bentota-beach",
+    "name": "Bentota Beach",
+    "type": "Public Beach",
+    "city": "Bentota",
+    "district": "Galle",
+    "province": "Southern Province",
+    "latlng": [
+      6.4213,
+      79.9959
+    ],
+    "category": "BEACH",
+    "description": "A broad stretch of sand on the spit where the Bentota river meets the sea, so open surf on one side and still lagoon water on the other sit within a few minutes' walk of each other.",
+    "directions": "About 65 km south of Colombo on the Galle road, and a stop on the coastal railway. The river mouth is at the northern end of the beach.",
+    "tips": [
+      "The sandbar at the river mouth is the distinctive frame here, not the open beach.",
+      "The lagoon side stays glassy at dawn while the sea side is already breaking.",
+      "West-facing, so sunset works directly off the sand."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "droneNotes": "Open coastline clear of controlled airspace; CAASL registration still applies.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "bestMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sri_Lanka%2C_Bentota%2C_beach_%281%29.JPG/1280px-Sri_Lanka%2C_Bentota%2C_beach_%281%29.JPG"
+  },
+  {
+    "slug": "weligama-bay",
+    "name": "Weligama Bay",
+    "type": "Surf Beach",
+    "city": "Weligama",
+    "district": "Matara",
+    "province": "Southern Province",
+    "latlng": [
+      5.9748,
+      80.4294
+    ],
+    "category": "BEACH",
+    "description": "A wide shallow bay with a forgiving beach break, which is why most of the south coast's surf schools cluster here. Outrigger fishing boats line the eastern end and a small island sits just offshore.",
+    "directions": "On the main coast road between Galle and Matara. The bay is visible from the road along its full length, with access points throughout.",
+    "tips": [
+      "Beginner surf means plenty of usable action without needing a long lens.",
+      "The fishing fleet at the eastern end is the quieter photographic end of the bay.",
+      "Shallow water a long way out suits low-angle reflective work at dawn."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "bestMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Fishermen_at_Fisherman%27s_Bay.jpg/1280px-Fishermen_at_Fisherman%27s_Bay.jpg"
+  },
+  {
+    "slug": "tangalle-beach",
+    "name": "Tangalle Beach",
+    "type": "Public Beach",
+    "city": "Tangalle",
+    "district": "Hambantota",
+    "province": "Southern Province",
+    "latlng": [
+      6.0233,
+      80.7949
+    ],
+    "category": "BEACH",
+    "description": "A long run of far-south coastline broken into separate coves by rocky headlands. Noticeably emptier than the Galle-side beaches, with stronger surf and more open horizon.",
+    "directions": "About 195 km from Colombo via the southern expressway to Matara, then the coast road. Goyambokka and Medaketiya are the main access coves.",
+    "tips": [
+      "Headlands let you shoot down into a cove rather than along flat sand.",
+      "Currents here are genuinely strong — be careful positioning anyone in the water.",
+      "Few facilities between coves, so carry everything you need."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "bestMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Tangalle_Beach%2C_Sri_Lanka_%2840081697721%29.jpg/1280px-Tangalle_Beach%2C_Sri_Lanka_%2840081697721%29.jpg"
+  },
+  {
+    "slug": "dondra-head-lighthouse",
+    "name": "Dondra Head Lighthouse",
+    "type": "Historic Lighthouse",
+    "city": "Devinuwara",
+    "district": "Matara",
+    "province": "Southern Province",
+    "latlng": [
+      5.9226,
+      80.5934
+    ],
+    "category": "VIEWPOINT",
+    "description": "The southernmost point of the island, marked by a 49 m colonial lighthouse in banded stone. There is nothing but open ocean south of here until Antarctica.",
+    "directions": "At Devinuwara, roughly 6 km east of Matara. A side road off the coast road runs out to the headland and the lighthouse compound.",
+    "tips": [
+      "The tower reads best against open sky from the rocks below rather than head-on.",
+      "Interior access is restricted — plan on exterior frames only.",
+      "Exposed headland with constant wind and salt spray; shield your gear."
+    ],
+    "openingHours": "Grounds accessible during daylight; tower interior generally closed.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Active navigational aid — check locally before flying.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Dondra_Head_lighthouse.jpg/1280px-Dondra_Head_lighthouse.jpg"
+  },
+  {
+    "slug": "ambalangoda-beach",
+    "name": "Ambalangoda Beach",
+    "type": "Public Beach",
+    "city": "Ambalangoda",
+    "district": "Galle",
+    "province": "Southern Province",
+    "latlng": [
+      6.2353,
+      80.0536
+    ],
+    "category": "BEACH",
+    "description": "A quiet working beach in a town better known for mask carving and devil-dance traditions. Fishing boats and a rocky natural pool at one end give it more structure than a plain sand strip.",
+    "directions": "About 85 km south of Colombo on the coast road, between Kosgoda and Hikkaduwa. Ambalangoda railway station is close to the sand.",
+    "tips": [
+      "The natural rock pool holds still water for reflections when the sea is rough.",
+      "Mask workshops in town are a strong companion subject to the beach itself.",
+      "Sunset is unobstructed along the whole west-facing stretch."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "evening"
+    ],
+    "bestMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/b/be/Beach_ambalangoda_srilanka.jpg"
+  },
+  {
+    "slug": "hummanaya-blowhole",
+    "name": "Hummanaya Blow Hole",
+    "type": "Coastal Blowhole",
+    "city": "Kudawella",
+    "district": "Hambantota",
+    "province": "Southern Province",
+    "latlng": [
+      5.9397,
+      80.6742
+    ],
+    "category": "VIEWPOINT",
+    "description": "A sea cave that forces swell up through a vertical rock shaft, throwing spray well above the cliff line. Reckoned to be the second-largest blowhole in the world and at its most dramatic in rough weather.",
+    "directions": "At Kudawella, off the coast road between Dickwella and Tangalle. A short walk from the parking area leads to the viewing platform.",
+    "tips": [
+      "Rough seas produce the biggest spouts — calm days can be a non-event.",
+      "Spray reaches the platform, so a rain cover is not optional here.",
+      "Time your bursts with the swell rather than shooting continuously."
+    ],
+    "openingHours": "Daylight hours.",
+    "entryFee": "Small local entrance charge at the viewing area.",
+    "isFree": false,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "midday"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Hummanaya%28Blow_hole%29%2C_Kudawella%2C_Sri_Lanka.jpg/1280px-Hummanaya%28Blow_hole%29%2C_Kudawella%2C_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "ella-rock",
+    "name": "Ella Rock",
+    "type": "Hill Viewpoint",
+    "city": "Ella",
+    "district": "Badulla",
+    "province": "Uva Province",
+    "latlng": [
+      6.8599,
+      81.0366
+    ],
+    "category": "VIEWPOINT",
+    "description": "The larger of Ella's two summits, reached by a route that follows the railway line before climbing through tea and eucalyptus. The top opens onto Ella Gap with the plains far below.",
+    "directions": "Walk south from Ella station along the track, then take the marked path uphill. Allow around two hours each way; the junctions are poorly signed.",
+    "tips": [
+      "Go at sunrise — the gap fills with cloud later in the morning.",
+      "The track section is live railway; stay alert and step well clear of trains.",
+      "Route-finding is genuinely confusing, so download an offline map first."
+    ],
+    "openingHours": "Open access; daylight hiking only.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "shootingNotes": "A long approach on foot — carry only what you can walk two hours with.",
+    "bestTimeOfDay": [
+      "sunrise"
+    ],
+    "bestMonths": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      9
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Ella_Rock%2C_Sri_Lanka.jpg/1280px-Ella_Rock%2C_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "diyaluma-falls",
+    "name": "Diyaluma Falls",
+    "type": "Waterfall",
+    "city": "Koslanda",
+    "district": "Badulla",
+    "province": "Uva Province",
+    "latlng": [
+      6.7322,
+      81.0353
+    ],
+    "category": "WATERFALL",
+    "description": "At 220 m the second-highest waterfall in the country — a single long drop visible straight from the road, with a chain of natural pools on the plateau above it.",
+    "directions": "On the Koslanda–Wellawaya road. The base view is roadside; the upper pools need a steep 45-minute climb from a signed trailhead nearby.",
+    "tips": [
+      "Roadside gives you the full drop; the upper pools give the infinity-edge frames.",
+      "The climb to the top is steep and slippery — not a route for heavy kit.",
+      "Flow drops noticeably in the dry season; after rain is far more impressive."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Diyaluma_Falls.jpg/1280px-Diyaluma_Falls.jpg"
+  },
+  {
+    "slug": "dunhinda-falls",
+    "name": "Dunhinda Falls",
+    "type": "Waterfall",
+    "city": "Badulla",
+    "district": "Badulla",
+    "province": "Uva Province",
+    "latlng": [
+      6.9975,
+      81.0683
+    ],
+    "category": "WATERFALL",
+    "description": "A 64 m fall named for the smoky spray it throws off, reached by a rough path through forest. The viewing platform faces it straight on across the gorge.",
+    "directions": "About 5 km north of Badulla. A rocky 1 km footpath leads from the parking area to the viewpoint, with stalls along the way.",
+    "tips": [
+      "Constant mist on the platform — keep a cloth on the front element.",
+      "The path is uneven rock, so a monopod travels better than a tripod here.",
+      "Morning light reaches into the gorge before the sun drops behind the ridge."
+    ],
+    "openingHours": "Roughly 07:00–17:00.",
+    "entryFee": "Small entrance charge at the trailhead.",
+    "isFree": false,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/SL_Badulla_asv2020-01_img24_Dunhinda_Falls.jpg/1280px-SL_Badulla_asv2020-01_img24_Dunhinda_Falls.jpg"
+  },
+  {
+    "slug": "demodara-loop",
+    "name": "Demodara Railway Loop",
+    "type": "Railway Landmark",
+    "city": "Demodara",
+    "district": "Badulla",
+    "province": "Uva Province",
+    "latlng": [
+      6.8747,
+      81.0877
+    ],
+    "category": "URBAN",
+    "description": "An engineering answer to a steep gradient: the line spirals under itself and passes through a tunnel directly beneath the station platform, so trains emerge a level below where they entered.",
+    "directions": "Demodara station, a few kilometres from Ella on the Badulla line. The loop and tunnel mouth are a short walk from the platform.",
+    "tips": [
+      "Check the timetable — the loop only makes sense photographically with a train on it.",
+      "The tunnel mouth below the platform is the frame that explains the design.",
+      "Station staff are used to photographers, but ask before crossing any track."
+    ],
+    "openingHours": "Station hours; tracks are live at all times.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Railway property — permission from Sri Lanka Railways needed for drone work.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Demodara_railway_loop.jpg/1280px-Demodara_railway_loop.jpg"
+  },
+  {
+    "slug": "nanu-oya-station",
+    "name": "Nanu Oya Railway Station",
+    "type": "Railway Station",
+    "city": "Nuwara Eliya",
+    "district": "Nuwara Eliya",
+    "province": "Central Province",
+    "latlng": [
+      6.9444,
+      80.7247
+    ],
+    "category": "URBAN",
+    "description": "The hill-country station serving Nuwara Eliya, and the usual boarding point for the tea-estate rail run towards Ella. Colonial-era platform buildings sit among pines and frequent mist.",
+    "directions": "About 8 km west of Nuwara Eliya town, connected by frequent tuk-tuks and buses.",
+    "tips": [
+      "Platform mist in the early morning is the signature look here.",
+      "Arriving trains fill the platform fast — pre-compose before they pull in.",
+      "Cold and damp at this altitude; lens condensation is a real problem."
+    ],
+    "openingHours": "Station operating hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Railway property; clearance required from Sri Lanka Railways.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Gare_de_Nanu_Oya-Sri_Lanka_%284%29.jpg/1280px-Gare_de_Nanu_Oya-Sri_Lanka_%284%29.jpg"
+  },
+  {
+    "slug": "victoria-park-nuwara-eliya",
+    "name": "Victoria Park",
+    "type": "Public Park",
+    "city": "Nuwara Eliya",
+    "district": "Nuwara Eliya",
+    "province": "Central Province",
+    "latlng": [
+      6.9697,
+      80.7658
+    ],
+    "category": "URBAN",
+    "description": "A formal park in the middle of Nuwara Eliya, planted with temperate flowers that will not grow elsewhere in the country. Also a noted spot for migrant hill-country birds.",
+    "directions": "Central Nuwara Eliya, beside the main road opposite the post office.",
+    "tips": [
+      "Flower beds peak around March to May after the cool season.",
+      "Early morning brings the birdlife and the low mist together.",
+      "A modest gate fee applies and the park closes before dark."
+    ],
+    "openingHours": "Roughly 07:30–18:00.",
+    "entryFee": "Small gate fee.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "bestMonths": [
+      3,
+      4,
+      5
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Victoria_park%2C_Nuwara_Eliya_-_panoramio.jpg/1280px-Victoria_park%2C_Nuwara_Eliya_-_panoramio.jpg"
+  },
+  {
+    "slug": "gregory-lake",
+    "name": "Gregory Lake",
+    "type": "Lakeside Walk",
+    "city": "Nuwara Eliya",
+    "district": "Nuwara Eliya",
+    "province": "Central Province",
+    "latlng": [
+      6.9586,
+      80.7675
+    ],
+    "category": "NATURE_TRAIL",
+    "description": "A reservoir created under British administration, now the centre of Nuwara Eliya's recreation — a walking promenade, hills reflected in still water, and low cloud most mornings.",
+    "directions": "On the southern edge of Nuwara Eliya town, with a walkway running along the northern shore.",
+    "tips": [
+      "Still mornings give clean hill reflections before the wind picks up.",
+      "Mist rolling across the water is common and worth waiting for.",
+      "The promenade is paved and level — the easiest hill-country location for heavy kit."
+    ],
+    "openingHours": "Promenade open during daylight.",
+    "entryFee": "Small charge for the lakeside park area.",
+    "isFree": false,
+    "droneRule": "PERMIT_REQUIRED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gregory_Lake_Nuwara_Eliya_01.jpg/1280px-Gregory_Lake_Nuwara_Eliya_01.jpg"
+  }
+]

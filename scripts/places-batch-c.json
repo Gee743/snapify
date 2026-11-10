@@ -1,0 +1,540 @@
+[
+  {
+    "slug": "delft-island",
+    "name": "Delft Island",
+    "type": "Remote Island",
+    "city": "Delft",
+    "district": "Jaffna",
+    "province": "Northern Province",
+    "latlng": [
+      9.5167,
+      79.6833
+    ],
+    "category": "NATURE_TRAIL",
+    "description": "A flat coral island west of the Jaffna peninsula, known for walls built from coral blocks, a population of feral ponies descended from Portuguese stock, and a baobab tree far from its native range.",
+    "directions": "Ferry from Kurikadduwan jetty, around an hour each way. Services are limited and fill up, so start early.",
+    "tips": [
+      "Coral walls and open scrub give the island its distinctive flat, bleached look.",
+      "The ponies are wild — use a long lens rather than approaching them.",
+      "Almost no shade or facilities; carry water and sun protection."
+    ],
+    "openingHours": "Governed by ferry times, typically morning departures and afternoon returns.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Naval-administered ferry route and island; clearance advised.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Delft_evening.jpg/1280px-Delft_evening.jpg"
+  },
+  {
+    "slug": "elephant-pass-memorial",
+    "name": "Elephant Pass Memorial",
+    "type": "War Memorial",
+    "city": "Elephant Pass",
+    "district": "Kilinochchi",
+    "province": "Northern Province",
+    "latlng": [
+      9.4833,
+      80.4
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A memorial on the narrow causeway linking the Jaffna peninsula to the mainland, marking one of the most strategically contested points of the civil war. Lagoon water lies flat on both sides.",
+    "directions": "On the A9 highway at Elephant Pass, roughly 45 km south of Jaffna. The memorial sits directly beside the road.",
+    "tips": [
+      "Treat it as a place of remembrance first — keep the approach respectful.",
+      "Flat lagoon on both sides gives strong symmetry and very big skies.",
+      "Almost no cover; the light is harsh from mid-morning onward."
+    ],
+    "openingHours": "Accessible any time from the highway.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Militarily sensitive location; do not fly.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Elephant_Pass_Memorial_And_Tree.jpg/1280px-Elephant_Pass_Memorial_And_Tree.jpg"
+  },
+  {
+    "slug": "adams-bridge",
+    "name": "Adam's Bridge Sandbanks",
+    "type": "Coastal Sandbanks",
+    "city": "Mannar",
+    "district": "Mannar",
+    "province": "Northern Province",
+    "latlng": [
+      9.1,
+      79.5167
+    ],
+    "category": "BEACH",
+    "description": "A chain of sandbanks and shoals running from Mannar towards India, exposed at low tide and steeped in the Ramayana. The seaward end of Mannar island is bare dune and shallow water.",
+    "directions": "From Talaimannar at the western tip of Mannar island, about 350 km from Colombo. The final stretch beyond the village is sand track.",
+    "tips": [
+      "Low tide exposes the sand chain — check tide times before travelling out.",
+      "Treeless dunes and shallow water suit minimal, horizon-led composition.",
+      "Boat access is restricted near the maritime border; stay on the island side."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Close to the international maritime boundary with naval oversight.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Adams_Bridge_aerial.jpg"
+  },
+  {
+    "slug": "mannar-dutch-fort",
+    "name": "Mannar Dutch Fort",
+    "type": "Colonial Fort",
+    "city": "Mannar",
+    "district": "Mannar",
+    "province": "Northern Province",
+    "latlng": [
+      8.9814,
+      79.9142
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A square Dutch fort with corner bastions guarding the causeway onto Mannar island, built over an earlier Portuguese structure and now weathered and largely open to walk.",
+    "directions": "At the entrance to Mannar town beside the causeway, about 10 minutes from the bridge.",
+    "tips": [
+      "Bastion walls make strong geometric lines against the flat surroundings.",
+      "Masonry is unstable in places — watch your footing on the ramparts.",
+      "Pair it with the nearby baobab trees, which grow nowhere else in the country."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Protected archaeological site in a security-sensitive province.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Mannar_Dutch_Fort.jpg/1280px-Mannar_Dutch_Fort.jpg"
+  },
+  {
+    "slug": "madhu-church",
+    "name": "Our Lady of Madhu Church",
+    "type": "Historic Church",
+    "city": "Madhu",
+    "district": "Mannar",
+    "province": "Northern Province",
+    "latlng": [
+      8.6167,
+      80.1833
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A Catholic shrine in forest inland from Mannar, over 400 years old and a pilgrimage site that drew people across ethnic and religious lines even through the conflict years.",
+    "directions": "Inland from Madhu Road, roughly 50 km east of Mannar town, approached through forest.",
+    "tips": [
+      "The white façade against dense forest is the frame that defines the place.",
+      "August festival days bring vast crowds; ordinary days are near-silent.",
+      "An active shrine — be discreet around anyone praying."
+    ],
+    "openingHours": "Daylight hours; festival periods extend much later.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Religious site in a sensitive area.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Madhu_Church_%28Madu_Church%29.jpg"
+  },
+  {
+    "slug": "point-pedro",
+    "name": "Point Pedro",
+    "type": "Coastal Viewpoint",
+    "city": "Point Pedro",
+    "district": "Jaffna",
+    "province": "Northern Province",
+    "latlng": [
+      9.8167,
+      80.2333
+    ],
+    "category": "BEACH",
+    "description": "The northernmost point of Sri Lanka, with a working fishing harbour, a lighthouse and wide palmyra-backed beaches. The light here is harder and clearer than anywhere further south.",
+    "directions": "About 30 km north-east of Jaffna town by road through the peninsula's palmyra country.",
+    "tips": [
+      "The fishing harbour at dawn is the most active subject in the area.",
+      "Palmyra palms give the north its distinctive skyline — use them.",
+      "Very little shade; midday light here is unforgiving."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Northern coastal area with naval presence; seek clearance.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Point_Pedro_Beach.jpg/1280px-Point_Pedro_Beach.jpg"
+  },
+  {
+    "slug": "marble-beach",
+    "name": "Marble Beach",
+    "type": "Public Beach",
+    "city": "Trincomalee",
+    "district": "Trincomalee",
+    "province": "Eastern Province",
+    "latlng": [
+      8.5167,
+      81.1833
+    ],
+    "category": "BEACH",
+    "description": "A sheltered cove south of Trincomalee named for water so still and clear it looks like polished stone. Forest comes down almost to the sand and the bay stays calm when the open coast is rough.",
+    "directions": "Off the Trincomalee–Nilaveli road near China Bay, about 15 km from Trincomalee town.",
+    "tips": [
+      "Exceptional water clarity — shoot from slightly above to show it.",
+      "Calm sheltered water makes this the easiest east-coast spot for in-water work.",
+      "Run as a managed facility, so a small entry charge may apply."
+    ],
+    "openingHours": "Daylight hours.",
+    "entryFee": "Small entry charge at the gate.",
+    "isFree": false,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Adjacent to air force land; clearance required.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "bestMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Marble_beach_Trincomalee.jpg"
+  },
+  {
+    "slug": "pasikuda-beach",
+    "name": "Pasikuda Beach",
+    "type": "Public Beach",
+    "city": "Pasikuda",
+    "district": "Batticaloa",
+    "province": "Eastern Province",
+    "latlng": [
+      7.9256,
+      81.5636
+    ],
+    "category": "BEACH",
+    "description": "A broad shallow bay on the east coast where the water stays waist-deep hundreds of metres out, producing long flat expanses of sea with almost no break.",
+    "directions": "About 35 km north of Batticaloa, signposted off the coast road near Kalkudah.",
+    "tips": [
+      "The shallow shelf lets you walk far out for sea-level angles back to shore.",
+      "East-facing, so sunrise is the main event here.",
+      "Resort frontage dominates the centre; the ends of the bay stay more open."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise"
+    ],
+    "bestMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Pasikuda_beach.jpg/1280px-Pasikuda_beach.jpg"
+  },
+  {
+    "slug": "batticaloa-lagoon",
+    "name": "Batticaloa Lagoon",
+    "type": "Coastal Lagoon",
+    "city": "Batticaloa",
+    "district": "Batticaloa",
+    "province": "Eastern Province",
+    "latlng": [
+      7.7167,
+      81.7
+    ],
+    "category": "NATURE_TRAIL",
+    "description": "A long brackish lagoon threading through Batticaloa, crossed by old iron bridges and lined with fishing craft. Local lore holds that the lagoon fish sing on still nights near the Kallady bridge.",
+    "directions": "Surrounds Batticaloa town; the Kallady bridge and the lagoon road either side are the usual vantage points.",
+    "tips": [
+      "Fishing boats at dawn against flat water are the reliable frame here.",
+      "The old iron bridge gives structure to otherwise featureless wides.",
+      "Sunset colour over the lagoon is often better than over the open sea."
+    ],
+    "openingHours": "Open at all hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Batticaloa_lagoon%2C_sunset.jpg/1280px-Batticaloa_lagoon%2C_sunset.jpg"
+  },
+  {
+    "slug": "lovers-leap-trincomalee",
+    "name": "Lovers Leap",
+    "type": "Clifftop Viewpoint",
+    "city": "Trincomalee",
+    "district": "Trincomalee",
+    "province": "Eastern Province",
+    "latlng": [
+      8.5819,
+      81.2472
+    ],
+    "category": "VIEWPOINT",
+    "description": "The cliff edge on Swami Rock beside Koneswaram, dropping straight into deep water. The outlook runs along the Trincomalee coastline with nothing between the cliff and the sea.",
+    "directions": "On Swami Rock inside Fort Frederick, a short walk from Koneswaram Temple. Carry ID for the fort checkpoint.",
+    "tips": [
+      "The cliff edge is unfenced in places — set up well back.",
+      "Whales and dolphins pass offshore in season; a long lens is worth carrying.",
+      "Morning light comes off the sea and lifts the whole cliff face."
+    ],
+    "openingHours": "Daylight hours, within fort opening times.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Inside an active naval fort.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "morning"
+    ],
+    "bestMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Lovers_Leap_1.jpg"
+  },
+  {
+    "slug": "abhayagiri-dagoba",
+    "name": "Abhayagiri Dagoba",
+    "type": "Ancient Stupa",
+    "city": "Anuradhapura",
+    "district": "Anuradhapura",
+    "province": "North Central Province",
+    "latlng": [
+      8.3703,
+      80.3956
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A vast brick stupa at the centre of what was once a monastery of thousands of monks. Left largely unrendered, so the raw brickwork reads very differently from the whitewashed domes nearby.",
+    "directions": "In the northern part of the Anuradhapura sacred city, reached by the ring road through the ruins.",
+    "tips": [
+      "Bare brick takes warm light far better than whitewashed stupas do.",
+      "The surrounding monastery ruins give foreground the stupa alone lacks.",
+      "Shoes off and shoulders covered on the stupa platform."
+    ],
+    "openingHours": "Daylight hours.",
+    "entryFee": "Within the ticketed archaeological zone for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "World Heritage site — Department of Archaeology clearance required.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Abhayagiri_Dagoba_in_Anuradhapura%2C_Sri_Lanka.jpg/1280px-Abhayagiri_Dagoba_in_Anuradhapura%2C_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "jetavanaramaya",
+    "name": "Jetavanaramaya",
+    "type": "Ancient Stupa",
+    "city": "Anuradhapura",
+    "district": "Anuradhapura",
+    "province": "North Central Province",
+    "latlng": [
+      8.3528,
+      80.4039
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "Built in the 3rd century, this was once among the tallest structures in the ancient world and remains one of the largest brick monuments ever raised. Its scale is hard to register until you stand under it.",
+    "directions": "In the eastern part of the Anuradhapura sacred city, near the Jetavana monastery ruins.",
+    "tips": [
+      "Include a person for scale or the size simply will not read.",
+      "Weathered brick holds detail that flat midday light destroys.",
+      "The ruined monastery around it is as photogenic as the dome."
+    ],
+    "openingHours": "Daylight hours.",
+    "entryFee": "Within the ticketed archaeological zone for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "World Heritage site — clearance required.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jetavanaramaya_Stupa_profile.jpg/1280px-Jetavanaramaya_Stupa_profile.jpg"
+  },
+  {
+    "slug": "isurumuniya",
+    "name": "Isurumuniya Rock Temple",
+    "type": "Rock Temple",
+    "city": "Anuradhapura",
+    "district": "Anuradhapura",
+    "province": "North Central Province",
+    "latlng": [
+      8.3389,
+      80.3967
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A temple carved into and around a rock outcrop beside a bathing pool, best known for the Isurumuniya Lovers relief and carvings of elephants worked directly into the stone face.",
+    "directions": "South of the Anuradhapura sacred city near Tissa Wewa, a short drive from the main ruins.",
+    "tips": [
+      "The elephant carvings at water level are easy to walk straight past — look low.",
+      "Climbing the rock gives a view over the tank behind the temple.",
+      "The famous Lovers relief sits in a small museum room, not outdoors."
+    ],
+    "openingHours": "Roughly 07:00–18:00.",
+    "entryFee": "Separate small charge at the temple entrance.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Protected archaeological site.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Isurumuniya_Rock_Temple.jpg/1280px-Isurumuniya_Rock_Temple.jpg"
+  },
+  {
+    "slug": "mihintale",
+    "name": "Mihintale",
+    "type": "Sacred Hill",
+    "city": "Mihintale",
+    "district": "Anuradhapura",
+    "province": "North Central Province",
+    "latlng": [
+      8.3528,
+      80.5097
+    ],
+    "category": "VIEWPOINT",
+    "description": "The hill where Buddhism is said to have been introduced to Sri Lanka in 247 BC. A long granite stairway climbs past monastery ruins to stupas and a white Buddha statue at the summit.",
+    "directions": "About 13 km east of Anuradhapura on the Trincomalee road. Roughly 1,840 steps lead from the car park to the top.",
+    "tips": [
+      "The wide lower stairway framed by trees is the classic approach shot.",
+      "Sunset from the summit looks back over the Anuradhapura plain.",
+      "Shoes come off well before the summit — the granite gets very hot."
+    ],
+    "openingHours": "Roughly 07:00–19:00.",
+    "entryFee": "Charge applies for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Sacred site under Department of Archaeology protection.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Mihintale_Peak_Sri_Lanka.jpg/1280px-Mihintale_Peak_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "minneriya-tank",
+    "name": "Minneriya Tank",
+    "type": "Ancient Reservoir",
+    "city": "Minneriya",
+    "district": "Polonnaruwa",
+    "province": "North Central Province",
+    "latlng": [
+      8.0333,
+      80.8833
+    ],
+    "category": "NATURE_TRAIL",
+    "description": "A reservoir built in the 3rd century and still in use, with grassland exposed along its bed as water recedes. That grass draws large numbers of wild elephants in the dry season.",
+    "directions": "On the Habarana–Polonnaruwa road, about 10 km from Habarana. The tank is visible from the main road and park entrance.",
+    "tips": [
+      "Dry-season months concentrate elephants on the exposed lake bed.",
+      "A long lens is essential — never approach wild elephants for a closer frame.",
+      "Late afternoon brings both the animals and the best light."
+    ],
+    "openingHours": "Roadside views any time; park entry has set hours.",
+    "entryFee": "Free from public roads; national park entry is charged separately.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "National park airspace — drones are not permitted.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "afternoon",
+      "evening"
+    ],
+    "bestMonths": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Minneriya_tank-sri_lanka.jpg/1280px-Minneriya_tank-sri_lanka.jpg"
+  },
+  {
+    "slug": "yapahuwa-rock",
+    "name": "Yapahuwa Rock Fortress",
+    "type": "Rock Fortress",
+    "city": "Maho",
+    "district": "Kurunegala",
+    "province": "North Western Province",
+    "latlng": [
+      7.8139,
+      80.3
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A granite outcrop rising abruptly from flat scrub, briefly the royal capital in the 13th century and guarded by an ornamental stone stairway that ranks among the finest carved work of its period.",
+    "directions": "Near Maho, roughly 50 km north of Kurunegala. The site is signposted from the Maho–Daladagama road.",
+    "tips": [
+      "The ornamental stairway and lion sculpture are the signature subject, not the summit view.",
+      "Steps are steep and worn — take care carrying kit above the stairway.",
+      "Low sun rakes across the carved balustrades and lifts the detail."
+    ],
+    "openingHours": "Roughly 07:30–17:30.",
+    "entryFee": "Charge applies for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Protected archaeological site.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Ancient_Kingdome_of_Yapahuwa%2C_Sri_Lanka.jpg/1280px-Ancient_Kingdome_of_Yapahuwa%2C_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "munneswaram-temple",
+    "name": "Munneswaram Temple",
+    "type": "Hindu Temple",
+    "city": "Chilaw",
+    "district": "Puttalam",
+    "province": "North Western Province",
+    "latlng": [
+      7.5667,
+      79.8333
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "An ancient Shaiva temple complex east of Chilaw, referenced in the Ramayana and drawing both Hindu and Buddhist worshippers. Five separate shrines sit within one walled precinct.",
+    "directions": "About 3 km east of Chilaw on the Kurunegala road, roughly 80 km north of Colombo.",
+    "tips": [
+      "The painted gopuram is the strongest exterior frame, especially in low sun.",
+      "An active temple — ask before photographing rituals or worshippers.",
+      "The August festival brings fire-walking and very large crowds."
+    ],
+    "openingHours": "Roughly 06:00–18:00 with a midday closure.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "tripodAllowed": false,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Munneswaram.jpg"
+  }
+]

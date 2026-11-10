@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "@/app/components/Container";
 import MapSection from "@/app/components/MapSection";
 import AccessPanel from "@/app/components/AccessPanel";
+import SpaceSummaryPanel from "@/app/components/SpaceSummaryPanel";
 import ShootTiming from "@/app/components/ShootTiming";
 import NearbyPlaces from "@/app/components/NearbyPlaces";
 import { PublicSpace, getPublicSpaceCity, slugifyPlace } from "@/app/data/publicSpaces";
@@ -14,16 +15,8 @@ interface PublicSpaceClientProps {
 }
 
 const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [] }) => {
-   const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${space.latlng[0]},${space.latlng[1]}`;
    const city = getPublicSpaceCity(space);
    const signals = accessSignals(space);
-   // Reuses the card's fee verdict so the sidebar headline and the chip on the
-   // listing can never disagree about the same place.
-   const feeLabel = signals.find((signal) =>
-      ["Free entry", "Free in part", "Entry fee"].includes(signal.label)
-   )?.label;
-   const feeHeadline =
-      feeLabel === "Entry fee" ? "Ticketed" : feeLabel === "Free in part" ? "Partly free" : "Free";
 
    return (
       <main className="bg-ink pb-24 pt-8">
@@ -135,44 +128,10 @@ const PublicSpaceClient: React.FC<PublicSpaceClientProps> = ({ space, nearby = [
                   </div>
 
                   <aside className="order-first md:order-last md:col-span-3">
-                     {/* Sticky on desktop: the directions action stays reachable
-                         through a long page instead of scrolling away at the top
-                         and leaving the column empty. */}
-                     <div className="rounded-panel bg-ink-raised p-6 shadow-raised md:sticky md:top-[88px]">
-                        <p className="text-[13px] text-cream-muted">Cost to shoot</p>
-                        {/* The headline is the derived verdict; entryFee itself
-                            is a sentence and belongs in the body below. */}
-                        <p className="mt-1 text-[28px] font-semibold tracking-[-0.02em] text-lime">
-                           {feeHeadline}
-                        </p>
-                        <p className="mt-3 text-[14px] leading-6 text-cream-soft">
-                           {space.entryFee?.trim() ||
-                              "A public location. Anyone can shoot here — no reservation and no fee."}
-                        </p>
-                        <a
-                           href={mapsUrl}
-                           target="_blank"
-                           rel="noreferrer"
-                           className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-lime px-5 py-3.5 text-[15px] font-semibold text-ink transition-all duration-300 ease-out hover:shadow-glow hover:brightness-105 active:scale-[0.98]"
-                        >
-                           Get directions
-                           <svg
-                              className="h-4 w-4"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2.2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                           >
-                              <path d="M7 17 17 7M9 7h8v8" />
-                           </svg>
-                        </a>
-                        <p className="mt-3 text-center text-[12px] text-cream-faint">
-                           Opens in Google Maps
-                        </p>
-                     </div>
+                     {/* Sticky on desktop: the cost, hours and rules stay
+                         reachable through a long page instead of scrolling away
+                         at the top and leaving the column empty. */}
+                     <SpaceSummaryPanel space={space} />
                   </aside>
                </div>
 

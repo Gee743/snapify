@@ -1,0 +1,471 @@
+[
+  {
+    "slug": "lankatilaka-viharaya",
+    "name": "Lankatilaka Viharaya",
+    "type": "Ancient Temple",
+    "city": "Kandy",
+    "district": "Kandy",
+    "province": "Central Province",
+    "latlng": [
+      7.2383,
+      80.5472
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A 14th-century temple built on a rock outcrop, mixing South Indian and Sinhalese architecture. The white structure stands above terraced paddy in an unusually commanding setting.",
+    "directions": "About 15 km west of Kandy near Daulagala, on the loop that also takes in Gadaladeniya and Embekka.",
+    "tips": [
+      "The approach across the bare rock face is the frame that shows the setting.",
+      "Paddy terraces below run green after rain and gold before harvest.",
+      "Remove shoes at the shrine; interior photography may be restricted."
+    ],
+    "openingHours": "Roughly 07:00–18:00.",
+    "entryFee": "Small charge for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Protected archaeological site — Department of Archaeology clearance needed.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Lankatilaka_Temple_%285%29.JPG/1280px-Lankatilaka_Temple_%285%29.JPG"
+  },
+  {
+    "slug": "gadaladeniya-temple",
+    "name": "Gadaladeniya Temple",
+    "type": "Ancient Temple",
+    "city": "Kandy",
+    "district": "Kandy",
+    "province": "Central Province",
+    "latlng": [
+      7.2656,
+      80.5392
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A stone temple from 1344 built directly onto a flat rock shelf, with carved granite pillars and a Dravidian-influenced plan that sets it apart from later timber-and-plaster temples.",
+    "directions": "Off the Kandy–Colombo road near Pilimathalawa, roughly 12 km from Kandy. Usually visited alongside Lankatilaka and Embekka.",
+    "tips": [
+      "The bare rock shelf gives a clean, uncluttered foreground most temples lack.",
+      "Carved stone pillars reward a close-focusing lens as much as the wide view.",
+      "Lower sun rakes across the carving and brings out the relief."
+    ],
+    "openingHours": "Roughly 07:00–18:00.",
+    "entryFee": "Small charge for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Protected archaeological site.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Main_entrance_Gadaladeniya_Vihara.png/1280px-Main_entrance_Gadaladeniya_Vihara.png"
+  },
+  {
+    "slug": "embekka-devalaya",
+    "name": "Embekka Devalaya",
+    "type": "Ancient Temple",
+    "city": "Kandy",
+    "district": "Kandy",
+    "province": "Central Province",
+    "latlng": [
+      7.2178,
+      80.5633
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "Known for its woodwork — the drummers' hall carries some of the finest timber carving in the country, with wrestlers, swans and entwined animal figures cut into every column.",
+    "directions": "Near Embekka village, about 19 km from Kandy. The third stop on the Gadaladeniya–Lankatilaka–Embekka circuit.",
+    "tips": [
+      "The carved pillars are the subject — bring something that focuses close.",
+      "The hall is dim, so a fast lens matters more than a wide one.",
+      "Side light through the open edges of the hall defines the relief best."
+    ],
+    "openingHours": "Roughly 07:00–18:00.",
+    "entryFee": "Small charge for foreign visitors.",
+    "isFree": false,
+    "droneRule": "PERMIT_REQUIRED",
+    "tripodAllowed": true,
+    "shootingNotes": "Low interior light against bright openings — bracket if you want carving and surroundings in one frame.",
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Embekka_Devalaya_%285%29.jpg/1280px-Embekka_Devalaya_%285%29.jpg"
+  },
+  {
+    "slug": "kadugannawa-rock-tunnel",
+    "name": "Kadugannawa Rock Tunnel",
+    "type": "Railway Landmark",
+    "city": "Kadugannawa",
+    "district": "Kandy",
+    "province": "Central Province",
+    "latlng": [
+      7.2547,
+      80.5219
+    ],
+    "category": "URBAN",
+    "description": "A tunnel cut through solid rock on the colonial-era line up to Kandy, part of a climb that was a serious feat of Victorian engineering. Trains emerge from the rock face against a steep hillside.",
+    "directions": "At Kadugannawa on the Colombo–Kandy line, about 17 km from Kandy. Visible from points along the adjacent road.",
+    "tips": [
+      "A train at the tunnel mouth is the shot; without one it is just rock.",
+      "Shoot from public roadside viewpoints — never from the track itself.",
+      "Backlight from the tunnel makes exposure tricky; meter for the rock face."
+    ],
+    "openingHours": "Viewable any time from public roads.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Railway infrastructure; clearance required.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Kadugannawa_tunnel.JPG/1280px-Kadugannawa_tunnel.JPG"
+  },
+  {
+    "slug": "dunumadalawa-forest",
+    "name": "Dunumadalawa Forest Reserve",
+    "type": "Forest Trail",
+    "city": "Kandy",
+    "district": "Kandy",
+    "province": "Central Province",
+    "latlng": [
+      7.2797,
+      80.6256
+    ],
+    "category": "NATURE_TRAIL",
+    "description": "A protected catchment forest on the hills above Kandy, with a reservoir at its centre and a network of shaded tracks. Close to the city but quiet enough for birds and monkeys.",
+    "directions": "Reached from the Roseneath or Hantana side above Kandy town. The main track climbs steadily from the entrance gate.",
+    "tips": [
+      "Dense canopy forces slow shutter speeds — plan for higher ISO than you expect.",
+      "Early morning for birds; the forest goes quiet by mid-morning.",
+      "Leeches are common after rain, so cover your ankles."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Protected catchment forest.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Dunumadalawa_Forest_%2825791410292%29.jpg/1280px-Dunumadalawa_Forest_%2825791410292%29.jpg"
+  },
+  {
+    "slug": "victoria-reservoir",
+    "name": "Victoria Reservoir",
+    "type": "Reservoir Viewpoint",
+    "city": "Teldeniya",
+    "district": "Kandy",
+    "province": "Central Province",
+    "latlng": [
+      7.2406,
+      80.7847
+    ],
+    "category": "VIEWPOINT",
+    "description": "The largest reservoir in the country, held back by an arch dam in a steep gorge on the Mahaweli. When levels drop, remains of the old Teldeniya town surface at the margins.",
+    "directions": "East of Kandy past Digana, roughly 30 km out. Several roadside viewpoints overlook the water and the dam.",
+    "tips": [
+      "Shoot from the public road viewpoints; the dam itself is a secured installation.",
+      "Low water in the dry season exposes the drowned town's foundations.",
+      "Haze builds through the day — morning is far clearer across the water."
+    ],
+    "openingHours": "Roadside viewpoints accessible any time.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "droneNotes": "Critical infrastructure with an active security presence.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Victoria_Reservoir_Sri_Lanka.jpg/1280px-Victoria_Reservoir_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "ramboda-falls",
+    "name": "Ramboda Falls",
+    "type": "Waterfall",
+    "city": "Ramboda",
+    "district": "Nuwara Eliya",
+    "province": "Central Province",
+    "latlng": [
+      7.0636,
+      80.6983
+    ],
+    "category": "WATERFALL",
+    "description": "A tall multi-tier fall on the climb between Kandy and Nuwara Eliya, dropping beside the main road through tea country. Upper and lower sections can be viewed separately.",
+    "directions": "On the A5 at Ramboda, roughly 60 km from Kandy. Roadside pull-ins serve the lower fall; a path leads towards the upper tiers.",
+    "tips": [
+      "Tea slopes around the fall give context a tight crop would lose.",
+      "Hill mist can hide the upper tier entirely — allow time to wait it out.",
+      "Spray plus hill drizzle means weather sealing earns its keep here."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Ramboda_Falls.jpg/1280px-Ramboda_Falls.jpg"
+  },
+  {
+    "slug": "devon-falls",
+    "name": "Devon Falls",
+    "type": "Waterfall",
+    "city": "Talawakele",
+    "district": "Nuwara Eliya",
+    "province": "Central Province",
+    "latlng": [
+      6.9381,
+      80.6619
+    ],
+    "category": "WATERFALL",
+    "description": "A 97 m fall named after a pioneer coffee planter, viewed across a tea-covered valley from a roadside platform rather than up close.",
+    "directions": "On the Hatton–Talawakele road, about 6 km west of Talawakele. The viewpoint is signposted directly off the road.",
+    "tips": [
+      "This is a long-lens location — the fall sits across the valley, not beside you.",
+      "Tea bushes in the foreground give the drop its sense of scale.",
+      "Valley haze thickens through the day, so go early."
+    ],
+    "openingHours": "Roadside viewpoint accessible any time.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "shootingNotes": "Distance brings atmospheric haze — expect to recover contrast in post.",
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Devon_falls-Sri_lanka.jpg"
+  },
+  {
+    "slug": "st-clairs-falls",
+    "name": "St Clair's Falls",
+    "type": "Waterfall",
+    "city": "Talawakele",
+    "district": "Nuwara Eliya",
+    "province": "Central Province",
+    "latlng": [
+      6.9333,
+      80.6833
+    ],
+    "category": "WATERFALL",
+    "description": "Sometimes called the little Niagara of Sri Lanka — a broad, wide-fronted fall dropping in two stages through tea estate country, unusual for its width rather than its height.",
+    "directions": "On the A7 between Hatton and Talawakele, a few kilometres from Devon Falls. A signed viewpoint sits above the fall.",
+    "tips": [
+      "Width suits a horizontal frame; vertical crops waste what makes it distinctive.",
+      "Hydro diversion can reduce flow — it is strongest after sustained rain.",
+      "Pairs naturally with Devon Falls in a single morning."
+    ],
+    "openingHours": "Roadside viewpoint accessible any time.",
+    "isFree": true,
+    "droneRule": "ALLOWED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/3/32/St_Clair%27s_Falls_in_Sri_Lanka.jpg"
+  },
+  {
+    "slug": "matale-muthumariamman",
+    "name": "Sri Muthumariamman Temple",
+    "type": "Hindu Temple",
+    "city": "Matale",
+    "district": "Matale",
+    "province": "Central Province",
+    "latlng": [
+      7.4675,
+      80.6236
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A major Hindu temple whose gopuram is densely packed with painted figures in vivid colour — one of the most visually saturated religious structures on the island.",
+    "directions": "In Matale town, about 25 km north of Kandy on the Dambulla road. The tower is visible from the main street.",
+    "tips": [
+      "The gopuram rewards a long lens — isolate sections rather than shooting it whole.",
+      "Shoes off and modest dress inside the precinct.",
+      "Ask before photographing ceremonies or worshippers."
+    ],
+    "openingHours": "Roughly 06:00–18:00 with a midday closure.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "tripodAllowed": false,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sri_Muthumariamman_Temple%28Hindu_temple%29_Teru_Festival_Chariot.jpg/1280px-Sri_Muthumariamman_Temple%28Hindu_temple%29_Teru_Festival_Chariot.jpg"
+  },
+  {
+    "slug": "sembuwatta-lake",
+    "name": "Sembuwatta Lake",
+    "type": "Mountain Lake",
+    "city": "Elkaduwa",
+    "district": "Matale",
+    "province": "Central Province",
+    "latlng": [
+      7.4333,
+      80.7333
+    ],
+    "category": "NATURE_TRAIL",
+    "description": "A spring-fed lake on a tea estate above Elkaduwa, held in a bowl of forested hills. The water is unusually clear and the setting feels enclosed and quiet.",
+    "directions": "Near Elkaduwa, around 25 km from Matale on the Campbell's Lane route. The final stretch is a narrow estate road.",
+    "tips": [
+      "Elevated paths around the rim give the view that shows the whole bowl.",
+      "Morning is calm and reflective; afternoons bring wind and visitors.",
+      "Hill cloud can close the scene in with very little warning."
+    ],
+    "openingHours": "Daylight hours.",
+    "entryFee": "Small entrance charge.",
+    "isFree": false,
+    "droneRule": "PERMIT_REQUIRED",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Sembuwatta_Lake_View.jpg/1280px-Sembuwatta_Lake_View.jpg"
+  },
+  {
+    "slug": "riverston-peak",
+    "name": "Riverston Peak",
+    "type": "Hill Viewpoint",
+    "city": "Matale",
+    "district": "Matale",
+    "province": "Central Province",
+    "latlng": [
+      7.5167,
+      80.7333
+    ],
+    "category": "VIEWPOINT",
+    "description": "A grassland ridge in the Knuckles foothills where the road runs along an exposed escarpment. The land drops away sharply and cloud pours over the ridge most afternoons.",
+    "directions": "On the Matale–Illukkumbura road, roughly 45 km from Matale. The viewpoints sit directly beside the road along the ridge.",
+    "tips": [
+      "Wind here is severe — a tripod needs weighting or it will walk.",
+      "Cloud spilling over the edge is the defining image, and it builds after midday.",
+      "Mini World's End is a short walk from the same road."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Knuckles Conservation Forest — check restrictions before flying.",
+    "tripodAllowed": true,
+    "shootingNotes": "Sustained high wind; keep shutter speeds up for anything handheld.",
+    "bestTimeOfDay": [
+      "afternoon"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Riverston_Matale.jpg/1280px-Riverston_Matale.jpg"
+  },
+  {
+    "slug": "nallur-kandaswamy",
+    "name": "Nallur Kandaswamy Kovil",
+    "type": "Hindu Temple",
+    "city": "Jaffna",
+    "district": "Jaffna",
+    "province": "Northern Province",
+    "latlng": [
+      9.6753,
+      80.0286
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "The principal Hindu temple of the north, with a golden-ochre gopuram and long colonnaded halls. Its August festival runs for weeks and draws enormous crowds.",
+    "directions": "On Point Pedro Road in Nallur, about 2 km north-east of central Jaffna.",
+    "tips": [
+      "Men are required to remove shirts to enter the inner precinct — plan accordingly.",
+      "Photography inside is restricted; the exterior gopuram is the reliable subject.",
+      "Festival season in August is extraordinary but extremely crowded."
+    ],
+    "openingHours": "Roughly 05:00–20:00 with a midday break.",
+    "isFree": true,
+    "droneRule": "PROHIBITED",
+    "tripodAllowed": false,
+    "bestTimeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/1/14/Nallur_Kandaswamy_Temple_-_Jaffna.jpg"
+  },
+  {
+    "slug": "jaffna-railway-station",
+    "name": "Jaffna Railway Station",
+    "type": "Railway Station",
+    "city": "Jaffna",
+    "district": "Jaffna",
+    "province": "Northern Province",
+    "latlng": [
+      9.6611,
+      80.0236
+    ],
+    "category": "URBAN",
+    "description": "Destroyed during the conflict and rebuilt in 2014, the station marks the restoration of the northern line to Colombo. The architecture deliberately echoes the original colonial building.",
+    "directions": "In central Jaffna off Station Road, walkable from the town centre.",
+    "tips": [
+      "Clean modern lines photograph well against the strong northern light.",
+      "The long-distance Colombo train brings the platform to life at departure.",
+      "Ask staff before setting up anything substantial on the platform."
+    ],
+    "openingHours": "Station operating hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Railway property; the northern province may impose additional requirements.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Jaffna_Railway_Station_-_Sri_Lanka_%281%29.jpg/1280px-Jaffna_Railway_Station_-_Sri_Lanka_%281%29.jpg"
+  },
+  {
+    "slug": "keerimalai-springs",
+    "name": "Keerimalai Springs",
+    "type": "Mineral Springs",
+    "city": "Keerimalai",
+    "district": "Jaffna",
+    "province": "Northern Province",
+    "latlng": [
+      9.8167,
+      80.0
+    ],
+    "category": "VIEWPOINT",
+    "description": "Walled freshwater bathing pools fed by mineral springs, sitting right at the sea's edge with the Naguleswaram temple nearby. The fresh water stays separate from the ocean only metres away.",
+    "directions": "On the northern coast about 20 km from Jaffna town, beyond Tellippalai.",
+    "tips": [
+      "The pools are segregated by gender and actively used — be discreet.",
+      "The contrast of walled pool against open sea is the frame worth finding.",
+      "Hard northern light all day; early or late is the only soft option."
+    ],
+    "openingHours": "Daylight hours.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Coastal northern province; security sensitivities remain in some areas.",
+    "tripodAllowed": true,
+    "bestTimeOfDay": [
+      "sunrise",
+      "evening"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Keerimalai_Hot_springs_jaffna.jpg/1280px-Keerimalai_Hot_springs_jaffna.jpg"
+  },
+  {
+    "slug": "nainativu-temple",
+    "name": "Nainativu Nagapooshani Amman Temple",
+    "type": "Island Temple",
+    "city": "Nainativu",
+    "district": "Jaffna",
+    "province": "Northern Province",
+    "latlng": [
+      9.6103,
+      79.7761
+    ],
+    "category": "TEMPLE_LANDMARK",
+    "description": "A Hindu temple on a small island off the Jaffna peninsula, reached only by ferry. Its tall painted gopuram rises straight out of a flat island with almost nothing else around it.",
+    "directions": "Ferry from Kurikadduwan jetty, roughly 35 km west of Jaffna. Boats run frequently through the day and the crossing is short.",
+    "tips": [
+      "The ferry approach is the best angle on the gopuram — shoot from the boat.",
+      "A Buddhist vihara shares the island, making it an unusual double site.",
+      "Ferries stop by late afternoon; do not get caught on the island."
+    ],
+    "openingHours": "Roughly 06:00–18:00, governed by ferry times.",
+    "isFree": true,
+    "droneRule": "PERMIT_REQUIRED",
+    "droneNotes": "Island with naval presence nearby; seek local clearance first.",
+    "tripodAllowed": false,
+    "bestTimeOfDay": [
+      "morning"
+    ],
+    "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Nainativu_Nagapooshani_Amman_Temple.jpg/1280px-Nainativu_Nagapooshani_Amman_Temple.jpg"
+  }
+]
