@@ -5,6 +5,8 @@ import NewsletterForm from "./NewsletterForm";
 
 const exploreLinks = [
    { label: "All free public spaces", href: "/community" },
+   { label: "Studios to hire", href: "/studios" },
+   { label: "Daylight studios", href: "/studios/type/daylight-studios" },
    { label: "Browse by area", href: "/photo-spots" },
    { label: "Beaches", href: "/photo-spots/category/beaches" },
    { label: "Viewpoints", href: "/photo-spots/category/viewpoints" },

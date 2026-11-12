@@ -9,8 +9,11 @@ happens: entry fees, which of the six permitting authorities applies, whether
 drones are allowed, whether a tripod needs its own permit, and the golden hour
 computed for that specific location.
 
-Paid, bookable locations are next; the owner waitlist is live at
-`/list-your-space`.
+It also carries the paid side: bookable studios, villas, rooftops and
+warehouses at `/studios`, with rates, capacity, amenities and enquiries that go
+straight to the owner. No studio is listed until a real owner has confirmed it,
+so that section shows a waitlist empty state until the first one is published.
+The owner waitlist is live at `/list-your-space`.
 
 Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Prisma and MongoDB.
 
@@ -36,6 +39,13 @@ Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Prisma and MongoDB
 - **Three cornerstone guides** at `/guides` covering drone law, the permit
   landscape, and which coast is shootable in which month. Each carries a visible
   last-reviewed date and its sources.
+- **Bookable studios** at `/studios` and `/studios/<slug>` — a separate
+  `Studio` model for paid spaces, with hourly/half-day/full-day rates, capacity,
+  floor area, a closed amenity vocabulary, equipment lists and booking terms.
+  Faceted browsing by province, type, budget band and capacity; eight type hubs
+  at `/studios/type/<type>`. A blank rate means "on request" and is never
+  rendered as free or sorted as the cheapest. Enquiries post to
+  `/api/studio-inquiries` so the owner's email never reaches the client.
 - **Owner waitlist and place submissions** — `/list-your-space` and `/submit`
   write to the database behind rate-limited public endpoints.
 - **Newsletter capture** in the footer.
@@ -164,6 +174,7 @@ app/
   guides/         Cornerstone guides
   libs/           Prisma client, admin auth, validation, hubs, filters, sun times, taxonomy
   photo-spots/    pSEO hub pages (city, district, province, category)
+  studios/        Paid, bookable spaces — index, detail and type hubs
 middleware.ts     Canonicalises legacy ?area= URLs; holds the generated hub mirror
 prisma/           Prisma schema (MongoDB)
 scripts/          Seed batches, generators and consistency scripts
@@ -182,7 +193,8 @@ the short values for the detail-page spec rows, since `entryFee` and
 | `PublicSpace` | A location, keyed by URL `slug`. Carries structured location (city/district/province + slugs), a `category` enum, access fields (fees, permits, `droneRule`), timing fields and a submission `status` |
 | `PublicSpaceBootstrap` | One-time marker for the seed import |
 | `SpaceOwnerLead` | Owner waitlist and place submissions |
-| `SpaceInquiry` | Enquiries about a paid space (model ready, UI pending) |
+| `Studio` | A paid, bookable space keyed by URL `slug`. Rates, capacity, amenities, equipment, owner contact and a review `status` |
+| `SpaceInquiry` | Enquiries about a studio. `spaceSlug` holds the `Studio` slug |
 | `NewsletterSubscriber` | Footer email capture |
 | `User` / `Account` | NextAuth accounts |
 
@@ -190,6 +202,35 @@ the short values for the detail-page spec rows, since `entryFee` and
 `getPublicSpaceCity` / `getPublicSpaceProvince` rather than parsing it — the two
 are easy to transpose, and every hub URL, breadcrumb and JSON-LD address depends
 on telling them apart.
+
+### Two kinds of place
+
+`PublicSpace` and `Studio` are separate models rather than one model with a
+`kind` discriminator, because they share almost no decision-making fields. A
+public space is chosen on permits, drone rules, entry fees and golden hour; a
+studio is chosen on rate, capacity, amenities and kit. One table would leave
+roughly a dozen columns null on every row in both directions and make every
+validator and form conditional on `kind`.
+
+What they do share is location: `Studio` carries the same
+city/district/province (+ slug) columns and is derived through the same
+`deriveSpaceFields` helper, so a studio and a public space in the same town
+resolve to identical slugs.
+
+Two consequences worth knowing:
+
+- **There is no studio fixture.** `getPublicSpaces()` falls back to the
+  built-in array when the database is empty; `getStudios()` deliberately does
+  not. Public spaces are a seeded catalogue of facts, but studios are real
+  businesses that opt in — an empty database means genuinely zero listings, and
+  `/studios` renders its waitlist empty state rather than inventing inventory.
+- **New studios default to `PENDING`.** Only `PUBLISHED` rows reach the public
+  reader, the sitemap, `generateStaticParams` or the enquiry endpoint. Publishing
+  by default would make an unreviewed owner submission easy to miss.
+
+Owner contact (`ownerName`/`ownerEmail`/`ownerPhone`) is stripped in
+`toStudio()` before a studio reaches any component, which is why enquiries go
+through `/api/studio-inquiries` instead of a `mailto:` link on the page.
 
 ### Seeding and the fixture
 
@@ -228,6 +269,9 @@ the source of truth and overwrites the file.
 | `/photo-spots/district/[district]` | Public | District hub |
 | `/photo-spots/province/[province]` | Public | Province hub |
 | `/photo-spots/category/[category]` | Public | Category hub |
+| `/studios` | Public | Bookable studios with faceted filters |
+| `/studios/[slug]` | Public | Studio detail — rates, amenities, enquiry form |
+| `/studios/type/[type]` | Public | Studio type hub (daylight, cyclorama, villa...) |
 | `/guides`, `/guides/[slug]` | Public | Cornerstone guides |
 | `/about`, `/contact`, `/privacy` | Public | Static pages |
 | `/list-your-space`, `/submit` | Public | Owner waitlist and submissions |
@@ -246,7 +290,10 @@ the source of truth and overwrites the file.
 | `GET`/`POST`/`DELETE /api/admin/session` | Admin session |
 | `GET`/`POST /api/admin/public-spaces` | List and create locations |
 | `PUT`/`DELETE /api/admin/public-spaces/[slug]` | Update and delete a location |
-| `GET /api/admin/leads` | Read captured owner leads (admin session) |
+| `POST /api/studio-inquiries` | Studio enquiry (rate limited, published studios only) |
+| `GET`/`POST /api/admin/studios` | List and create studios |
+| `PUT`/`DELETE /api/admin/studios/[slug]` | Update and delete a studio |
+| `GET /api/admin/leads` | Read captured owner leads and studio enquiries (admin session) |
 
 Admin write endpoints require a valid signed session cookie **and** a
 same-origin request, and validate every field through

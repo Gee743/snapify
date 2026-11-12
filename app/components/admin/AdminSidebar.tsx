@@ -1,6 +1,6 @@
 "use client";
 
-export type AdminSection = "spaces" | "add" | "leads";
+export type AdminSection = "spaces" | "add" | "studios" | "addStudio" | "leads";
 
 interface NavItem {
    id: AdminSection;
@@ -13,8 +13,10 @@ interface AdminSidebarProps {
    active: AdminSection;
    onSelect: (section: AdminSection) => void;
    spaceCount: number;
+   studioCount: number;
    leadCount: number;
    isEditing: boolean;
+   isEditingStudio: boolean;
    onSignOut: () => void;
 }
 
@@ -38,10 +40,19 @@ const Icon = ({ name }: { name: AdminSection }) => {
          </svg>
       );
    }
-   if (name === "add") {
+   if (name === "add" || name === "addStudio") {
       return (
          <svg {...common}>
             <path d="M12 5v14M5 12h14" />
+         </svg>
+      );
+   }
+   if (name === "studios") {
+      return (
+         <svg {...common}>
+            <path d="M3 21V8l9-5 9 5v13" />
+            <path d="M3 21h18" />
+            <path d="M9 21v-6h6v6" />
          </svg>
       );
    }
@@ -57,14 +68,22 @@ const AdminSidebar = ({
    active,
    onSelect,
    spaceCount,
+   studioCount,
    leadCount,
    isEditing,
+   isEditingStudio,
    onSignOut,
 }: AdminSidebarProps) => {
    const items: NavItem[] = [
-      { id: "spaces", label: "Public spaces", hint: "Browse and edit", count: spaceCount },
+      { id: "spaces", label: "Public spaces", hint: "Free, community", count: spaceCount },
       { id: "add", label: isEditing ? "Edit space" : "Add a space", hint: "Full details" },
-      { id: "leads", label: "Leads inbox", hint: "Owners and signups", count: leadCount },
+      { id: "studios", label: "Studios", hint: "Paid, bookable", count: studioCount },
+      {
+         id: "addStudio",
+         label: isEditingStudio ? "Edit studio" : "Add a studio",
+         hint: "Rates and amenities",
+      },
+      { id: "leads", label: "Leads inbox", hint: "Owners and enquiries", count: leadCount },
    ];
 
    return (

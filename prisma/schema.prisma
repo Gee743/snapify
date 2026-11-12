@@ -64,6 +64,23 @@ enum SpaceStatus {
   REJECTED
 }
 
+enum StudioType {
+  DAYLIGHT
+  BLACKOUT
+  CYCLORAMA
+  VILLA
+  ROOFTOP
+  WAREHOUSE
+  HERITAGE
+  EVENT_VENUE
+}
+
+enum StudioStatus {
+  PUBLISHED
+  PENDING
+  REJECTED
+}
+
 model PublicSpace {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   slug          String   @unique
@@ -134,6 +151,85 @@ model PublicSpace {
   @@index([status])
 }
 
+/// A paid, bookable space: a studio, villa, rooftop or warehouse an owner rents
+/// out for shoots. Deliberately a separate model from PublicSpace rather than a
+/// `kind` discriminator on it -- the two share almost no decision-making fields.
+/// A studio has no permit authority, drone rule or golden hour; a public space
+/// has no rate card, capacity or owner. One model would leave roughly a dozen
+/// columns null on every row in both directions and make validation conditional.
+model Studio {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  slug    String @unique
+  name    String
+  tagline String
+  /// Freeform human descriptor, mirroring PublicSpace.type ("Daylight loft").
+  type        String
+  description String
+
+  /// Same structured-location contract as PublicSpace, so the two can share the
+  /// slugify/hub helpers and a studio can be placed on the same area pages.
+  locationLabel String
+  city          String?
+  citySlug      String?
+  district      String?
+  districtSlug  String?
+  province      String?
+  provinceSlug  String?
+  /// Optional: an owner may not want an exact pin published pre-booking.
+  latlng Float[]
+
+  imageSrc String
+  images   String[]
+
+  studioType StudioType @default(DAYLIGHT)
+
+  /// Rates are stored as integers in minor-unit-free LKR (rupees), not strings,
+  /// because the index page sorts and filters on them. A null rate means "ask"
+  /// rather than zero -- zero would sort as the cheapest studio on the site.
+  currency      String  @default("LKR")
+  hourlyRate    Int?
+  halfDayRate   Int?
+  fullDayRate   Int?
+  minimumHours  Int?
+  rateNotes     String?
+
+  /// Capacity and dimensions, the other half of the shortlist decision.
+  capacity       Int?
+  floorAreaSqft  Int?
+  ceilingHeightFt Int?
+
+  amenities String[]
+  equipment String[]
+
+  /// Availability as prose. Deliberately not a booking calendar: enquiries go
+  /// to the owner, and a stale calendar is worse than none.
+  availabilityNotes String?
+  openingHours      String?
+
+  /// Owner contact. Never rendered publicly -- enquiries route through
+  /// SpaceInquiry so the address is not scraped off the page.
+  ownerName  String?
+  ownerEmail String?
+  ownerPhone String?
+
+  bookingNotes       String?
+  cancellationPolicy String?
+
+  metaTitle       String?
+  metaDescription String?
+
+  status StudioStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([citySlug])
+  @@index([districtSlug])
+  @@index([provinceSlug])
+  @@index([studioType])
+  @@index([status])
+}
+
 model SpaceOwnerLead {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -148,6 +244,9 @@ model SpaceOwnerLead {
   @@index([email])
 }
 
+/// An enquiry about a bookable studio. `spaceSlug` holds the Studio slug; the
+/// field keeps its original name so the existing admin leads inbox and its
+/// SpaceInquiryRecord type keep working unchanged.
 model SpaceInquiry {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   spaceSlug String
@@ -156,6 +255,10 @@ model SpaceInquiry {
   phone     String?
   shootDate DateTime?
   message   String?
+  /// Denormalised so the inbox can show what was enquired about without a
+  /// second lookup, and still reads correctly if the studio is later renamed.
+  spaceName String?
+  crewSize  Int?
   createdAt DateTime  @default(now())
 
   @@index([spaceSlug])

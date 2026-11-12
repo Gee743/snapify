@@ -97,7 +97,13 @@ const LeadsInbox = ({ leads, isLoading, onRefresh }: LeadsInboxProps) => {
    const visibleInquiries = useMemo(
       () =>
          inquiries.filter((inquiry) =>
-            matches(inquiry.name, inquiry.email, inquiry.spaceSlug, inquiry.message)
+            matches(
+               inquiry.name,
+               inquiry.email,
+               inquiry.spaceSlug,
+               inquiry.spaceName,
+               inquiry.message
+            )
          ),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [inquiries, needle]
@@ -110,7 +116,7 @@ const LeadsInbox = ({ leads, isLoading, onRefresh }: LeadsInboxProps) => {
 
    const tabs: { id: LeadTab; label: string; count: number }[] = [
       { id: "owners", label: "Space owners", count: owners.length },
-      { id: "inquiries", label: "Space inquiries", count: inquiries.length },
+      { id: "inquiries", label: "Studio enquiries", count: inquiries.length },
       { id: "subscribers", label: "Newsletter", count: subscribers.length },
    ];
 
@@ -136,15 +142,29 @@ const LeadsInbox = ({ leads, isLoading, onRefresh }: LeadsInboxProps) => {
       }
       if (tab === "inquiries") {
          downloadCsv(
-            "snapify-space-inquiries.csv",
+            "snapify-studio-enquiries.csv",
             toCsv(
-               ["Received", "Space", "Name", "Email", "Phone", "Shoot date", "Message"],
+               [
+                  "Received",
+                  "Studio",
+                  "Slug",
+                  "Name",
+                  "Email",
+                  "Phone",
+                  "Crew size",
+                  "Shoot date",
+                  "Message",
+               ],
                visibleInquiries.map((inquiry) => [
                   inquiry.createdAt,
+                  inquiry.spaceName ?? "",
                   inquiry.spaceSlug,
                   inquiry.name,
                   inquiry.email,
                   inquiry.phone,
+                  inquiry.crewSize === null || inquiry.crewSize === undefined
+                     ? ""
+                     : String(inquiry.crewSize),
                   inquiry.shootDate,
                   inquiry.message,
                ])
@@ -261,27 +281,32 @@ const LeadsInbox = ({ leads, isLoading, onRefresh }: LeadsInboxProps) => {
                )}
             </Table>
          ) : tab === "inquiries" ? (
-            <Table headers={["Received", "Space", "Name", "Email", "Shoot date", "Message"]}>
+            <Table
+               headers={["Received", "Studio", "Name", "Email", "Crew", "Shoot date", "Message"]}
+            >
                {visibleInquiries.length === 0 ? (
-                  <Empty colSpan={6} label="No space inquiries yet." />
+                  <Empty colSpan={7} label="No studio enquiries yet." />
                ) : (
                   visibleInquiries.map((inquiry) => (
                      <tr key={inquiry.id} className="border-b border-white/5 last:border-0">
                         <Cell muted>{formatDate(inquiry.createdAt)}</Cell>
                         <Cell>
+                           {/* Enquiries come from the studio pages, so link to
+                               /studios -- /community would 404 on this slug. */}
                            <a
-                              href={`/community/${inquiry.spaceSlug}`}
+                              href={`/studios/${inquiry.spaceSlug}`}
                               target="_blank"
                               rel="noreferrer"
                               className="hover:text-[#dcff1a]"
                            >
-                              {inquiry.spaceSlug}
+                              {inquiry.spaceName || inquiry.spaceSlug}
                            </a>
                         </Cell>
                         <Cell>{inquiry.name}</Cell>
                         <Cell>
                            <Mail email={inquiry.email} />
                         </Cell>
+                        <Cell muted>{inquiry.crewSize ?? "-"}</Cell>
                         <Cell muted>
                            {inquiry.shootDate ? formatDate(inquiry.shootDate) : "-"}
                         </Cell>

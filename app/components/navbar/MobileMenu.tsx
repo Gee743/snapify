@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 
 const links = [
    { label: "Browse by area", href: "/photo-spots", hint: "Province, district, city or type" },
-   { label: "All free spaces", href: "/community", hint: "Every location on Snapify" },
+   { label: "All free spaces", href: "/community", hint: "Public places, no booking or fee" },
+   { label: "Studios to hire", href: "/studios", hint: "Paid, bookable spaces" },
    { label: "Guides", href: "/guides", hint: "Permits, drone law, seasons" },
    { label: "Submit a place", href: "/submit", hint: "Add a spot you know" },
    { label: "About", href: "/about", hint: "What Snapify is for" },

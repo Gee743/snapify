@@ -5,7 +5,11 @@ import { usePathname } from "next/navigation";
 
 const links = [
    { label: "Browse", href: "/photo-spots" },
-   { label: "All spaces", href: "/community" },
+   // "Free spaces" and "Studios" are named by what they cost, not by what they
+   // are: the free/paid split is the first thing a visitor needs to understand
+   // about the directory, and "All spaces" next to "Studios" would not convey it.
+   { label: "Free spaces", href: "/community" },
+   { label: "Studios", href: "/studios" },
    { label: "Guides", href: "/guides" },
 ];
 

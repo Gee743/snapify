@@ -46,13 +46,64 @@ export interface OwnerLead {
 export interface SpaceInquiryRecord {
    id: string;
    spaceSlug: string;
+   /** Denormalised studio name, captured at enquiry time. */
+   spaceName?: string | null;
    name: string;
    email: string;
    phone: string | null;
    shootDate: string | null;
+   crewSize?: number | null;
    message: string | null;
    createdAt: string;
 }
+
+/** A bookable studio, as /admin reads and writes it. Unlike the public
+ *  reader this keeps owner contact, since the dashboard is authenticated. */
+export interface StudioRecord {
+   id: string;
+   slug: string;
+   name: string;
+   tagline: string;
+   type: string;
+   description: string;
+   locationLabel: string;
+   city?: string | null;
+   district?: string | null;
+   province?: string | null;
+   latlng: number[];
+   imageSrc: string;
+   images: string[];
+   studioType: string;
+   currency: string;
+   hourlyRate?: number | null;
+   halfDayRate?: number | null;
+   fullDayRate?: number | null;
+   minimumHours?: number | null;
+   rateNotes?: string | null;
+   capacity?: number | null;
+   floorAreaSqft?: number | null;
+   ceilingHeightFt?: number | null;
+   amenities: string[];
+   equipment: string[];
+   availabilityNotes?: string | null;
+   openingHours?: string | null;
+   ownerName?: string | null;
+   ownerEmail?: string | null;
+   ownerPhone?: string | null;
+   bookingNotes?: string | null;
+   cancellationPolicy?: string | null;
+   metaTitle?: string | null;
+   metaDescription?: string | null;
+   status: string;
+   createdAt: string;
+   updatedAt: string;
+}
+
+export const STUDIO_STATUS_LABELS: Record<string, string> = {
+   PUBLISHED: "Published",
+   PENDING: "Pending review",
+   REJECTED: "Rejected",
+};
 
 export interface Subscriber {
    id: string;
